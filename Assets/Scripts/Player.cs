@@ -11,4 +11,10 @@ public class Player : MonoBehaviour {
 	
 	
 	/*===================== Methods =====================*/
-}
+
+
+	void Start(){
+
+		playerName = "Player";
+	}
+} // class

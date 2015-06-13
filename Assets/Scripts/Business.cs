@@ -3,13 +3,10 @@ using System.Collections;
 
 public class Business : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-}
+	// Variables
+
+	public string businessName;
+	public float bankAccount;
+	public int reputation;
+
+} // class

@@ -26,4 +26,9 @@ public class DisplayText : MonoBehaviour {
 		displayButton.GetComponent<Button> ().gameObject.SetActive(true);
 
 	}
+
+	public void ShowText(string text){
+
+		outputText.text = text;
+	} // ShowText()
 }
