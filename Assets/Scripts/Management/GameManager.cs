@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 		displayScript = GetComponent<DisplayText> ();
 
 
-		displayScript.ShowText ("Player's Name: " + playerScript.playerName);
+		displayScript.ShowText ("Player's Name: " + playerScript.name);
 	} // Start()
 	
 	// Update is called once per frame

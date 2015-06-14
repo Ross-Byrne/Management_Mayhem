@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Person {
 
 	// Variables
 	
-	public string playerName;
+	//Inherits public string name; from Person
 	public float bankAccount;
 	public string[] traits = new string[5]; // string array to store 5 player traits
 
 	// Methods
 	
-	void Start(){
+	void Awake(){
 
-		playerName = "Player";
-	}
+		name = "Player";
+	} // Awake()
+
 } // class

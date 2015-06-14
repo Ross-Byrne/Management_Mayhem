@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Employee : MonoBehaviour {
+public class Employee : Person {
 
 	// Variables
-	public string employeeName;
+
+	// Inherits public string name; from Person
 	
+	// Methods
+
+	void Awake(){
+
+		name = "Employee";
+	} // Awake()
 
 } // class
