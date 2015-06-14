@@ -5,6 +5,6 @@ using System.Collections;
 
 public abstract class Person : MonoBehaviour {
 
-	public new string name;
+	protected new string name;
 
 } // class
