@@ -16,34 +16,34 @@ public class GameManager : MonoBehaviour {
 	// Scripts
 
 	public static GameManager gameManager;
-	private Player playerScript;
-	private Business businessScript;
-	private DisplayText displayScript;
+	public Player playerScript;
+	public Business businessScript;
+	public DisplayText displayScript;
 
 	// Variables
 
-	private string gameDifficulty;
-	private bool isCharacterCreated = false;
-	private bool isBusinessSetup = false;
-	private bool isNewGameCreated = false;
-	private bool isGameLoaded = false;
-	private bool canHireDealers = false;
-	private bool canBuildDrugLab = false;
-	private bool canStartSellingDrugs = false;
-	private bool canStartMakingDrugs = false;
-	private bool appliedForGrant = false;
+	public string gameDifficulty;
+	public bool isCharacterCreated = false;
+	public bool isBusinessSetup = false;
+	public bool isNewGameCreated = false;
+	public bool isGameLoaded = false;
+	public bool canHireDealers = false;
+	public bool canBuildDrugLab = false;
+	public bool canStartSellingDrugs = false;
+	public bool canStartMakingDrugs = false;
+	public bool appliedForGrant = false;
 
 	// Pool of selectable player traits
 
-	private string[] playerTraitsSelection = { 	"People Person", "Marketing Master", "Organiser", "Opertunist", "Charming",
+	public string[] playerTraitsSelection = { 	"People Person", "Marketing Master", "Organiser", "Opertunist", "Charming",
 		"Greedy", "Spitful", "Alcoholic", "Reckless", "Seedy"};
 
 	// Pool of random first and last names for employees
 
-	private string[] randomFName = { "John", "Mike", "Carl", "Jim", "Conor", "Bob", "Tom",
+	public string[] randomFName = { "John", "Mike", "Carl", "Jim", "Conor", "Bob", "Tom",
 		"Rachael", "Samantha", "Mary", "Ciara", "Jennifer", "Jane", "Sarah"};
 	
-	private string[] randomLName = {		" Power", " Sullivan", " Smith", " McCarthy", " White", " Rodrigue", " Jones",
+	public string[] randomLName = {		" Power", " Sullivan", " Smith", " McCarthy", " White", " Rodrigue", " Jones",
 		" Browne", " Butler", " Byrne", " Daly", " Kelly", " Harrington", " Jameson"};
 
 	// Methods
@@ -65,10 +65,10 @@ public class GameManager : MonoBehaviour {
 		businessScript = business.GetComponent<Business>();
 		displayScript = GetComponent<DisplayText> ();
 
-		// display the players name on output text
+		/*// display the players name on output text
 		displayScript.ShowText ("Player's Name: " + playerScript.name);
 		Save ();
-		Load ();
+		Load ();*/
 	} // Awake()
 	
 	// Update is called once per frame
