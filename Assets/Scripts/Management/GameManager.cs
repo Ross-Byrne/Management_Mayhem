@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 	// Methods
 
 	// Initialization
-	void Start () 
+	void Awake () 
 	{
 		// get references for scripts
 		playerScript = player.GetComponent<Player>();
