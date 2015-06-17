@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class StartMenuUIControl : MonoBehaviour {
 
 	// Menus
-	public GameObject mainMenu;
+	//public StartMenuUIControl mainMenu;
 	public GameObject characterCreationMenu;
 
 	// UI Elements
@@ -20,7 +20,7 @@ public class StartMenuUIControl : MonoBehaviour {
 	public void NewGame(){
 
 		// Deactivates MainMenu and Activates Character Creation Menu
-		mainMenu.gameObject.SetActive(false);
+		gameObject.SetActive(false);
 		characterCreationMenu.gameObject.SetActive(true);
 	} // NewGame()
 
@@ -39,7 +39,8 @@ public class StartMenuUIControl : MonoBehaviour {
 	// Fires when player clicks "ExitGameButton"
 	public void ExitGame(){
 
-
+		// Exits the game
+		Application.Quit();
 	} // ExitGame()
 
 

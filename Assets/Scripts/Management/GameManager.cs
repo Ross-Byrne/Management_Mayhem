@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 
 	// Variables
 
-	public string gameDifficulty;
+	public char gameDifficulty;
 	public bool isCharacterCreated = false;
 	public bool isBusinessSetup = false;
 	public bool isNewGameCreated = false;
@@ -32,6 +32,12 @@ public class GameManager : MonoBehaviour {
 	public bool canStartSellingDrugs = false;
 	public bool canStartMakingDrugs = false;
 	public bool appliedForGrant = false;
+
+	// New Game info
+	public string pName;
+	public string[] pTraits = new string[5];
+	public string bName;
+	public char gDif;
 
 	// Pool of selectable player traits
 
