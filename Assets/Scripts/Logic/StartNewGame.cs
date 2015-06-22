@@ -28,7 +28,6 @@ public class StartNewGame : MonoBehaviour {
 		int menuChoice = 0;
 		bool createStage1, createStage2;
 
-		GameManager.gameManager.isCharacterCreated = false; // set isCharacterCreated to false
 		createStage1 = createStage2 = false;
 		/*
 		while(menuChoice != 99)

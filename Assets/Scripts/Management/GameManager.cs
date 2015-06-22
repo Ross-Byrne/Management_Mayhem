@@ -23,8 +23,6 @@ public class GameManager : MonoBehaviour {
 	// Variables
 
 	public char gameDifficulty;
-	public bool isCharacterCreated = false;
-	public bool isBusinessSetup = false;
 	public bool isNewGameCreated = false;
 	public bool isGameLoaded = false;
 	public bool canHireDealers = false;

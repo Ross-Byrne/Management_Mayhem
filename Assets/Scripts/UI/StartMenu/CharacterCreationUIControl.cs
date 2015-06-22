@@ -21,6 +21,9 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		// Activates Character Name Menu
 		characterNameMenu.gameObject.SetActive (true);
 
+		// Clears playerNameInput
+		playerNameInput.text = "";
+
 		// Deactivates Character Trait Menu
 		characterTraitsMenu.gameObject.SetActive (false);
 
@@ -42,6 +45,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		}// if
 	} // CanContinue()
 
+	// Saves players name that was entered and moves to next section 
 	public void SavePlayerName(){
 
 		// save player name by setting it in gamemanager
@@ -52,6 +56,13 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		characterTraitsMenu.gameObject.SetActive (true);
 
 	} // SavePlayerName()
+
+	// Saves players traits selection and moves on to next section
+	public void SavePlayerTraits(){
+
+
+
+	} // SavePlayerTraits()
 
 	// To exit character Creation Menu
 	public void Exit(){
