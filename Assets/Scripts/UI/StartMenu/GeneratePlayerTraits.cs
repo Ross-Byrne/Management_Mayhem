@@ -7,7 +7,17 @@ using UnityEngine.UI;
 
 public class GeneratePlayerTraits : MonoBehaviour {
 
+	// scripts
+
+	public CharacterInfo characterInfoScript;
+
+	// UI Elements
+
+	public Text headingText;
 	public Toggle traitTogglePrefab;
+	public Button exitButton;
+	public Button nextButton;
+
 	public float posY;
 	public float posX = 0;
 	public int arrayLength;
@@ -15,19 +25,31 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	public int spacing = 25;
 	public int startingPoint = -180;
 
+	// Methods
+
 	void Awake(){
 
-		// get the length of playerTraitSelect array
-		arrayLength = GameManager.gameManager.PlayerTraitsSelection.Length;
+		// get references for scripts
+		characterInfoScript = GetComponent<CharacterInfo> ();
 
-		posY = startingPoint;		
+	} // Awake()
+	
+	void Start(){
+
+		// get the length of traitsSelection array
+		arrayLength = characterInfoScript.TraitsSelection.Length;
+
+		posY = startingPoint + (arrayLength / 2) * spacing;		
 
 		// set up the traits
 		SetUpTraits ();
-	}
+
+	} // Start()
 
 	public void SetUpTraits(){
 
+		// move heading above first trait with a bit of extra space
+		headingText.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, posY + 60f);
 
 		for (int i = 0; i < arrayLength; i++) {
 
@@ -44,11 +66,16 @@ public class GeneratePlayerTraits : MonoBehaviour {
 			toggle.isOn = false;
 
 			// set the text on the toggle to the name of selectable trait
-			toggle.GetComponentInChildren<Text>().text = GameManager.gameManager.PlayerTraitsSelection[i];
+			toggle.GetComponentInChildren<Text>().text = characterInfoScript.TraitsSelection[i];
 
 			// Decrement position of toggle by 25
 			posY -= spacing;
+
 		} // for
+
+		// move the buttons down to the y poition under last trait with a bit of exit space
+		exitButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-55f, posY - 30f);
+		nextButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (55f, posY - 30f);
 
 	} // SetUpTraits()
 } // class

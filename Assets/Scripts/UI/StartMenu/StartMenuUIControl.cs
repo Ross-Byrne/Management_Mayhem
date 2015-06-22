@@ -19,9 +19,14 @@ public class StartMenuUIControl : MonoBehaviour {
 	// Fires when player clicks "StartNewGameButton"
 	public void NewGame(){
 
-		// Deactivates MainMenu and Activates Character Creation Menu
+		// Deactivates MainMenu 
 		gameObject.SetActive(false);
+
+		// Activates Character Creation Menu
 		characterCreationMenu.gameObject.SetActive(true);
+
+		// Runs setup needed for characterCreationMenu
+		characterCreationMenu.GetComponent<CharacterCreationUIControl> ().SetUp ();
 	} // NewGame()
 
 	// Fires when player clicks "LoadGameButton"

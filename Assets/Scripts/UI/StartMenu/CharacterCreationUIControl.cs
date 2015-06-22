@@ -6,6 +6,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 	// Menus
 	public GameObject mainMenu;
+	public GameObject characterNameMenu;
+	public GameObject characterTraitsMenu;
 
 	// UI Elements
 	public InputField playerNameInput;
@@ -16,7 +18,15 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	// To get the menu Setup. Runs when player goes to visit it
 	public void SetUp(){
 
+		// Activates Character Name Menu
+		characterNameMenu.gameObject.SetActive (true);
+
+		// Deactivates Character Trait Menu
+		characterTraitsMenu.gameObject.SetActive (false);
+
+		// Makes nextButton not interactable
 		nextButton.GetComponent<CanvasGroup> ().interactable = false;
+
 	} // SetUp()
 
 	// its run every time the input field changes
@@ -37,13 +47,20 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		// save player name by setting it in gamemanager
 		GameManager.gameManager.pName = playerNameInput.text;
 
+		// deactivate enterCharacterName and activate select character trait
+		characterNameMenu.gameObject.SetActive (false);
+		characterTraitsMenu.gameObject.SetActive (true);
+
 	} // SavePlayerName()
 
 	// To exit character Creation Menu
 	public void Exit(){
 
 		// Deactivates Character Creation Menu and Activates MainMenu
+		characterNameMenu.gameObject.SetActive (false);
+		characterTraitsMenu.gameObject.SetActive (false);
 		gameObject.SetActive(false);
+
 		mainMenu.gameObject.SetActive(true);
 	} // Exit()
 

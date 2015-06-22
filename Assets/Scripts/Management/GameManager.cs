@@ -39,18 +39,6 @@ public class GameManager : MonoBehaviour {
 	public string bName;
 	public char gDif;
 
-	// Pool of selectable player traits
-
-	public string[] PlayerTraitsSelection { get; set; }
-
-	// Pool of random first and last names for employees
-
-	public string[] randomFName = { "John", "Mike", "Carl", "Jim", "Conor", "Bob", "Tom",
-		"Rachael", "Samantha", "Mary", "Ciara", "Jennifer", "Jane", "Sarah"};
-	
-	public string[] randomLName = {		" Power", " Sullivan", " Smith", " McCarthy", " White", " Rodrigue", " Jones",
-		" Browne", " Butler", " Byrne", " Daly", " Kelly", " Harrington", " Jameson"};
-
 	// Methods
 
 	// Initialisation
@@ -69,10 +57,6 @@ public class GameManager : MonoBehaviour {
 		playerScript = player.GetComponent<Player>();
 		businessScript = business.GetComponent<Business>();
 		displayScript = GetComponent<DisplayText> ();
-
-		// Initialise playerTraitsSelection with values
-		PlayerTraitsSelection = new string[]{ 	"People Person", "Marketing Master", "Organiser", "Opertunist", "Charming",
-			"Greedy", "Spitful", "Alcoholic", "Reckless", "Seedy"};
 
 		/*// display the players name on output text
 		displayScript.ShowText ("Player's Name: " + playerScript.name);
