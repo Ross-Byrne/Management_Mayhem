@@ -41,8 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	// Pool of selectable player traits
 
-	public string[] playerTraitsSelection = { 	"People Person", "Marketing Master", "Organiser", "Opertunist", "Charming",
-		"Greedy", "Spitful", "Alcoholic", "Reckless", "Seedy"};
+	public string[] PlayerTraitsSelection { get; set; }
 
 	// Pool of random first and last names for employees
 
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour {
 
 	// Methods
 
-	// Initialization
+	// Initialisation
 	void Awake () 
 	{
 		// to make sure only one version of GameManager exisits
@@ -70,6 +69,10 @@ public class GameManager : MonoBehaviour {
 		playerScript = player.GetComponent<Player>();
 		businessScript = business.GetComponent<Business>();
 		displayScript = GetComponent<DisplayText> ();
+
+		// Initialise playerTraitsSelection with values
+		PlayerTraitsSelection = new string[]{ 	"People Person", "Marketing Master", "Organiser", "Opertunist", "Charming",
+			"Greedy", "Spitful", "Alcoholic", "Reckless", "Seedy"};
 
 		/*// display the players name on output text
 		displayScript.ShowText ("Player's Name: " + playerScript.name);

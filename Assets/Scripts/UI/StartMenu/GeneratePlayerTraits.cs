@@ -9,23 +9,27 @@ public class GeneratePlayerTraits : MonoBehaviour {
 
 	public Toggle traitToggle;
 	public int top = 80;
-	//public string[] traits;
+	public int arrayLength;
 
 	void Awake(){
-		int len = GameManager.gameManager.playerTraitsSelection.Length;
+
+		// get the length of playerTraitSelect array
+		arrayLength = GameManager.gameManager.PlayerTraitsSelection.Length;
+
+		// set up the traits
 		SetUpTraits ();
 	}
 
 	public void SetUpTraits(){
 
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < arrayLength; i++) {
 
 			Toggle toggle = (Toggle)Instantiate (traitToggle);
 			toggle.transform.SetParent (gameObject.transform, false);
 			//toggle.transform.position.Set(0,top-10, 0);
 			toggle.isOn = false;
-			toggle.GetComponentInChildren<Text>().text = GameManager.gameManager.pName;
+			toggle.GetComponentInChildren<Text>().text = GameManager.gameManager.PlayerTraitsSelection[i];
 
 		} // for
 
