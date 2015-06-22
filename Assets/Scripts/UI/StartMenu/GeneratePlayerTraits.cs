@@ -13,17 +13,14 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	public int arrayLength;
 
 	public int spacing = 25;
-	public int startingPoint = 0;
+	public int startingPoint = -180;
 
 	void Awake(){
 
 		// get the length of playerTraitSelect array
 		arrayLength = GameManager.gameManager.PlayerTraitsSelection.Length;
 
-		// Calculate starting position for trait toggles
-		// based on number of traits to choose from
-		// gets the aprox center of screen
-		posY = startingPoint + (arrayLength / 2) * spacing;		
+		posY = startingPoint;		
 
 		// set up the traits
 		SetUpTraits ();
@@ -34,14 +31,14 @@ public class GeneratePlayerTraits : MonoBehaviour {
 
 		for (int i = 0; i < arrayLength; i++) {
 
-			// set position of trait toggle
-			Vector3 pos = new Vector3(posX, posY, 0);
-
 			// instantiate toggle to set position
-			Toggle toggle = (Toggle)Instantiate (traitTogglePrefab, pos, Quaternion.identity);
+			Toggle toggle = (Toggle)Instantiate (traitTogglePrefab);
 
 			// make toggle a child of "SelectCharacterTraitsMenu" GameObject
 			toggle.transform.SetParent (gameObject.transform, false);
+
+			// set position of toggle
+			toggle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, posY);
 
 			// set is to not be toggled
 			toggle.isOn = false;
