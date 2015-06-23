@@ -61,8 +61,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public void SavePlayerTraits(){
 
 
-
 	} // SavePlayerTraits()
+
 
 	// To exit character Creation Menu
 	public void Exit(){
