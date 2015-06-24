@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 public class GeneratePlayerTraits : MonoBehaviour {
 
-	// menus
+	// Menus
 
+	public GameObject characterCreationMenu;
 	public GameObject selectCharacterTraitsMenu;
 
-	// scripts
+	// Scripts
 
 	public CharacterInfo characterInfoScript;
 
@@ -57,15 +58,33 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		// get the length of traitsSelection array
 		arrayLength = characterInfoScript.TraitsSelection.Length;
 
+		// determin starting Y position. starting point value decides 
+		// where the aprox center of the list of trait toggles will appear
 		posY = startingPoint + (arrayLength / 2) * spacing;		
 
+		// Set the size of toggle array depending on amount of selectable traits
 		toggles = new Toggle[arrayLength];
 
-		// set up the traits
+		// set up the trait toggles on the page
 		SetUpTraits ();
+
+		// After traits are setup, deactivate gameobject
+
+		// Deactivates Character Trait Menu
+		gameObject.SetActive (false);
+
+		// Deactivates CharacterCreationMenu
+		characterCreationMenu.gameObject.SetActive(false);
+
+		// Sets CharacterCreationMenu's alpha to 1 (makes it visable)
+		characterCreationMenu.GetComponent<CanvasGroup> ().alpha = 1;
+
+		// Makes CharacterCreationMenu clickable again
+		characterCreationMenu.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 
 	} // Start()
 
+	// Sets up the traits toggles
 	public void SetUpTraits(){
 
 		// move heading above first trait with a bit of extra space
@@ -108,15 +127,17 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		int numberSelected = 0;
 		int count = 0;
 
+		// loops through the array of toggles that are generated
 		foreach(Toggle toggle in toggles){
 
-
-			if(toggle.isOn == true){
+			// checks to see which toggles are selected or not
+			if(toggle.isOn == true){ // if trait toggle selected
 
 				if(numberSelected < 5){ // only add 5 trait indexes to array
+
 					// add Trait to players selected trait list
 					selectedTraits[numberSelected] = count;
-				}
+				} // if
 
 				// count the number of traits selected
 				numberSelected++;
@@ -136,5 +157,16 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		} // if
 
 	} // CheckSelected()
+
+	// resets all of the toggles to off
+	public void ResetTraits(){
+
+		foreach (Toggle toggle in toggles) {
+
+			// reset toggles by making them all turned off
+			toggle.isOn = false;
+		} // for
+
+	} // ResetTraits()
 
 } // class

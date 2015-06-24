@@ -5,16 +5,35 @@ using UnityEngine.UI;
 public class StartMenuUIControl : MonoBehaviour {
 
 	// Menus
-	//public StartMenuUIControl mainMenu;
+
 	public GameObject characterCreationMenu;
 
 	// UI Elements
+
 	public Button StartNewGameButton;
 	public Button LoadGameButton;
 	public Button GameInfoButton;
 	public Button ExitGameButton;
 
 	// Methods
+	
+	void Awake(){
+
+		// Setup the characterCreationMenu
+
+		// Set characterCreationMenu's aphla to 0 (Makes transperent)
+		characterCreationMenu.GetComponent<CanvasGroup> ().alpha = 0;
+
+		// Block raycasts - making the menu not clickable
+		characterCreationMenu.GetComponent<CanvasGroup> ().blocksRaycasts = false;
+
+		// Activate CharacterCreationMenu
+		characterCreationMenu.gameObject.SetActive (true);
+
+		// Activate CharacterTraitsMenu
+		characterCreationMenu.GetComponent<CharacterCreationUIControl> ().characterTraitsMenu.gameObject.SetActive (true);
+
+	} // Awake()
 
 	// Fires when player clicks "StartNewGameButton"
 	public void NewGame(){
