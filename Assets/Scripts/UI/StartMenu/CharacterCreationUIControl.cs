@@ -49,7 +49,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public void SavePlayerName(){
 
 		// save player name by setting it in gamemanager
-		GameManager.gameManager.pName = playerNameInput.text;
+		GameManager.gameManager.PName = playerNameInput.text;
 
 		// deactivate enterCharacterName and activate select character trait
 		characterNameMenu.gameObject.SetActive (false);
@@ -60,6 +60,10 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	// Saves players traits selection and moves on to next section
 	public void SavePlayerTraits(){
 
+		for (int i = 0; i < GameManager.gameManager.PTraits.Length; i++) {
+			GameManager.gameManager.PTraits [i] = 
+				gameObject.GetComponent<CharacterInfo> ().TraitsSelection [gameObject.GetComponent<GeneratePlayerTraits> ().SelectedTraits[i]];
+		} // for
 
 	} // SavePlayerTraits()
 

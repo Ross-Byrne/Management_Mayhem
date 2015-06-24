@@ -6,7 +6,11 @@ using UnityEngine.UI;
 // Script for generating toggles for all selectable player traits
 
 public class GeneratePlayerTraits : MonoBehaviour {
-	
+
+	// menus
+
+	public GameObject selectCharacterTraitsMenu;
+
 	// scripts
 
 	public CharacterInfo characterInfoScript;
@@ -14,7 +18,6 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	// UI Elements
 
 	public Text headingText;
-
 	public Toggle traitTogglePrefab;
 	public Button exitButton;
 	public Button nextButton;
@@ -32,6 +35,13 @@ public class GeneratePlayerTraits : MonoBehaviour {
 
 	public int spacing = 25;
 	public int startingPoint = -180;
+
+	// to save traits currently picked
+	private int[] selectedTraits = new int[5];
+	public int[] SelectedTraits {
+		get{ return selectedTraits;}
+		set{ selectedTraits = value;}
+	}
 
 	// Methods
 
@@ -67,7 +77,7 @@ public class GeneratePlayerTraits : MonoBehaviour {
 			Toggle toggle = (Toggle)Instantiate (traitTogglePrefab);
 
 			// make toggle a child of "SelectCharacterTraitsMenu" GameObject
-			toggle.transform.SetParent (gameObject.transform, false);
+			toggle.transform.SetParent (selectCharacterTraitsMenu.transform, false);
 
 			// set position of toggle
 			toggle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posX, posY);
@@ -96,30 +106,35 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	public void CheckSelected(){
 
 		int numberSelected = 0;
+		int count = 0;
 
 		foreach(Toggle toggle in toggles){
 
 
-			if(toggle.isOn == true && numberSelected < 5){
+			if(toggle.isOn == true){
 
-				Debug.Log(toggle.GetComponentInChildren<Text>().text);
+				if(numberSelected < 5){ // only add 5 trait indexes to array
+					// add Trait to players selected trait list
+					selectedTraits[numberSelected] = count;
+				}
 
-				// add Trait to players selected
-
+				// count the number of traits selected
 				numberSelected++;
 			} // if
 
-			Debug.Log(numberSelected);
-
+			// To keep track of the current trait index
+			count++;
 		} // for
 
+		// can only select 5 traits. if 5, can continue
 		if(numberSelected == 5){
+
 			nextButton.GetComponent<CanvasGroup> ().interactable = true;
-		} else {
+		} else { // if > or < then 5, cant continue
+
 			nextButton.GetComponent<CanvasGroup> ().interactable = false;
 		} // if
 
-	
 	} // CheckSelected()
 
 } // class

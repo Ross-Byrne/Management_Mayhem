@@ -31,11 +31,16 @@ public class GameManager : MonoBehaviour {
 	public bool canStartMakingDrugs = false;
 	public bool appliedForGrant = false;
 
-	// New Game info
-	public string pName;
-	public string[] pTraits = new string[5];
-	public string bName;
-	public char gDif;
+	// New Game info - for saving bewteen scenes
+	public string PName { get; set;}
+	[SerializeField] 							// to show in editor
+	private string[] pTraits = new string[5];
+	public string[] PTraits {
+		get{ return pTraits;}
+		set{ pTraits = value;}
+	}
+	public string BName { get; set;}
+	public char GDif { get; set;}
 
 	// Methods
 
