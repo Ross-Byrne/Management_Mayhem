@@ -10,11 +10,22 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public GameObject characterNameMenu;
 	public GameObject characterTraitsMenu;
 	public GameObject setupBusinessMenu;
+	public GameObject selectGameDiffMenu;
 
 	// UI Elements
 
 	public InputField playerNameInput;
-	public Button nextButton;
+	public InputField businessNameInput;
+	public Button savePlayerNameButton;		// nextButton on characterNameMenu
+	public Button saveBusinessNameButton;	// nextButton on setupBusinessMenu
+	public Button finishButton;				// finishButton on selectGameDiffMenu
+	public Toggle easyToggle;
+	public Toggle normalToggle;
+	public Toggle hardToggle;
+
+	// Variables
+
+	private char gameDiff;
 	
 	// Methods
 
@@ -30,23 +41,44 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		// resets selected traits
 		characterTraitsMenu.GetComponent<GeneratePlayerTraits> ().ResetTraits ();
 
+		// Clears businessNameInput
+		businessNameInput.text = "";
+
 		// Makes nextButton not interactable
-		nextButton.GetComponent<CanvasGroup> ().interactable = false;
+		savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = false;
+		saveBusinessNameButton.GetComponent<CanvasGroup> ().interactable = false;
+		finishButton.GetComponent<CanvasGroup> ().interactable = false;
 
 	} // SetUp()
 
+
 	// its run every time the input field changes
 	// to check to make sure it's a valid name
-	public void CanContinue(){
+	public void ValidPlayerName(){
 
 		if (playerNameInput.text.Equals("") || playerNameInput.text.StartsWith(" ")) { // if input is blank or starts with space
 
-			nextButton.GetComponent<CanvasGroup> ().interactable = false;
+			savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = false;
 		} else { // if it doesn't = a valid name
 
-			nextButton.GetComponent<CanvasGroup> ().interactable = true;
+			savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = true;
 		}// if
-	} // CanContinue()
+	} // ValidPlayerName()
+
+
+	// its run every time the input field changes
+	// to check to make sure it's a valid name
+	public void ValidBusinessName(){
+		
+		if (businessNameInput.text.Equals("") || businessNameInput.text.StartsWith(" ")) { // if input is blank or starts with space
+			
+			saveBusinessNameButton.GetComponent<CanvasGroup> ().interactable = false;
+		} else { // if it doesn't = a valid name
+			
+			saveBusinessNameButton.GetComponent<CanvasGroup> ().interactable = true;
+		}// if
+	} // ValidBusinessName()
+
 
 	// Saves players name that was entered and moves to next section 
 	public void SavePlayerName(){
@@ -59,6 +91,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		characterTraitsMenu.gameObject.SetActive (true);
 
 	} // SavePlayerName()
+
 
 	// Saves players traits selection and moves on to next section
 	public void SavePlayerTraits(){
@@ -77,6 +110,71 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		setupBusinessMenu.gameObject.SetActive (true);
 
 	} // SavePlayerTraits()
+
+
+	// Saves the name of the business and moves to next section
+	public void SaveBusinessName(){
+
+		// saves business name by setting it in gameManager
+		GameManager.gameManager.BName = businessNameInput.text;
+
+		// deactivates setupBusinessMenu and activates selectGameDiffMenu
+		setupBusinessMenu.gameObject.SetActive (false);
+		selectGameDiffMenu.gameObject.SetActive (true);
+
+	} // SaveBusinessName()
+
+
+	// fires every time a game Diff toggle is clicked
+	// to make sure a game difficulty is selected
+	public void ValidGameDiff(){
+
+		if (easyToggle.isOn) { // if easy game Diff is selected
+
+			// Saves game difficulty to gameDiff
+			gameDiff = 'E'; // easy
+
+			// Makes finishButton clickable
+			finishButton.GetComponent<CanvasGroup> ().interactable = true;
+
+		} else if (normalToggle.isOn) { // if normal game Diff is selected
+
+			// Saves game difficulty to gameDiff
+			gameDiff = 'N'; // normal
+			
+			// Makes finishButton clickable
+			finishButton.GetComponent<CanvasGroup> ().interactable = true;
+
+		} else if (hardToggle.isOn) { // hard game Diff is selected
+
+			// Saves game difficulty to gameDiff
+			gameDiff = 'H'; // hard
+			
+			// Makes finishButton clickable
+			finishButton.GetComponent<CanvasGroup> ().interactable = true;
+
+
+		} else { // if no difficulty is selected
+
+			// make finishButton non clickable
+			finishButton.GetComponent<CanvasGroup> ().interactable = false;
+
+		} // if
+
+	} // ValidGameDiff()
+
+
+	// Save game difficulty and finishes character creation
+	public void SaveGameDiffAndFinish(){
+
+		// Saves Game Difficulty to gameManager
+		GameManager.gameManager.GDif = gameDiff;
+
+		// Loads Next Scene, New Game Ready to start
+		Application.LoadLevel("Main"); // Loads Second Scene
+
+	} // SaveGameDiffAndFinish()
+
 	
 	// To exit character Creation Menu
 	public void Exit(){
