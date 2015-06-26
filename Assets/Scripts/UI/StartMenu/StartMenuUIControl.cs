@@ -21,6 +21,9 @@ public class StartMenuUIControl : MonoBehaviour {
 
 		// Setup the characterCreationMenu
 
+		// Get reference for menu because it was instantiated 
+
+
 		// Set characterCreationMenu's aphla to 0 (Makes transperent)
 		characterCreationMenu.GetComponent<CanvasGroup> ().alpha = 0;
 

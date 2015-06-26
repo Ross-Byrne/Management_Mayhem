@@ -28,6 +28,13 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	private char gameDiff;
 	
 	// Methods
+	
+	//void Awake(){
+
+		// Get reference for menu because it was instantiated 
+		//mainMenu = GameObject.FindWithTag("MainMenu");
+	//} // Awake
+
 
 	// To get the menu Setup. Runs when player goes to visit it
 	public void SetUp(){
