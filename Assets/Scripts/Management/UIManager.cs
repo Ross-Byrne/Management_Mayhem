@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour {
 
 	public Canvas mainCanvas;
 	public GameObject mainMenu;
-	public GameObject characterCreationMenu;
 	
 	// UIs
 
@@ -44,7 +43,7 @@ public class UIManager : MonoBehaviour {
 		// Only one instance of UIManager exsists, so start is only run in start scene
 		
 		// instantiate Main Menu
-		GameObject mainMenu = (GameObject)Instantiate (mainMenuPrefab);
+		mainMenu = (GameObject)Instantiate (mainMenuPrefab);
 		
 		// make mainMenu a child of "MainCanvas"
 		mainMenu.transform.SetParent (mainCanvas.transform, false);
@@ -55,14 +54,9 @@ public class UIManager : MonoBehaviour {
 		// make characterCreationMenu a child of "MainCanvas"
 		characterCreationMenu.transform.SetParent (mainCanvas.transform, false);
 
-
-
 	} // Awake()
 
 	void Start(){
-
-		mainMenu = GameObject.FindWithTag ("MainMenu");
-		characterCreationMenu = GameObject.FindWithTag ("CharacterCreationMenu");
 		
 		// Activate mainMenu
 		mainMenu.gameObject.SetActive (true);

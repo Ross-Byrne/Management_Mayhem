@@ -29,11 +29,11 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	
 	// Methods
 	
-	//void Awake(){
+	void Awake(){
 
 		// Get reference for menu because it was instantiated 
-		//mainMenu = GameObject.FindWithTag("MainMenu");
-	//} // Awake
+		mainMenu = GameObject.FindWithTag("MainMenu");
+	} // Awake
 
 
 	// To get the menu Setup. Runs when player goes to visit it
@@ -50,6 +50,11 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 		// Clears businessNameInput
 		businessNameInput.text = "";
+
+		// Clears selected game difficulty
+		easyToggle.isOn = false;
+		normalToggle.isOn = false;
+		hardToggle.isOn = false;
 
 		// Makes nextButton not interactable
 		savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = false;
@@ -190,6 +195,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		characterNameMenu.gameObject.SetActive (false);
 		characterTraitsMenu.gameObject.SetActive (false);
 		setupBusinessMenu.gameObject.SetActive (false);
+		selectGameDiffMenu.gameObject.SetActive (false);
 
 		// Deactivates Character Creation Menu itself
 		gameObject.SetActive(false); 

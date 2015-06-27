@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class StartMenuUIControl : MonoBehaviour {
 
+	// GameObjects
+
+	public Canvas mainCanvas;
+	public GameObject characterCreationMenuPrefab;
+	
 	// Menus
 
 	public GameObject characterCreationMenu;
@@ -17,26 +22,26 @@ public class StartMenuUIControl : MonoBehaviour {
 
 	// Methods
 	
-	void Awake(){
-
+	void Start(){
+	
 		// Setup the characterCreationMenu
-
+		
 		// Get reference for menu because it was instantiated 
-
+		characterCreationMenu = GameObject.FindWithTag ("CharacterCreationMenu");
 
 		// Set characterCreationMenu's aphla to 0 (Makes transperent)
 		characterCreationMenu.GetComponent<CanvasGroup> ().alpha = 0;
-
+		
 		// Block raycasts - making the menu not clickable
 		characterCreationMenu.GetComponent<CanvasGroup> ().blocksRaycasts = false;
-
+		
 		// Activate CharacterCreationMenu
 		characterCreationMenu.gameObject.SetActive (true);
-
+		
 		// Activate CharacterTraitsMenu
 		characterCreationMenu.GetComponent<CharacterCreationUIControl> ().characterTraitsMenu.gameObject.SetActive (true);
 
-	} // Awake()
+	} // Start()
 
 	// Fires when player clicks "StartNewGameButton"
 	public void NewGame(){
