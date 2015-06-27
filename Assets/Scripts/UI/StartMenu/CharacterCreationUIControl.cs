@@ -39,6 +39,9 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	// To get the menu Setup. Runs when player goes to visit it
 	public void SetUp(){
 
+		// Sets isNewGameCreated to false
+		GameManager.gameManager.isNewGameCreated = false;
+
 		// Activates Character Name Menu
 		characterNameMenu.gameObject.SetActive (true);
 
@@ -181,6 +184,18 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 		// Saves Game Difficulty to gameManager
 		GameManager.gameManager.GDif = gameDiff;
+
+		// Deactivates the sections of Character Creation Menu
+		characterNameMenu.gameObject.SetActive (false);
+		characterTraitsMenu.gameObject.SetActive (false);
+		setupBusinessMenu.gameObject.SetActive (false);
+		selectGameDiffMenu.gameObject.SetActive (false);
+		
+		// Deactivates Character Creation Menu itself
+		gameObject.SetActive(false); 
+
+		// Set isNewGameCreated to true
+		GameManager.gameManager.isNewGameCreated = true;
 
 		// Loads Next Scene, New Game Ready to start
 		Application.LoadLevel("Main"); // Loads Second Scene

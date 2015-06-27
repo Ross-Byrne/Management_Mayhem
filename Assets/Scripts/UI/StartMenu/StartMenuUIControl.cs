@@ -6,7 +6,6 @@ public class StartMenuUIControl : MonoBehaviour {
 
 	// GameObjects
 
-	public Canvas mainCanvas;
 	public GameObject characterCreationMenuPrefab;
 	
 	// Menus

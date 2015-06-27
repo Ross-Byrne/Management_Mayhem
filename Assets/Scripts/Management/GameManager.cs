@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 	public bool appliedForGrant = false;
 
 	// New Game info - for saving bewteen scenes
+	[SerializeField]
 	public string PName { get; set;}
 	[SerializeField] 							// to show in editor
 	private string[] pTraits = new string[5];
@@ -71,6 +72,39 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		//displayScript.ShowText ("Player's Name: " + playerScript.playerName);
 	} // Update()
+
+
+	// runs when a Scene is loaded
+	void OnLevelWasLoaded(int level){
+
+		// if scene loaded is Main Scene
+		if (level == 1) {
+
+			// if a new game has been created, setup variables
+			if(isNewGameCreated == true){
+
+				// set the players new name to players name
+				Debug.Log(playerScript.Name);
+				playerScript.Name = PName;
+				Debug.Log(playerScript.Name);
+
+				// set the players selected traits to players traits
+				for(int i = 0; i < 5; i++){
+
+					playerScript.Traits[i] = PTraits[i];
+				} // for
+
+				// set players business name to business name
+				businessScript.Name = BName;
+
+				// set players selected game dif to gameDifficulty
+				gameDifficulty = GDif;
+
+			} // if
+
+		} // if
+
+	} // OnLevelWasLoaded()
 
 	// Save Data to file
 	public void Save(){
