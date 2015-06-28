@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject business;
+	public GameObject uiManager;
 
 	// Scripts
 
@@ -62,17 +63,7 @@ public class GameManager : MonoBehaviour {
 		businessScript = business.GetComponent<Business>();
 		displayScript = GetComponent<DisplayText> ();
 
-		/*// display the players name on output text
-		displayScript.ShowText ("Player's Name: " + playerScript.name);
-		Save ();
-		Load ();*/
 	} // Awake()
-
-	// Update is called once per frame
-	void Update () {
-
-	
-	} // Update()
 
 
 	// runs when a Scene is loaded
@@ -85,11 +76,8 @@ public class GameManager : MonoBehaviour {
 			if(isNewGameCreated == true){
 
 				StartCoroutine("SetupNewGame");
-
 			} // if
-
 		} // if
-
 	} // OnLevelWasLoaded()
 
 	void SetupGame(){
@@ -122,8 +110,8 @@ public class GameManager : MonoBehaviour {
 		// set players selected game dif to gameDifficulty
 		gameDifficulty = GDif;
 
+		// Displays New Games info
 		UIManager.uiManager.displayNewGameDetails (playerScript, businessScript, gameManager);
-
 	} // SetupNewGame()
 
 	// Save Data to file

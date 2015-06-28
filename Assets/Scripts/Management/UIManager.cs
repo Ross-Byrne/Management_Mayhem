@@ -7,16 +7,18 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 	
 	// UIs
-		
-	public Canvas mainCanvasPrefab;
+
+	public GameObject canvasPrefab;
+	public GameObject canvasHolder;
+	public Canvas mainCanvas;
 
 	// StartMenus
 
 	public GameObject mainMenuPrefab;
 	public GameObject characterCreationMenuPrefab;
 
-	public Canvas mainCanvas;
 	public GameObject mainMenu;
+	public GameObject characterCreationMenu;
 	
 	// Main Game UIs
 
@@ -49,20 +51,21 @@ public class UIManager : MonoBehaviour {
 			Destroy (gameObject);
 		} // if
 
-		mainCanvas = (Canvas)Instantiate (mainCanvasPrefab);
-		mainCanvas.transform.SetParent (gameObject.transform, false);
-
 		// Variable initialisation
 		IsMainUISetup = false;
-
 
 		// to make sure code is running in the right scene
 		if (Application.loadedLevelName.Equals ("StartMenu")) {
 
-			// Only one instance of UIManager exsists, so start is only run in start scene
-
 			// Setup Main Menu
 			SetUpStartMenuScene();
+
+		} // if
+
+		if (Application.loadedLevelName.Equals ("Main")) {
+
+			// setup main scene UIs
+			SetUpMainScene();
 
 		} // if
 
@@ -81,9 +84,7 @@ public class UIManager : MonoBehaviour {
 				// Games Main Menu Appears
 				Debug.Log("MainMenu Appears");
 			} // if
-			
 		} // if
-
 	} // Update()
 
 	
@@ -100,20 +101,22 @@ public class UIManager : MonoBehaviour {
 		// if the scene "Main" loads
 		if (level == 1) {
 		
-			// instantiate The Main UI
-			mainUI = (GameObject)Instantiate(mainUIPrefab);
-
-			// make mainUI a child of "MainCanvs"
-			mainUI.transform.SetParent(mainCanvas.transform, false);
-
-			// MainUI is finished Setting up
-			IsMainUISetup = true;
-
+			// setup main scene UIs
+			SetUpMainScene();
 		} // if
 
 	} // OnLevelWasLoaded()
 
 	void SetUpStartMenuScene(){
+
+		// instantiate Main Canvas Holder
+		canvasHolder = (GameObject)Instantiate (canvasPrefab);
+
+		// make canvasHolder a child of "UIManager"
+		canvasHolder.transform.SetParent (gameObject.transform, false);
+
+		// Get reference to mainCanvas from canvasHolder
+		mainCanvas = canvasHolder.GetComponentInChildren<Canvas> ();
 
 		// instantiate Main Menu
 		mainMenu = (GameObject)Instantiate (mainMenuPrefab);
@@ -122,7 +125,7 @@ public class UIManager : MonoBehaviour {
 		mainMenu.transform.SetParent (mainCanvas.transform, false);
 		
 		// instantiate Character Creation Menu
-		GameObject characterCreationMenu = (GameObject)Instantiate (characterCreationMenuPrefab);
+		characterCreationMenu = (GameObject)Instantiate (characterCreationMenuPrefab);
 		
 		// make characterCreationMenu a child of "MainCanvas"
 		characterCreationMenu.transform.SetParent (mainCanvas.transform, false);
@@ -131,6 +134,30 @@ public class UIManager : MonoBehaviour {
 		mainMenu.gameObject.SetActive (true);
 
 	} // SetUpStartMenuScene()
+
+
+	void SetUpMainScene(){
+
+		// instantiate Main Canvas Holder
+		canvasHolder = (GameObject)Instantiate (canvasPrefab);
+
+		// make canvasHolder a child of "UIManager"
+		canvasHolder.transform.SetParent (gameObject.transform, false);
+		
+		// Get reference to mainCanvas from canvasHolder
+		mainCanvas = canvasHolder.GetComponentInChildren<Canvas> ();
+
+		// instantiate The Main UI
+		mainUI = (GameObject)Instantiate(mainUIPrefab);
+		
+		// make mainUI a child of "MainCanvs"
+		mainUI.transform.SetParent(mainCanvas.transform, false);
+		
+		// MainUI is finished Setting up
+		IsMainUISetup = true;
+
+	} // SetUpMainScene()
+
 
 	public void displayNewGameDetails(Player player, Business business, GameManager gameManager){
 		mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
