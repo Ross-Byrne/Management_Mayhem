@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour {
 	// Methods
 
 	// Initialisation
-	void Awake () 
-	{
+	void Awake () {
+
 		// to make sure only one version of GameManager exisits
 		// to enforce singlton patern
 		if (gameManager == null) {
@@ -67,10 +67,11 @@ public class GameManager : MonoBehaviour {
 		Save ();
 		Load ();*/
 	} // Awake()
-	
+
 	// Update is called once per frame
 	void Update () {
-		//displayScript.ShowText ("Player's Name: " + playerScript.playerName);
+
+	
 	} // Update()
 
 
@@ -83,28 +84,47 @@ public class GameManager : MonoBehaviour {
 			// if a new game has been created, setup variables
 			if(isNewGameCreated == true){
 
-				// set the players new name to players name
-				Debug.Log(playerScript.Name);
-				playerScript.Name = PName;
-				Debug.Log(playerScript.Name);
-
-				// set the players selected traits to players traits
-				for(int i = 0; i < 5; i++){
-
-					playerScript.Traits[i] = PTraits[i];
-				} // for
-
-				// set players business name to business name
-				businessScript.Name = BName;
-
-				// set players selected game dif to gameDifficulty
-				gameDifficulty = GDif;
+				StartCoroutine("SetupNewGame");
 
 			} // if
 
 		} // if
 
 	} // OnLevelWasLoaded()
+
+	void SetupGame(){
+
+
+	} // SetupGame()
+
+	IEnumerator SetupNewGame(){
+	
+		// To make sure MainUI is set up first
+		do{
+			// Waits one frame
+			yield return null;
+			// loops while mainUI isn't finished being setup
+		}while(!UIManager.uiManager.IsMainUISetup);
+
+		Debug.Log ("Starting New Game Setup");
+		// set the players new name to players name
+		playerScript.Name = PName;
+		
+		// set the players selected traits to players traits
+		for(int i = 0; i < 5; i++){
+			
+			playerScript.Traits[i] = PTraits[i];
+		} // for
+		
+		// set players business name to business name
+		businessScript.Name = BName;
+		
+		// set players selected game dif to gameDifficulty
+		gameDifficulty = GDif;
+
+		UIManager.uiManager.displayNewGameDetails (playerScript, businessScript, gameManager);
+
+	} // SetupNewGame()
 
 	// Save Data to file
 	public void Save(){

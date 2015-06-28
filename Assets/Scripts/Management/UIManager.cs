@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 	
 	// UIs
+		
+	public Canvas mainCanvasPrefab;
 
 	// StartMenus
 
@@ -29,6 +31,10 @@ public class UIManager : MonoBehaviour {
 
 	public static UIManager uiManager;
 
+	// Variables
+
+	public bool IsMainUISetup { get; set;}
+
 	// Methods
 
 	// Initialisation
@@ -42,6 +48,12 @@ public class UIManager : MonoBehaviour {
 		} else if (uiManager != this) {
 			Destroy (gameObject);
 		} // if
+
+		mainCanvas = (Canvas)Instantiate (mainCanvasPrefab);
+		mainCanvas.transform.SetParent (gameObject.transform, false);
+
+		// Variable initialisation
+		IsMainUISetup = false;
 
 
 		// to make sure code is running in the right scene
@@ -67,21 +79,19 @@ public class UIManager : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.Escape) == true ){
 
 				// Games Main Menu Appears
-				Debug.Log("MainMEnu Appears");
+				Debug.Log("MainMenu Appears");
 			} // if
 			
 		} // if
-
 
 	} // Update()
 
 	
 	// When the main scene loads
 	void OnLevelWasLoaded(int level){
-
+		Debug.Log ("Setting up UIManager");
 		// if the scene "StartMenu" loads
 		if(level == 0){
-			Debug.Log("StartMenu");
 
 			// Setup main Menu
 			SetUpStartMenuScene();
@@ -89,24 +99,16 @@ public class UIManager : MonoBehaviour {
 
 		// if the scene "Main" loads
 		if (level == 1) {
-			Debug.Log("Main");
-
+		
 			// instantiate The Main UI
 			mainUI = (GameObject)Instantiate(mainUIPrefab);
 
 			// make mainUI a child of "MainCanvs"
 			mainUI.transform.SetParent(mainCanvas.transform, false);
 
-			// should be a method that is called in GameManger
-		/*	mainUI.GetComponentInChildren<Text>().text = GameManager.gameManager.playerScript.Name;
-				/*+ GameManager.gameManager.playerScript.Traits[0] + " "
-				+ GameManager.gameManager.playerScript.Traits[1] + "/n"
-				+ GameManager.gameManager.playerScript.Traits[2] + "/n"
-				+ GameManager.gameManager.playerScript.Traits[3] + "/n"
-				+ GameManager.gameManager.playerScript.Traits[4] + "/n"
-				+ GameManager.gameManager.businessScript.Name + "/n"
-				+ GameManager.gameManager.gameDifficulty; */
-		
+			// MainUI is finished Setting up
+			IsMainUISetup = true;
+
 		} // if
 
 	} // OnLevelWasLoaded()
@@ -129,4 +131,26 @@ public class UIManager : MonoBehaviour {
 		mainMenu.gameObject.SetActive (true);
 
 	} // SetUpStartMenuScene()
+
+	public void displayNewGameDetails(Player player, Business business, GameManager gameManager){
+		mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
+			+ player.Traits[0] + "\n"
+			+ player.Traits[1] + "\n"
+			+ player.Traits[2] + "\n"
+			+ player.Traits[3] + "\n"
+			+ player.Traits[4] + "\n"
+			+ business.Name + "\n";
+
+		 switch (gameManager.gameDifficulty) {
+		case 'E':
+				mainUI.GetComponentInChildren<Text>().text += "Easy";
+				break;
+		case 'N':
+				mainUI.GetComponentInChildren<Text>().text += "Normal";
+				break;
+		case 'H':
+				mainUI.GetComponentInChildren<Text>().text += "Hard";
+				break;
+		} // Switch
+	} // displayNewGameDetails()
 } // class
