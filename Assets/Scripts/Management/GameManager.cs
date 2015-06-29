@@ -6,8 +6,8 @@ using System.IO;										// For saving to file
 
 // GameManager is a singlton.
 
-public class GameManager : MonoBehaviour {
-	
+public class GameManager : MonoBehaviour 
+{
 	/*===================== GameObjects =====================================================================================*/
 
 	public GameObject uiManagerPrefab;
@@ -54,8 +54,8 @@ public class GameManager : MonoBehaviour {
 	/*===================== Awake() =====================================================================================*/
 
 	// Initialisation
-	void Awake () {
-
+	void Awake () 
+	{
 		// to make sure only one version of GameManager exisits
 		// to enforce singlton patern
 		if (gameManager == null) {
@@ -80,8 +80,8 @@ public class GameManager : MonoBehaviour {
 	/*===================== OnLevelWasLoaded() =====================================================================================*/
 
 	// runs when a Scene is loaded
-	void OnLevelWasLoaded(int level){
-
+	void OnLevelWasLoaded(int level)
+	{
 		// if scene loaded is Main Scene
 		if (level == 1) {
 
@@ -96,16 +96,16 @@ public class GameManager : MonoBehaviour {
 
 	/*===================== SetupGame() =====================================================================================*/
 
-	void SetupGame(){
-
+	void SetupGame()
+	{
 
 	} // SetupGame()
 
 
 	/*===================== SetupNewGame() =====================================================================================*/
 
-	IEnumerator SetupNewGame(){
-	
+	IEnumerator SetupNewGame()
+	{
 		// To make sure MainUI is set up first
 		do{
 			// Waits one frame
@@ -136,16 +136,16 @@ public class GameManager : MonoBehaviour {
 
 	/*===================== ResumeGame() =====================================================================================*/
 
-	public void ResumeGame(){
-		
+	public void ResumeGame()
+	{
 		uiManager.ExitEscapeMenu ();
 	} // ResumeGame()
 
 
 	/*===================== ExitToMainMenu() =====================================================================================*/
 
-	public void ExitToMainMenu(){
-
+	public void ExitToMainMenu()
+	{
 		// loads StartMenu Scene (first scene)
 		Application.LoadLevel (0);
 	} // ExitToMainMenu()
@@ -154,8 +154,8 @@ public class GameManager : MonoBehaviour {
 	/*===================== Save() =====================================================================================*/
 
 	// Save Data to file
-	public void Save(){
-
+	public void Save()
+	{
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
@@ -171,8 +171,8 @@ public class GameManager : MonoBehaviour {
 	/*===================== Load() =====================================================================================*/
 
 	// Load data from file
-	public void Load(){
-
+	public void Load()
+	{
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);

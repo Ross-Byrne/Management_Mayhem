@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 // UIManager is a singlton
 
-public class UIManager : MonoBehaviour {
-
+public class UIManager : MonoBehaviour 
+{
 	/*===================== UIs =====================================================================================*/
 	
 	public Canvas mainCanvas;
@@ -50,8 +50,8 @@ public class UIManager : MonoBehaviour {
 	/*===================== Awake() =====================================================================================*/
 
 	// Initialisation
-	void Awake(){
-
+	void Awake()
+	{
 	/*	// to make sure only one version of UIManager exisits
 		// to enforce singlton patern
 		if (uiManager == null) {
@@ -86,8 +86,8 @@ public class UIManager : MonoBehaviour {
 	/*===================== Update() =====================================================================================*/
 
 	// Runs code every Frame
-	void Update(){
-
+	void Update()
+	{
 		// If in the main game Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
@@ -114,8 +114,8 @@ public class UIManager : MonoBehaviour {
 
 	/*===================== SetUpStartMenuScene() =====================================================================================*/
 
-	void SetUpStartMenuScene(){
-
+	void SetUpStartMenuScene()
+	{
 		// instantiate Main Menu
 		mainMenu = (GameObject)Instantiate (mainMenuPrefab);
 		
@@ -136,8 +136,8 @@ public class UIManager : MonoBehaviour {
 
 	/*===================== SetUpMainScene() =====================================================================================*/
 
-	void SetUpMainScene(){
-
+	void SetUpMainScene()
+	{
 		// instantiate The Main UI
 		mainUI = (GameObject)Instantiate(mainUIPrefab);
 		
@@ -165,8 +165,8 @@ public class UIManager : MonoBehaviour {
 	/*===================== ManageEscapeMenu() =====================================================================================*/
 
 	// Manages when the escapeMenu is active and disabled
-	public void ManageEscapeMenu(bool isActive){
-
+	public void ManageEscapeMenu(bool isActive)
+	{
 		if (isActive) {
 			// Activates escapeMenu
 			escapeMenu.gameObject.SetActive (true);
@@ -179,8 +179,8 @@ public class UIManager : MonoBehaviour {
 
 	/*===================== ExitEscapeMenu() =====================================================================================*/
 
-	public void ExitEscapeMenu(){
-
+	public void ExitEscapeMenu()
+	{
 		IsEscapeMenuActivated = false;
 		ManageEscapeMenu (IsEscapeMenuActivated);
 
@@ -189,8 +189,8 @@ public class UIManager : MonoBehaviour {
 
 	/*===================== displayNewGameDetails() =====================================================================================*/
 
-	public void displayNewGameDetails(Player player, Business business, GameManager gameManager){
-
+	public void displayNewGameDetails(Player player, Business business, GameManager gameManager)
+	{
 		mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
 			+ player.Traits[0] + "\n"
 			+ player.Traits[1] + "\n"
