@@ -10,13 +10,17 @@ public class GameManager : MonoBehaviour {
 
 	// GameObjects
 
+	public GameObject uiManagerPrefab;
+
 	public GameObject player;
 	public GameObject business;
-	public GameObject uiManager;
+	//public GameObject uiManager;
 
 	// Scripts
 
 	public static GameManager gameManager;
+	public static UIManager uiManager;
+
 	public Player playerScript;
 	public Business businessScript;
 	public DisplayText displayScript;
@@ -58,7 +62,11 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject);
 		} // if
 
+		// Instanstiate UIManager 
+		GameObject uiManagerObject = (GameObject)Instantiate (uiManagerPrefab);
+
 		// get references for scripts
+		uiManager = uiManagerObject.GetComponent<UIManager> ();
 		playerScript = player.GetComponent<Player>();
 		businessScript = business.GetComponent<Business>();
 		displayScript = GetComponent<DisplayText> ();
@@ -92,7 +100,7 @@ public class GameManager : MonoBehaviour {
 			// Waits one frame
 			yield return null;
 			// loops while mainUI isn't finished being setup
-		}while(!UIManager.uiManager.IsMainUISetup);
+		}while(!uiManager.IsMainUISetup);
 
 		Debug.Log ("Starting New Game Setup");
 		// set the players new name to players name
@@ -111,8 +119,21 @@ public class GameManager : MonoBehaviour {
 		gameDifficulty = GDif;
 
 		// Displays New Games info
-		UIManager.uiManager.displayNewGameDetails (playerScript, businessScript, gameManager);
+		uiManager.displayNewGameDetails (playerScript, businessScript, gameManager);
 	} // SetupNewGame()
+
+
+	public void ResumeGame(){
+		
+		uiManager.ExitEscapeMenu ();
+	} // ResumeGame()
+
+
+	public void ExitToMainMenu(){
+
+		// loads StartMenu Scene (first scene)
+		Application.LoadLevel (0);
+	} // ExitToMainMenu()
 
 	// Save Data to file
 	public void Save(){

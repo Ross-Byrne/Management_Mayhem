@@ -7,9 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 	
 	// UIs
-
-	public GameObject canvasPrefab;
-	public GameObject canvasHolder;
+	
 	public Canvas mainCanvas;
 
 	// StartMenus
@@ -28,6 +26,10 @@ public class UIManager : MonoBehaviour {
 
 	// MainGameMenus
 
+	public GameObject escapeMenuPrefab;
+
+	public GameObject escapeMenu;
+
 
 	// Scripts
 
@@ -36,23 +38,25 @@ public class UIManager : MonoBehaviour {
 	// Variables
 
 	public bool IsMainUISetup { get; set;}
+	public bool IsEscapeMenuActivated { get; set;}
 
 	// Methods
 
 	// Initialisation
 	void Awake(){
 
-		// to make sure only one version of UIManager exisits
+	/*	// to make sure only one version of UIManager exisits
 		// to enforce singlton patern
 		if (uiManager == null) {
 			DontDestroyOnLoad (gameObject);
 			uiManager = this;
 		} else if (uiManager != this) {
 			Destroy (gameObject);
-		} // if
+		} // if*/
 
 		// Variable initialisation
 		IsMainUISetup = false;
+		IsEscapeMenuActivated = false;
 
 		// to make sure code is running in the right scene
 		if (Application.loadedLevelName.Equals ("StartMenu")) {
@@ -81,42 +85,25 @@ public class UIManager : MonoBehaviour {
 			// If escape key is pressed
 			if(Input.GetKeyDown(KeyCode.Escape) == true ){
 
-				// Games Main Menu Appears
-				Debug.Log("MainMenu Appears");
+				// flags escapeMenu as toggled
+				if(!IsEscapeMenuActivated){
+					// if escapeMenu is not already activated, activate it
+					IsEscapeMenuActivated = true;
+				} else{
+					// if menu is already activated, deactivate it
+					IsEscapeMenuActivated = false;
+				} // if
+			
+				// Opens/closes escapeMenu
+				ManageEscapeMenu(IsEscapeMenuActivated);
 			} // if
+
+
 		} // if
 	} // Update()
 
-	
-	// When the main scene loads
-	void OnLevelWasLoaded(int level){
-		Debug.Log ("Setting up UIManager");
-		// if the scene "StartMenu" loads
-		if(level == 0){
-
-			// Setup main Menu
-			SetUpStartMenuScene();
-		} // if
-
-		// if the scene "Main" loads
-		if (level == 1) {
-		
-			// setup main scene UIs
-			SetUpMainScene();
-		} // if
-
-	} // OnLevelWasLoaded()
 
 	void SetUpStartMenuScene(){
-
-		// instantiate Main Canvas Holder
-		canvasHolder = (GameObject)Instantiate (canvasPrefab);
-
-		// make canvasHolder a child of "UIManager"
-		canvasHolder.transform.SetParent (gameObject.transform, false);
-
-		// Get reference to mainCanvas from canvasHolder
-		mainCanvas = canvasHolder.GetComponentInChildren<Canvas> ();
 
 		// instantiate Main Menu
 		mainMenu = (GameObject)Instantiate (mainMenuPrefab);
@@ -138,25 +125,49 @@ public class UIManager : MonoBehaviour {
 
 	void SetUpMainScene(){
 
-		// instantiate Main Canvas Holder
-		canvasHolder = (GameObject)Instantiate (canvasPrefab);
-
-		// make canvasHolder a child of "UIManager"
-		canvasHolder.transform.SetParent (gameObject.transform, false);
-		
-		// Get reference to mainCanvas from canvasHolder
-		mainCanvas = canvasHolder.GetComponentInChildren<Canvas> ();
-
 		// instantiate The Main UI
 		mainUI = (GameObject)Instantiate(mainUIPrefab);
 		
 		// make mainUI a child of "MainCanvs"
 		mainUI.transform.SetParent(mainCanvas.transform, false);
-		
+
+		// Setup escape menu
+
+		// instantuate escape menu
+		escapeMenu = (GameObject)Instantiate (escapeMenuPrefab);
+
+		// make escape menu a child of mainCanvas
+		escapeMenu.transform.SetParent (mainCanvas.transform, false);
+
+		// Deactivates escapeMenu
+		escapeMenu.gameObject.SetActive (false);
+
+
 		// MainUI is finished Setting up
 		IsMainUISetup = true;
 
 	} // SetUpMainScene()
+
+
+	// Manages when the escapeMenu is active and disabled
+	public void ManageEscapeMenu(bool isActive){
+
+		if (isActive) {
+			// Activates escapeMenu
+			escapeMenu.gameObject.SetActive (true);
+		} else {
+			// Deactivates escapeMenu
+			escapeMenu.gameObject.SetActive(false);
+		} // if
+	} // ManageEscapeMenu()
+
+
+	public void ExitEscapeMenu(){
+
+		IsEscapeMenuActivated = false;
+		ManageEscapeMenu (IsEscapeMenuActivated);
+
+	} // ExitEscapeMenu()
 
 
 	public void displayNewGameDetails(Player player, Business business, GameManager gameManager){
