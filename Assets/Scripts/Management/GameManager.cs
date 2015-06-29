@@ -7,16 +7,16 @@ using System.IO;										// For saving to file
 // GameManager is a singlton.
 
 public class GameManager : MonoBehaviour {
-
-	// GameObjects
+	
+	/*===================== GameObjects =====================================================================================*/
 
 	public GameObject uiManagerPrefab;
 
 	public GameObject player;
 	public GameObject business;
-	//public GameObject uiManager;
 
-	// Scripts
+	
+	/*===================== Scripts =====================================================================================*/
 
 	public static GameManager gameManager;
 	public static UIManager uiManager;
@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour {
 	public Business businessScript;
 	public DisplayText displayScript;
 
-	// Variables
+
+	/*===================== Variables =====================================================================================*/
 
 	public char gameDifficulty;
 	public bool isNewGameCreated = false;
@@ -48,7 +49,9 @@ public class GameManager : MonoBehaviour {
 	public string BName { get; set;}
 	public char GDif { get; set;}
 
-	// Methods
+	/*===================== Methods =====================================================================================*/
+
+	/*===================== Awake() =====================================================================================*/
 
 	// Initialisation
 	void Awake () {
@@ -74,6 +77,8 @@ public class GameManager : MonoBehaviour {
 	} // Awake()
 
 
+	/*===================== OnLevelWasLoaded() =====================================================================================*/
+
 	// runs when a Scene is loaded
 	void OnLevelWasLoaded(int level){
 
@@ -88,10 +93,16 @@ public class GameManager : MonoBehaviour {
 		} // if
 	} // OnLevelWasLoaded()
 
+
+	/*===================== SetupGame() =====================================================================================*/
+
 	void SetupGame(){
 
 
 	} // SetupGame()
+
+
+	/*===================== SetupNewGame() =====================================================================================*/
 
 	IEnumerator SetupNewGame(){
 	
@@ -123,17 +134,24 @@ public class GameManager : MonoBehaviour {
 	} // SetupNewGame()
 
 
+	/*===================== ResumeGame() =====================================================================================*/
+
 	public void ResumeGame(){
 		
 		uiManager.ExitEscapeMenu ();
 	} // ResumeGame()
 
 
+	/*===================== ExitToMainMenu() =====================================================================================*/
+
 	public void ExitToMainMenu(){
 
 		// loads StartMenu Scene (first scene)
 		Application.LoadLevel (0);
 	} // ExitToMainMenu()
+
+
+	/*===================== Save() =====================================================================================*/
 
 	// Save Data to file
 	public void Save(){
@@ -148,6 +166,9 @@ public class GameManager : MonoBehaviour {
 		bf.Serialize (file, data);
 		file.Close ();
 	} // Save()
+
+
+	/*===================== Load() =====================================================================================*/
 
 	// Load data from file
 	public void Load(){
@@ -165,6 +186,8 @@ public class GameManager : MonoBehaviour {
 	
 } // class
 
+
+/*===================== PlayerData Class =====================================================================================*/
 [Serializable]
 class PlayerData
 {

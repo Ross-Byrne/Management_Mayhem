@@ -5,12 +5,13 @@ using UnityEngine.UI;
 // UIManager is a singlton
 
 public class UIManager : MonoBehaviour {
-	
-	// UIs
+
+	/*===================== UIs =====================================================================================*/
 	
 	public Canvas mainCanvas;
+	
 
-	// StartMenus
+	/*===================== StartMenus =====================================================================================*/
 
 	public GameObject mainMenuPrefab;
 	public GameObject characterCreationMenuPrefab;
@@ -18,29 +19,35 @@ public class UIManager : MonoBehaviour {
 	public GameObject mainMenu;
 	public GameObject characterCreationMenu;
 	
-	// Main Game UIs
+
+	/*===================== Main Game UIs =====================================================================================*/
 
 	public GameObject mainUIPrefab;
 
 	public GameObject mainUI;
 
-	// MainGameMenus
+
+	/*===================== MainGameMenus =====================================================================================*/
 
 	public GameObject escapeMenuPrefab;
 
 	public GameObject escapeMenu;
 
-
-	// Scripts
+	
+	/*===================== Scripts =====================================================================================*/
 
 	public static UIManager uiManager;
 
-	// Variables
+
+	/*===================== Variables =====================================================================================*/
 
 	public bool IsMainUISetup { get; set;}
 	public bool IsEscapeMenuActivated { get; set;}
 
-	// Methods
+
+	/*===================== Methods =====================================================================================*/
+
+	/*===================== Awake() =====================================================================================*/
 
 	// Initialisation
 	void Awake(){
@@ -76,6 +83,8 @@ public class UIManager : MonoBehaviour {
 	} // Awake()
 
 
+	/*===================== Update() =====================================================================================*/
+
 	// Runs code every Frame
 	void Update(){
 
@@ -103,6 +112,8 @@ public class UIManager : MonoBehaviour {
 	} // Update()
 
 
+	/*===================== SetUpStartMenuScene() =====================================================================================*/
+
 	void SetUpStartMenuScene(){
 
 		// instantiate Main Menu
@@ -122,6 +133,8 @@ public class UIManager : MonoBehaviour {
 
 	} // SetUpStartMenuScene()
 
+
+	/*===================== SetUpMainScene() =====================================================================================*/
 
 	void SetUpMainScene(){
 
@@ -149,6 +162,8 @@ public class UIManager : MonoBehaviour {
 	} // SetUpMainScene()
 
 
+	/*===================== ManageEscapeMenu() =====================================================================================*/
+
 	// Manages when the escapeMenu is active and disabled
 	public void ManageEscapeMenu(bool isActive){
 
@@ -162,6 +177,8 @@ public class UIManager : MonoBehaviour {
 	} // ManageEscapeMenu()
 
 
+	/*===================== ExitEscapeMenu() =====================================================================================*/
+
 	public void ExitEscapeMenu(){
 
 		IsEscapeMenuActivated = false;
@@ -170,7 +187,10 @@ public class UIManager : MonoBehaviour {
 	} // ExitEscapeMenu()
 
 
+	/*===================== displayNewGameDetails() =====================================================================================*/
+
 	public void displayNewGameDetails(Player player, Business business, GameManager gameManager){
+
 		mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
 			+ player.Traits[0] + "\n"
 			+ player.Traits[1] + "\n"
