@@ -40,7 +40,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public void SetUp(){
 
 		// Sets isNewGameCreated to false
-		GameManager.gameManager.isNewGameCreated = false;
+		GameManager.gameManager.IsNewGameCreated = false;
 
 		// Activates Character Name Menu
 		characterNameMenu.gameObject.SetActive (true);
@@ -195,7 +195,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		gameObject.SetActive(false); 
 
 		// Set isNewGameCreated to true
-		GameManager.gameManager.isNewGameCreated = true;
+		GameManager.gameManager.IsNewGameCreated = true;
 
 		// Loads Next Scene, New Game Ready to start
 		Application.LoadLevel("Main"); // Loads Second Scene

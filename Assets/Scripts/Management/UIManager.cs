@@ -52,15 +52,6 @@ public class UIManager : MonoBehaviour
 	// Initialisation
 	void Awake()
 	{
-	/*	// to make sure only one version of UIManager exisits
-		// to enforce singlton patern
-		if (uiManager == null) {
-			DontDestroyOnLoad (gameObject);
-			uiManager = this;
-		} else if (uiManager != this) {
-			Destroy (gameObject);
-		} // if*/
-
 		// Variable initialisation
 		IsMainUISetup = false;
 		IsEscapeMenuActivated = false;
@@ -187,9 +178,9 @@ public class UIManager : MonoBehaviour
 	} // ExitEscapeMenu()
 
 
-	/*===================== displayNewGameDetails() =====================================================================================*/
+	/*===================== DisplayNewGameDetails() =====================================================================================*/
 
-	public void displayNewGameDetails(Player player, Business business, GameManager gameManager)
+	public void DisplayNewGameDetails(Player player, Business business, GameManager gameManager)
 	{
 		mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
 			+ player.Traits[0] + "\n"
@@ -199,7 +190,8 @@ public class UIManager : MonoBehaviour
 			+ player.Traits[4] + "\n"
 			+ business.Name + "\n";
 
-		 switch (gameManager.gameDifficulty) {
+		 switch (gameManager.GameDifficulty) 
+		{
 		case 'E':
 				mainUI.GetComponentInChildren<Text>().text += "Easy";
 				break;
@@ -210,5 +202,13 @@ public class UIManager : MonoBehaviour
 				mainUI.GetComponentInChildren<Text>().text += "Hard";
 				break;
 		} // Switch
-	} // displayNewGameDetails()
+	} // DisplayNewGameDetails()
+
+
+	/*===================== DisplayText() =====================================================================================*/
+	
+	public void DisplayText(string str)
+	{
+		mainUI.GetComponentInChildren<Text>().text = str;
+	} // DisplayText()
 } // class

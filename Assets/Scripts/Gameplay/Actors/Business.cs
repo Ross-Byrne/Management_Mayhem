@@ -1,9 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 	// to use Lists
+using System.Text; 					// to use StringBuilder
 
 public class Business : MonoBehaviour 
 {
+	/*===================== GameObjects =====================================================================================*/
+
+	public GameObject employeePrefab;
+
+
+	/*===================== Scripts =====================================================================================*/
+
+	public CharacterInfo characterInfoScript;
+
+
 	/*===================== Variables =====================================================================================*/
 
 	public string Name { get; set;}
@@ -25,8 +36,8 @@ public class Business : MonoBehaviour
 	
 	/*===================== List of Employee GameObjects =====================================================================================*/
 
-	private List<Employee> employees = new List<Employee> ();
-	public List<Employee> Employees 
+	private List<GameObject> employees = new List<GameObject> ();
+	public List<GameObject> Employees 
 	{
 		get{ return employees;}
 		set{ employees = value;}
@@ -109,6 +120,8 @@ public class Business : MonoBehaviour
 
 	void Awake()
 	{
+		// get Script References
+		characterInfoScript = gameObject.GetComponent<CharacterInfo>();
 
 		// Sets up business by setting variables to default values
 		SetupBusiness();
@@ -204,22 +217,19 @@ public class Business : MonoBehaviour
 	
 	public void HireEmployees(GameManager gameManager, int theAmount)
 	{
-		Random rnd = new Random();
-		int rndValue=0;
-		string tempName="";
-		
 		for(int i = 0; i < theAmount; i++)
 		{
-			Employee employee = new Employee(); // create employee
-			
-			//rndValue = rnd.nextInt(14); // get a random value 
-			//tempName = gameManager.getRandomFName(rndValue); // use value to get random first name
-			
-			//rndValue = rnd.nextInt(14); // get another random value
-			//tempName += gameManager.getRandomLName(rndValue); // choose a random last name and add it on to the first name
-			
-			employee.Name = tempName; // name the employee
-			employees.Add(employee); // add employee to employees list
+			// instantiate employee
+			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
+
+			// make employee a child of Business
+			newEmployee.transform.SetParent(gameObject.transform, false);
+
+			// name the employee
+			newEmployee.GetComponent<Employee>().Name = characterInfoScript.GenerateRandomName(); 
+
+			// add employee to employees list
+			Employees.Add(newEmployee);
 		} // for
 	} // HireEmployees()
 
@@ -228,28 +238,31 @@ public class Business : MonoBehaviour
 	
 	public void FireEmployees(GameManager gameManager, int theAmount)
 	{
-		if(theAmount == employees.Count) // if the amount is = to all employees, clear list
+	/*	if(theAmount == employees.Count) // if the amount is = to all employees, clear list
 		{
-			employees.Clear();
+			Employees.Clear();
 		}
 		else // remove the number entered
 		{
 			while(theAmount > 0)
-				employees.RemoveRange(0, theAmount--);
-		} // if else
+				Employees.RemoveRange(0, theAmount--);
+		} // if else*/
 	} // FireEmployees()
 
 
 	/*===================== PrintListOfEmployees() =====================================================================================*/
 	
-	public void PrintListOfEmployees()
+	public string PrintListOfEmployees()
 	{
-		string tempNames = "";
+		StringBuilder employeeNames = new StringBuilder();
+		int i = 0;
 		
-		for(int i = 0; i < employees.Count; i++)
-			tempNames += "\n\t" + employees[i].Name;
+		for (i = 0; i < Employees.Count; i++) {
+			employeeNames.Append ("\n");
+			employeeNames.Append (Employees [i].GetComponent<Employee> ().Name);
+		}
 		
-		//System.out.println("Employees: " + tempNames);
+		return employeeNames.ToString ();
 	} // PrintListOfEmployees()
 
 

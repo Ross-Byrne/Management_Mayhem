@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
 	/*===================== GameObjects =====================================================================================*/
 
 	public GameObject uiManagerPrefab;
+	public GameObject businessPrefab;
 
 	public GameObject player;
-	public GameObject business;
 
 	
 	/*===================== Scripts =====================================================================================*/
@@ -22,25 +22,23 @@ public class GameManager : MonoBehaviour
 	public static UIManager uiManager;
 
 	public Player playerScript;
-	public Business businessScript;
+	public static Business businessScript;
 	public DisplayText displayScript;
 
 
 	/*===================== Variables =====================================================================================*/
 
-	public char gameDifficulty;
-	public bool isNewGameCreated = false;
-	public bool isGameLoaded = false;
-	public bool canHireDealers = false;
-	public bool canBuildDrugLab = false;
-	public bool canStartSellingDrugs = false;
-	public bool canStartMakingDrugs = false;
-	public bool appliedForGrant = false;
+	public char GameDifficulty { get; set;}
+	public bool IsNewGameCreated { get; set;}
+	public bool IsGameLoaded { get; set;}
+	public bool CanHireDealers { get; set;}
+	public bool CanBuildDrugLab { get; set;}
+	public bool CanStartSellingDrugs { get; set;}
+	public bool CanStartMakingDrugs { get; set;}
+	public bool AppliedForGrant { get; set;}
 
 	// New Game info - for saving bewteen scenes
-	[SerializeField]
 	public string PName { get; set;}
-	[SerializeField] 							// to show in editor
 	private string[] pTraits = new string[5];
 	public string[] PTraits {
 		get{ return pTraits;}
@@ -48,6 +46,7 @@ public class GameManager : MonoBehaviour
 	}
 	public string BName { get; set;}
 	public char GDif { get; set;}
+
 
 	/*===================== Methods =====================================================================================*/
 
@@ -68,11 +67,39 @@ public class GameManager : MonoBehaviour
 		// Instanstiate UIManager 
 		GameObject uiManagerObject = (GameObject)Instantiate (uiManagerPrefab);
 
+		if (Application.loadedLevelName.Equals ("Main")) {
+
+			// Instanstiate Business
+			GameObject business = (GameObject)Instantiate (businessPrefab);
+
+			// Get reference for script
+			businessScript = business.GetComponent<Business>();
+		}
+
 		// get references for scripts
 		uiManager = uiManagerObject.GetComponent<UIManager> ();
 		playerScript = player.GetComponent<Player>();
-		businessScript = business.GetComponent<Business>();
 		displayScript = GetComponent<DisplayText> ();
+
+		// if in Main Scene
+		if (Application.loadedLevelName.Equals ("Main")) {
+
+			// if a new game has been created, setup variables
+			if(IsNewGameCreated == true){
+				
+				StartCoroutine("SetupNewGame");
+			} // if
+
+			Debug.Log ("Hiring Employees");
+			businessScript.HireEmployees (gameManager, 2);
+
+			// Wait until mainUI is read
+			StartCoroutine("WaitForMainUI");
+
+			uiManager.DisplayText(businessScript.PrintListOfEmployees());
+
+		} // if
+
 
 	} // Awake()
 
@@ -83,14 +110,14 @@ public class GameManager : MonoBehaviour
 	void OnLevelWasLoaded(int level)
 	{
 		// if scene loaded is Main Scene
-		if (level == 1) {
+		/*if (level == 1) {
 
 			// if a new game has been created, setup variables
-			if(isNewGameCreated == true){
+			if(IsNewGameCreated == true){
 
 				StartCoroutine("SetupNewGame");
-			} // if
-		} // if
+			} // if*/
+		//} // if
 	} // OnLevelWasLoaded()
 
 
@@ -127,11 +154,25 @@ public class GameManager : MonoBehaviour
 		businessScript.Name = BName;
 		
 		// set players selected game dif to gameDifficulty
-		gameDifficulty = GDif;
+		GameDifficulty = GDif;
 
 		// Displays New Games info
-		uiManager.displayNewGameDetails (playerScript, businessScript, gameManager);
+		uiManager.DisplayNewGameDetails (playerScript, businessScript, gameManager);
+
 	} // SetupNewGame()
+
+
+	/*===================== WaitForMainUI() =====================================================================================*/
+
+	IEnumerator WaitForMainUI(){
+
+		// To make sure MainUI is set up first
+		do{
+			// Waits one frame
+			yield return null;
+			// loops while mainUI isn't finished being setup
+		}while(!uiManager.IsMainUISetup);
+	} // WaitForMainUI()
 
 
 	/*===================== ResumeGame() =====================================================================================*/
@@ -150,6 +191,37 @@ public class GameManager : MonoBehaviour
 		Application.LoadLevel (0);
 	} // ExitToMainMenu()
 
+
+	/*===================== CheckBadReputation() =====================================================================================*/
+	
+	// checks if player can do bad things because of bad rep level
+	public void CheckBadReputation(Business business)
+	{
+		if(business.Reputation > 39) // if at least 40 bad rep
+		{
+			// player can hire dealers
+			CanHireDealers = true;
+		}
+		else
+		{
+			// if you cant sell, you cant hire and all dealers a fired
+			CanHireDealers = false;
+			CanStartSellingDrugs = false;
+			//business.dealers.Clear();
+		} // if
+		
+		if(business.Reputation > 59) // if at least 60 bad rep
+		{
+			// can build drug lab
+			CanBuildDrugLab = true;
+		}
+		else
+		{
+			// cannot build drug lab
+			CanBuildDrugLab = false;
+		} // if
+		
+	} // CheckBadReputation()
 
 	/*===================== Save() =====================================================================================*/
 
