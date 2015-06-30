@@ -9,8 +9,8 @@ public class CharacterInfo : MonoBehaviour {
 
 	// Pool of selectable player traits
 	
-	private string[] traitsSelection = { 	"People Person", "Marketing Master", "Organiser", "Opertunist", "Charming",
-		"Greedy", "Spitful", "Alcoholic", "Reckless", "Seedy"};
+	private string[] traitsSelection = { 	"People Person", "Marketing Master", "Organiser", "Opportunist", "Charming",
+		"Greedy", "Spiteful", "Alcoholic", "Reckless", "Seedy"};
 	
 	// Pool of random first and last names for employees
 	

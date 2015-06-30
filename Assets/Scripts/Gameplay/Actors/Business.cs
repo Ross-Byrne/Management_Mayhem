@@ -182,6 +182,7 @@ public class Business : MonoBehaviour
 		if(TotalEmployeeSalary > BankAccount)
 		{
 			// flag business as not able to pay salary without going into debt
+			Debug.Log("Cannot Afford Employees Salary Without Entering Debt!");
 			return;
 		}
 		// takes the total salary out of the business bank account
@@ -189,7 +190,7 @@ public class Business : MonoBehaviour
 	} // PayEmployees()
 
 
-	/*===================== payEmployeesAnyway() =====================================================================================*/
+	/*===================== PayEmployeesAnyway() =====================================================================================*/
 	
 	public void PayEmployeesAnyway()
 	{
@@ -198,4 +199,297 @@ public class Business : MonoBehaviour
 		BankAccount -= TotalEmployeeSalary;
 	} // PayEmployeesAnyway()
 
+
+	/*===================== HireEmployees() =====================================================================================*/
+	
+	public void HireEmployees(GameManager gameManager, int theAmount)
+	{
+		Random rnd = new Random();
+		int rndValue=0;
+		string tempName="";
+		
+		for(int i = 0; i < theAmount; i++)
+		{
+			Employee employee = new Employee(); // create employee
+			
+			//rndValue = rnd.nextInt(14); // get a random value 
+			//tempName = gameManager.getRandomFName(rndValue); // use value to get random first name
+			
+			//rndValue = rnd.nextInt(14); // get another random value
+			//tempName += gameManager.getRandomLName(rndValue); // choose a random last name and add it on to the first name
+			
+			employee.Name = tempName; // name the employee
+			employees.Add(employee); // add employee to employees list
+		} // for
+	} // HireEmployees()
+
+
+	/*===================== FireEmployees() =====================================================================================*/
+	
+	public void FireEmployees(GameManager gameManager, int theAmount)
+	{
+		if(theAmount == employees.Count) // if the amount is = to all employees, clear list
+		{
+			employees.Clear();
+		}
+		else // remove the number entered
+		{
+			while(theAmount > 0)
+				employees.RemoveRange(0, theAmount--);
+		} // if else
+	} // FireEmployees()
+
+
+	/*===================== PrintListOfEmployees() =====================================================================================*/
+	
+	public void PrintListOfEmployees()
+	{
+		string tempNames = "";
+		
+		for(int i = 0; i < employees.Count; i++)
+			tempNames += "\n\t" + employees[i].Name;
+		
+		//System.out.println("Employees: " + tempNames);
+	} // PrintListOfEmployees()
+
+
+	/*===================== HireDealers() =====================================================================================*/
+	
+	/*public void HireDealers(GameManager gameManager, int theAmount)
+	{
+		Random rnd = new Random();
+		int rndValue=0;
+		String tempName="";
+		
+		for(int i = 0; i < theAmount; i++)
+		{
+			Employee dealer = new Dealer(); // create dealer - Polymorphism
+			
+			rndValue = rnd.nextInt(14); // get a random value 
+			tempName = gameManager.getRandomFName(rndValue); // use value to get random first name
+			
+			rndValue = rnd.nextInt(14); // get another random value
+			tempName += gameManager.getRandomLName(rndValue); // choose a random last name and add it on to the first name
+			
+			dealer.setName(tempName); // name the employee
+			dealers.add(dealer); // add dealer to dealers list
+		} // for
+	} // HireDealers()*/
+
+
+	/*===================== FireDealers() =====================================================================================*/
+	
+	/*	public void FireDealers(GameManager gameManager, int theAmount)
+	{
+		if(theAmount == dealers.size()) // if the amount is = to all dealers, clear list
+		{
+			dealers.clear();
+		}
+		else // remove the number entered
+		{
+			while(theAmount > 0)
+				dealers.remove(theAmount--);
+		} // if else
+	} // FireDealers()*/
+
+
+	/*===================== PrintListOfDealers() =====================================================================================*/
+	
+	/*public void PrintListOfDealers()
+	{
+		String tempNames = "";
+		
+		for(int i = 0; i < dealers.size(); i++)
+			tempNames += "\n\t" + dealers.get(i);
+		
+		System.out.println("Dealers: " + tempNames);
+	} // PrintListOfDealers()*/
+
+
+	/*===================== PayMaintenance() =====================================================================================*/
+	
+	// to pay the buildings monthly maintenance bill
+	public void PayMaintenance()
+	{
+		if(BuildingMaintenance > BankAccount)
+		{
+			// flag business not being able to pay maintenance without going into debt
+			Debug.Log("Cannot Afford Building Maintenance!");
+			return;
+		}
+		// takes the Maintenance out of the business bank account
+		BankAccount -= BuildingMaintenance;
+	} // PayMaintenance()
+
+
+	/*===================== SetBuildingMaintenanceLevel() =====================================================================================*/
+	
+	public void SetBuildingMaintenanceLevel(int theLevel)
+	{
+		float oldMaintenanceCost=0;
+		oldMaintenanceCost = BuildingMaintenance; // to make sure player doesn't keep changing 
+		// maintenance to endless get reputation
+
+		// return reputation that was given for a particular
+		// maintenance level
+		if(oldMaintenanceCost == 0)
+		{
+			Reputation += 50; // give back 50 rep lost
+		}
+		else if(oldMaintenanceCost == 500)
+		{
+			Reputation += 25; // give back 25 rep lost
+		}
+		else if(oldMaintenanceCost == 1000)
+		{
+			Reputation -= 25; // take back 25 rep given
+		}
+		else if(oldMaintenanceCost == 1500)
+		{
+			Reputation -= 50; // take back 50 rep given
+		} // if
+
+		// set the new maintenance level and give rep
+		switch(theLevel)
+		{
+		case 1: // no maintenance
+			BuildingMaintenance = 0f; // sets maintenance cost
+			Reputation -= 50; // loose 50 rep
+			break;
+		case 2: // low maintenance
+			BuildingMaintenance = 500f; // sets maintenance cost
+			Reputation -= 25; // loose 25 rep
+			break;
+		case 3: // medium maintenance
+			BuildingMaintenance = 1000f; // sets maintenance cost
+			Reputation += 25; // get 25 rep
+			break;
+		case 4: // high maintenance
+			BuildingMaintenance = 1500f; // sets maintenance cost
+			Reputation += 50; // get 50 rep
+			break;
+		} // switch
+	} // SetBuildingMaintenanceLevel()
+
+
+	/*===================== SetEmployeeSalaryLevel() =====================================================================================*/
+	
+	public void SetEmployeeSalaryLevel(int theLevel)
+	{
+		float oldSalary=0;
+		oldSalary = EmployeeSalary; // to make sure player doesn't keep changing 
+		// Salary to endless get reputation
+
+		// return rep given for setting salary level
+		if(oldSalary == 400)
+		{
+			Reputation += 50; // give back 50 rep
+		}
+		else if(oldSalary == 800)
+		{
+			Reputation += 25; // give back 25 rep
+		}
+		else if(oldSalary == 1000)
+		{
+			Reputation -= 25; // take back 25 rep
+		}
+		else if(oldSalary == 1200)
+		{
+			Reputation -= 50; // take back 50 rep
+		} // if
+
+		// set new employeeSalary level
+		switch(theLevel)
+		{
+		case 1: // Low
+			EmployeeSalary = 400f; // sets Salary
+			Reputation -= 50; // loose 50 rep
+			break;
+		case 2: // medium
+			EmployeeSalary = 800f;
+			Reputation -= 25; // loose 25 rep
+			break;
+		case 3: // good
+			EmployeeSalary = 1000f;
+			Reputation += 25; // get 25 rep
+			break;
+		case 4: // Great
+			EmployeeSalary = 1200f;
+			Reputation += 50; // get 50 rep
+			break;
+		} // switch
+	} // SetEmployeeSalaryLevel()
+
+
+	/*===================== UpgradeBuilding() =====================================================================================*/
+	
+	public void UpgradeBuilding()
+	{
+		if(BuildingUpgradeCost > BankAccount)
+		{
+			// flag business as not being able to afford upgrade
+			Debug.Log("Cannot Afford Building Upgrade!");
+			return;
+		} // if
+		
+		BuildingSize += 1; // increase building size by 1
+
+		// Pay for upgrade
+		BankAccount -= BuildingUpgradeCost;
+	} // UpgradeBuilding()
+
+
+	/*===================== UpgradeEquipment() =====================================================================================*/
+	
+	public void UpgradeEquipment()
+	{
+		if(EquipmentUpgradeCost > BankAccount)
+		{
+			// flag business as not being able to afford equipment upgrade
+			Debug.Log("Cannot Afford Equipment Upgrade!");
+			return;
+		} // if
+		
+		EquipmentUpgrades += 1; // increase equipment upgrades by 1
+
+		// pay for upgrade
+		BankAccount -= EquipmentUpgradeCost;
+	} // UpgradeEquipment()
+
+
+	/*===================== BuildDrugLab() =====================================================================================*/
+	
+	public void BuildDrugLab()
+	{
+		if(BankAccount < 50000)
+		{
+			// flag business as not being able to afford to build a drug lab
+			Debug.Log("Cannot Afford To Build Drug Lab!");
+			return;
+		} // if
+
+		// Pay for drug lab
+		BankAccount -= 50000; // cost 50000 to build a lab
+		
+	} // BuildDrugLab()
+
+
+	/*===================== DisplayBusinessInfo() =====================================================================================*/
+	
+	public string DisplayBusinessInfo()
+	{
+		string str="";
+		
+		str += "\nName: " + Name +
+			"\nBusiness Age: " + BusinessAge + " Months" +
+				"\nBank Account: " + BankAccount +
+				"\nReputation: " + Reputation +
+				"\nRooms In The Building: " + BuildingSize +
+				"\nBuilding Maintenance: " + BuildingMaintenance +
+				"\nEmployee Salary Per Month: " + EmployeeSalary +
+				"\nBusiness Productivity Bonus: " + ProductivityBonus + "%" +
+				"\nBusiness Equipment Upgrades: " + EquipmentUpgrades;
+		
+		return str;
+	} // DisplayBusinessInfo()
 } // class
