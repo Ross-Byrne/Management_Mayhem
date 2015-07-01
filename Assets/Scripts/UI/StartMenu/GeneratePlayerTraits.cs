@@ -30,12 +30,12 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		set{ toggles = value;}
 	}
 
-	private float posY;
-	private float posX = 0;
-	private int arrayLength;
+	public float posY;
+	public float posX = 0;
+	public int arrayLength;
 
-	private int spacing = 50;
-	private int startingPoint = 0;
+	public int spacing = 25;
+	public int startingPoint = -180;
 
 	// to save traits currently picked
 	private int[] selectedTraits = new int[5];
@@ -88,7 +88,7 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	public void SetUpTraits(){
 
 		// move heading above first trait with a bit of extra space
-		headingText.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, posY + 80f);
+		headingText.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (0f, posY + 60f);
 
 		for (int i = 0; i < arrayLength; i++) {
 
@@ -116,8 +116,8 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		} // for
 
 		// move the buttons down to the y poition under last trait with a bit of exit space
-		exitButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-75f, posY - 50f);
-		nextButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (75f, posY - 50f);
+		exitButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-55f, posY - 30f);
+		nextButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (55f, posY - 30f);
 
 	} // SetUpTraits()
 
