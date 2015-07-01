@@ -84,19 +84,14 @@ public class GameManager : MonoBehaviour
 		// if in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
-			// if a new game has been created, setup variables
-			if(IsNewGameCreated == true){
-				
-				StartCoroutine("SetupNewGame");
-			} // if
 
-			Debug.Log ("Hiring Employees");
-			businessScript.HireEmployees (gameManager, 2);
+			//Debug.Log ("Hiring Employees");
+		//	businessScript.HireEmployees (gameManager, 2);
 
 			// Wait until mainUI is read
-			StartCoroutine("WaitForMainUI");
+			//StartCoroutine("WaitForMainUI");
 
-			uiManager.DisplayText(businessScript.PrintListOfEmployees());
+			//uiManager.DisplayText(businessScript.PrintListOfEmployees());
 
 		} // if
 
@@ -106,18 +101,18 @@ public class GameManager : MonoBehaviour
 
 	/*===================== OnLevelWasLoaded() =====================================================================================*/
 
-	// runs when a Scene is loaded
+	// runs when a Scene is loaded, after Awake() has run
 	void OnLevelWasLoaded(int level)
 	{
 		// if scene loaded is Main Scene
-		/*if (level == 1) {
+		if (level == 1) {
 
 			// if a new game has been created, setup variables
 			if(IsNewGameCreated == true){
 
 				StartCoroutine("SetupNewGame");
-			} // if*/
-		//} // if
+			} // if
+		} // if
 	} // OnLevelWasLoaded()
 
 

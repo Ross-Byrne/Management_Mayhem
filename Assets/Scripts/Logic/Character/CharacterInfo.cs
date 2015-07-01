@@ -19,7 +19,7 @@ public class CharacterInfo : MonoBehaviour {
 	private string[] randomFName = { "John", "Mike", "Carl", "Jim", "Conor", "Bob", "Tom",
 		"Rachael", "Samantha", "Mary", "Ciara", "Jennifer", "Jane", "Sarah"};
 	
-	private string[] randomLName = {		" Power", " Sullivan", " Smith", " McCarthy", " White", " Rodrigue", " Jones",
+	private string[] randomLName = { " Power", " Sullivan", " Smith", " McCarthy", " White", " Rodrigue", " Jones",
 		" Browne", " Butler", " Byrne", " Daly", " Kelly", " Harrington", " Jameson"};
 
 	// get and set properties
