@@ -116,8 +116,8 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		} // for
 
 		// move the buttons down to the y poition under last trait with a bit of exit space
-		exitButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-75f, posY - 50f);
-		nextButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (75f, posY - 50f);
+		exitButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (-75f, posY - 55f);
+		nextButton.GetComponent<RectTransform> ().anchoredPosition = new Vector2 (75f, posY - 55f);
 
 	} // SetUpTraits()
 
