@@ -205,6 +205,22 @@ public class UIManager : MonoBehaviour
 	} // DisplayNewGameDetails()
 
 
+	/*===================== InformationBarUpdate() =====================================================================================*/
+
+	public void InformationBarUpdate(string playerInfo, string businessInfo, string worldInfo){
+
+		// update player info text
+		mainUI.GetComponent<MainUIControl>().playerInfoText.text = playerInfo;
+
+		// update business info Text
+		mainUI.GetComponent<MainUIControl>().businessInfoText.text = businessInfo;
+
+		// update world text
+		mainUI.GetComponent<MainUIControl>().worldInfoText.text = worldInfo;
+
+	} // InformationBarUpdate()
+
+
 	/*===================== DisplayText() =====================================================================================*/
 	
 	public void DisplayText(string str)

@@ -491,18 +491,49 @@ public class Business : MonoBehaviour
 	
 	public string DisplayBusinessInfo()
 	{
-		string str="";
-		
-		str += "\nName: " + Name +
-			"\nBusiness Age: " + BusinessAge + " Months" +
-				"\nBank Account: " + BankAccount +
-				"\nReputation: " + Reputation +
-				"\nRooms In The Building: " + BuildingSize +
-				"\nBuilding Maintenance: " + BuildingMaintenance +
-				"\nEmployee Salary Per Month: " + EmployeeSalary +
-				"\nBusiness Productivity Bonus: " + ProductivityBonus + "%" +
-				"\nBusiness Equipment Upgrades: " + EquipmentUpgrades;
-		
-		return str;
+		StringBuilder str = new StringBuilder();
+
+		str.Append ("Business Info\n");
+
+		// Add Business Name
+		str.Append ("\nName: ");
+		str.Append (Name);
+
+		// add business Age
+		str.Append ("\nBusiness Age: ");
+		str.Append (BusinessAge);
+		str.Append (" Months");
+
+		// Add business bank account
+		str.Append ("\nBank Account: ");
+		str.Append (BankAccount);
+
+		// add business reputation]
+		str.Append ("\nReputation: ");
+		str.Append (Reputation);
+
+		// add the size of the building
+		str.Append ("\nRooms In The Building: ");
+		str.Append (BuildingSize);
+
+		// add cost of mantenance
+		str.Append ("\nBuilding Maintenance: ");
+		str.Append (BuildingMaintenance);
+
+		// add employees salary per month
+		str.Append ("\nEmployee Salary Per Month: ");
+		str.Append (EmployeeSalary);
+
+		// add business productivity bonus
+		str.Append ("\nBusiness Productivity Bonus: ");
+		str.Append (ProductivityBonus);
+		str.Append("%");
+
+		// add number of equipment upgrades
+		str.Append ("\nBusiness Equipment Upgrades: ");
+		str.Append (EquipmentUpgrades);
+
+		// return string
+		return str.ToString();
 	} // DisplayBusinessInfo()
 } // class

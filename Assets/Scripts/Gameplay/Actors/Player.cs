@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text; 			// to use StringBuilder
 
 public class Player : Person {
 
@@ -20,10 +21,33 @@ public class Player : Person {
 
 
 	/*===================== Methods =====================================================================================*/
+
+	/*===================== Awake() =====================================================================================*/
 	
 	void Awake(){
 
 		Name = "Player";
 	} // Awake()
+
+
+	/*===================== DisplayPlayerInfo() =====================================================================================*/
+
+	public string DisplayPlayerInfo(){
+
+		StringBuilder str = new StringBuilder();
+
+		str.Append ("Player Info\n\n");
+		// Add Players name
+		str.Append ("Name: ");
+		str.Append (Name);
+		str.Append ("\n\n");
+
+		// Add players BankBalance
+		str.Append ("Bank Account: $");
+		str.Append (string.Format("0.00", BankAccount));
+		str.Append ("\n\n");
+
+		return str.ToString ();
+	} // DisplayPlayerInfo()
 
 } // class

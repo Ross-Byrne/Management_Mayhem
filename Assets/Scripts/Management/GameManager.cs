@@ -114,7 +114,21 @@ public class GameManager : MonoBehaviour
 			} // if
 		} // if
 	} // OnLevelWasLoaded()
+	
 
+	/*===================== Update() =====================================================================================*/
+
+	void Update(){
+
+		// if in Main Scene
+		if (Application.loadedLevelName.Equals ("Main")) {
+
+			// update game information
+			uiManager.InformationBarUpdate (playerScript.DisplayPlayerInfo (), businessScript.DisplayBusinessInfo (), "World Info");
+
+		} // if
+
+	} // Update()
 
 	/*===================== SetupGame() =====================================================================================*/
 
