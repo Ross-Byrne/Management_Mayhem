@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Text;			// to use StringBuilder
 
 // UIManager is a singlton
 
@@ -182,14 +183,14 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayNewGameDetails(Player player, Business business, GameManager gameManager)
 	{
-		mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
+	/*	mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
 			+ player.Traits[0] + "\n"
 			+ player.Traits[1] + "\n"
 			+ player.Traits[2] + "\n"
 			+ player.Traits[3] + "\n"
 			+ player.Traits[4] + "\n"
 			+ business.Name + "\n";
-
+*/
 		 switch (gameManager.GameDifficulty) 
 		{
 		case 'E':
@@ -207,13 +208,45 @@ public class UIManager : MonoBehaviour
 
 	/*===================== InformationBarUpdate() =====================================================================================*/
 
-	public void InformationBarUpdate(string playerInfo, string businessInfo, string worldInfo){
+	public void InformationBarUpdate(Player player, Business business, string worldInfo){
+
+		StringBuilder str = new StringBuilder ();
 
 		// update player info text
-		mainUI.GetComponent<MainUIControl>().playerInfoText.text = playerInfo;
+		mainUI.GetComponent<MainUIControl>().playerInfoText.text = player.DisplayPlayerInfo();
 
 		// update business info Text
-		mainUI.GetComponent<MainUIControl>().businessInfoText.text = businessInfo;
+		str.Append ("Name: " + business.Name);
+		mainUI.GetComponent<MainUIControl>().businessNameText.text = str.ToString();
+		str.Length = 0; // clear
+
+		str.Append ("Age: " + business.BusinessAge + " Months");
+		mainUI.GetComponent<MainUIControl> ().businessAgeText.text = str.ToString ();
+		str.Length = 0;
+
+		str.Append ("Reputation: " + business.Reputation);
+		mainUI.GetComponent<MainUIControl>().businessRepText.text = str.ToString ();
+		str.Length = 0;
+
+		str.Append ("Number Of Rooms: " + business.BuildingSize);
+		mainUI.GetComponent<MainUIControl>().businessSizeText.text = str.ToString ();
+		str.Length = 0;
+
+		str.Append ("Maintenance Cost: $" + string.Format("0.00", business.BuildingMaintenance));
+		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = str.ToString ();
+		str.Length = 0;
+
+		str.Append ("Employees Salary: $" + string.Format("0.00", business.EmployeeSalary));
+		mainUI.GetComponent<MainUIControl>().businessEmployeeSalText.text = str.ToString ();
+		str.Length = 0;
+
+		str.Append ("Productivity Bonus: " + business.ProductivityBonus + "%");
+		mainUI.GetComponent<MainUIControl>().businessProdcutivtyBonusText.text = str.ToString ();
+		str.Length = 0;
+
+		str.Append ("Equipment Upgrades: " + business.EquipmentUpgrades);
+		mainUI.GetComponent<MainUIControl>().businessEquipUpgradesText.text = str.ToString ();
+		str.Length = 0;
 
 		// update world text
 		mainUI.GetComponent<MainUIControl>().worldInfoText.text = worldInfo;

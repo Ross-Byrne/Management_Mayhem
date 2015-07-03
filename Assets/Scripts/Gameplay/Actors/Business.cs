@@ -493,10 +493,9 @@ public class Business : MonoBehaviour
 	{
 		StringBuilder str = new StringBuilder();
 
-		str.Append ("Business Info\n");
 
 		// Add Business Name
-		str.Append ("\nName: ");
+		str.Append ("Name: ");
 		str.Append (Name);
 
 		// add business Age

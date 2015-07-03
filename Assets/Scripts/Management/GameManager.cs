@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
 	public Player playerScript;
 	public static Business businessScript;
-	public DisplayText displayScript;
 
 
 	/*===================== Variables =====================================================================================*/
@@ -79,7 +78,6 @@ public class GameManager : MonoBehaviour
 		// get references for scripts
 		uiManager = uiManagerObject.GetComponent<UIManager> ();
 		playerScript = player.GetComponent<Player>();
-		displayScript = GetComponent<DisplayText> ();
 
 		// if in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
@@ -124,7 +122,7 @@ public class GameManager : MonoBehaviour
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 			// update game information
-			uiManager.InformationBarUpdate (playerScript.DisplayPlayerInfo (), businessScript.DisplayBusinessInfo (), "World Info");
+			uiManager.InformationBarUpdate (playerScript, businessScript, "World Info");
 
 		} // if
 
@@ -166,7 +164,7 @@ public class GameManager : MonoBehaviour
 		GameDifficulty = GDif;
 
 		// Displays New Games info
-		uiManager.DisplayNewGameDetails (playerScript, businessScript, gameManager);
+		//uiManager.DisplayNewGameDetails (playerScript, businessScript, gameManager);
 
 	} // SetupNewGame()
 
@@ -261,7 +259,7 @@ public class GameManager : MonoBehaviour
 			file.Close();
 
 			// copy data from PlayerData class to local variables
-			displayScript.ShowText("Health: " + data.health + " Exp: " + data.experience);
+
 		} // if
 	} // Load()
 	

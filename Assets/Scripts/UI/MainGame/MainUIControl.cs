@@ -10,8 +10,27 @@ public class MainUIControl : MonoBehaviour {
 	public GameObject businessInfo;
 	public GameObject worldInfo;
 
+
+	/*===================== UI Elements =====================================================================================*/
+
+	/*===================== InforBar Text Elements =====================================================================================*/
+
+	// Player text
 	public Text playerInfoText;
-	public Text businessInfoText;
+
+
+	// Business info Text
+	public Text businessNameText;
+	public Text businessAgeText;
+	public Text businessRepText;
+	public Text businessSizeText;
+	public Text businessMaintenanceText;
+	public Text businessEmployeeSalText;
+	public Text businessProdcutivtyBonusText;
+	public Text businessEquipUpgradesText;
+
+
+	// World Info Text
 	public Text worldInfoText;
 
 } // class

@@ -36,16 +36,13 @@ public class Player : Person {
 
 		StringBuilder str = new StringBuilder();
 
-		str.Append ("Player Info\n\n");
 		// Add Players name
 		str.Append ("Name: ");
 		str.Append (Name);
-		str.Append ("\n\n");
 
 		// Add players BankBalance
-		str.Append ("Bank Account: $");
+		str.Append ("\nBank Account: $");
 		str.Append (string.Format("0.00", BankAccount));
-		str.Append ("\n\n");
 
 		return str.ToString ();
 	} // DisplayPlayerInfo()
