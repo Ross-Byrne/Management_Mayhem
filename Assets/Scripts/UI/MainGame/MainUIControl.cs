@@ -21,11 +21,13 @@ public class MainUIControl : MonoBehaviour {
 
 	// Business info Text
 	public Text businessNameText;
+	public Text businessBankAccountText;
 	public Text businessAgeText;
 	public Text businessRepText;
 	public Text businessSizeText;
-	public Text businessMaintenanceText;
+	public Text BusinessEmployeeCountText;
 	public Text businessEmployeeSalText;
+	public Text businessMaintenanceText;
 	public Text businessProdcutivtyBonusText;
 	public Text businessEquipUpgradesText;
 

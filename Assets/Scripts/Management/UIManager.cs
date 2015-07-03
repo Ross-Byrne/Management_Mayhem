@@ -210,43 +210,42 @@ public class UIManager : MonoBehaviour
 
 	public void InformationBarUpdate(Player player, Business business, string worldInfo){
 
-		StringBuilder str = new StringBuilder ();
-
 		// update player info text
 		mainUI.GetComponent<MainUIControl>().playerInfoText.text = player.DisplayPlayerInfo();
 
+
 		// update business info Text
-		str.Append ("Name: " + business.Name);
-		mainUI.GetComponent<MainUIControl>().businessNameText.text = str.ToString();
-		str.Length = 0; // clear
 
-		str.Append ("Age: " + business.BusinessAge + " Months");
-		mainUI.GetComponent<MainUIControl> ().businessAgeText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Name
+		mainUI.GetComponent<MainUIControl> ().businessNameText.text = string.Format("Name: {0}", business.Name);
 
-		str.Append ("Reputation: " + business.Reputation);
-		mainUI.GetComponent<MainUIControl>().businessRepText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Bank Account
+		mainUI.GetComponent<MainUIControl>().businessBankAccountText.text = string.Format ("Bank Account: $0.00", business.BankAccount);
 
-		str.Append ("Number Of Rooms: " + business.BuildingSize);
-		mainUI.GetComponent<MainUIControl>().businessSizeText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Age
+		mainUI.GetComponent<MainUIControl> ().businessAgeText.text = string.Format("Age: {0} Months", business.BusinessAge);
+	
+		// Update Business Reputation
+		mainUI.GetComponent<MainUIControl> ().businessRepText.text = string.Format ("Reputation: {0}", business.Reputation);;
 
-		str.Append ("Maintenance Cost: $" + string.Format("0.00", business.BuildingMaintenance));
-		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Building Size
+		mainUI.GetComponent<MainUIControl>().businessSizeText.text = string.Format("Number Of Rooms: {0}", business.BuildingSize);
 
-		str.Append ("Employees Salary: $" + string.Format("0.00", business.EmployeeSalary));
-		mainUI.GetComponent<MainUIControl>().businessEmployeeSalText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Employee Count
+		mainUI.GetComponent<MainUIControl>().BusinessEmployeeCountText.text = string.Format("Employees: {0}", business.Employees.Count);
 
-		str.Append ("Productivity Bonus: " + business.ProductivityBonus + "%");
-		mainUI.GetComponent<MainUIControl>().businessProdcutivtyBonusText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Employee Salary
+		mainUI.GetComponent<MainUIControl>().businessEmployeeSalText.text = string.Format("Employees Salary: $0.00", business.EmployeeSalary);
 
-		str.Append ("Equipment Upgrades: " + business.EquipmentUpgrades);
-		mainUI.GetComponent<MainUIControl>().businessEquipUpgradesText.text = str.ToString ();
-		str.Length = 0;
+		// Update Business Maintenance Cost
+		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = string.Format("Maintenance Cost: $0.00", business.BuildingMaintenance);
+
+		// Update Business Producivity Bonus
+		mainUI.GetComponent<MainUIControl>().businessProdcutivtyBonusText.text = string.Format("Productivity Bonus: {0}%", business.ProductivityBonus);
+
+		// Update Business Equipment Upgrades
+		mainUI.GetComponent<MainUIControl>().businessEquipUpgradesText.text = string.Format("Equipment Upgrades: {0}", business.EquipmentUpgrades);
+
 
 		// update world text
 		mainUI.GetComponent<MainUIControl>().worldInfoText.text = worldInfo;
