@@ -98,8 +98,8 @@ public class GameManager : MonoBehaviour
 	/*===================== OnLevelWasLoaded() =====================================================================================*/
 
 	// runs when a Scene is loaded, after Awake() has run
-	void OnLevelWasLoaded(int level)
-	{
+	void OnLevelWasLoaded(int level){
+
 		// if scene loaded is Main Scene
 		if (level == 1) {
 
@@ -107,17 +107,13 @@ public class GameManager : MonoBehaviour
 			if(IsNewGameCreated == true){
 
 				StartCoroutine("SetupNewGame");
+				Debug.Log("New game made");
+		
 			} else {
-
-		/*		// load last save Game
+				Debug.Log("Starting to load game");
+				// load last save Game
 				StartCoroutine("SetupLoadedGame");
 
-				if(IsGameLoaded == false){
-					Debug.Log("Game Not loaded");
-
-					// go back to main menu
-					Application.LoadLevel(0);
-				} // if*/
 			}
 		} // if
 	} // OnLevelWasLoaded()
@@ -176,15 +172,15 @@ public class GameManager : MonoBehaviour
 		switch (GameDifficulty) {
 		case 'E':	// Easy
 			// if game is easy, you start with 100,000 in bank account
-			businessScript.BankAccount = 100000f;
+			businessScript.BankAccount = 100000;
 			break;
 		case 'N':	// Normal
 			// if game is normal, you start with 50,000 in bank account
-			businessScript.BankAccount = 50000f;
+			businessScript.BankAccount = 50000;
 			break;
 		case 'H':	// Hard
 			// if game is hard, you start with 10,000 in bank account
-			businessScript.BankAccount = 10000f;
+			businessScript.BankAccount = 10000;
 			break;
 		} // switch
 
