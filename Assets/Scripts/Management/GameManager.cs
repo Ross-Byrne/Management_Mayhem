@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;											// For saving to file
-using System.Runtime.Serialization.Formatters.Binary;	// For saving to file
-using System.IO;										// For saving to file
 
 // GameManager is a singlton.
 
@@ -163,6 +160,22 @@ public class GameManager : MonoBehaviour
 		// set players selected game dif to gameDifficulty
 		GameDifficulty = GDif;
 
+		// set business bank account depending on game difficulty
+		switch (GameDifficulty) {
+		case 'E':	// Easy
+			// if game is easy, you start with 100,000 in bank account
+			businessScript.BankAccount = 100000f;
+			break;
+		case 'N':	// Normal
+			// if game is normal, you start with 50,000 in bank account
+			businessScript.BankAccount = 50000f;
+			break;
+		case 'H':	// Hard
+			// if game is hard, you start with 10,000 in bank account
+			businessScript.BankAccount = 10000f;
+			break;
+		} // switch
+
 		// Displays New Games info
 		//uiManager.DisplayNewGameDetails (playerScript, businessScript, gameManager);
 
@@ -199,12 +212,12 @@ public class GameManager : MonoBehaviour
 	} // ExitToMainMenu()
 
 
-	/*===================== CheckBadReputation() =====================================================================================*/
+	/*===================== CheckReputation() =====================================================================================*/
 	
-	// checks if player can do bad things because of bad rep level
-	public void CheckBadReputation(Business business)
+	// checks if player can do certain things because of reputation level
+	public void CheckReputation(Business business)
 	{
-		if(business.Reputation > 39) // if at least 40 bad rep
+		if(business.Reputation > 39) // if at least -40 rep
 		{
 			// player can hire dealers
 			CanHireDealers = true;
@@ -217,7 +230,7 @@ public class GameManager : MonoBehaviour
 			//business.dealers.Clear();
 		} // if
 		
-		if(business.Reputation > 59) // if at least 60 bad rep
+		if(business.Reputation > 59) // if at least -60 rep
 		{
 			// can build drug lab
 			CanBuildDrugLab = true;
@@ -228,48 +241,7 @@ public class GameManager : MonoBehaviour
 			CanBuildDrugLab = false;
 		} // if
 		
-	} // CheckBadReputation()
+	} // CheckReputation()
 
-	/*===================== Save() =====================================================================================*/
-
-	// Save Data to file
-	public void Save()
-	{
-		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
-
-		PlayerData data = new PlayerData ();
-		data.health = 100;
-		data.experience = 1000;
-
-		bf.Serialize (file, data);
-		file.Close ();
-	} // Save()
-
-
-	/*===================== Load() =====================================================================================*/
-
-	// Load data from file
-	public void Load()
-	{
-		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
-			PlayerData data = (PlayerData)bf.Deserialize(file);
-			file.Close();
-
-			// copy data from PlayerData class to local variables
-
-		} // if
-	} // Load()
-	
 } // class
 
-
-/*===================== PlayerData Class =====================================================================================*/
-[Serializable]
-class PlayerData
-{
-	public float health;
-	public float experience;
-} // class
