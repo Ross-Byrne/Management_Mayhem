@@ -58,6 +58,7 @@ public class StartMenuUIControl : MonoBehaviour {
 	// Fires when player clicks "LoadGameButton"
 	public void LoadGame(){
 
+		Application.LoadLevel (1);
 
 	} // LoadGame()
 

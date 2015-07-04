@@ -10,7 +10,7 @@ public class SaveGameManager : MonoBehaviour {
 	/*===================== Save() =====================================================================================*/
 	
 	// Saves the players game to save game file
-	public void Save(Player player, Business business, GameManager gameManager)
+	public void Save()
 	{
 		BinaryFormatter bf = new BinaryFormatter ();
 
@@ -23,39 +23,38 @@ public class SaveGameManager : MonoBehaviour {
 		// Save games data to GameData Object
 	
 		// Saving players state to save file
-		data.playerName = player.Name;
-		data.playerTrait0 = player.Traits[0];
-		data.playerTrait1 = player.Traits[1];
-		data.playerTrait2 = player.Traits[2];
-		data.playerTrait3 = player.Traits[3];
-		data.playerTrait4 = player.Traits[4];
-		data.playerBankAccount = player.BankAccount;
+		data.playerName = GameManager.gameManager.playerScript.Name;
+		data.playerTrait0 = GameManager.gameManager.playerScript.Traits[0];
+		data.playerTrait1 = GameManager.gameManager.playerScript.Traits[1];
+		data.playerTrait2 = GameManager.gameManager.playerScript.Traits[2];
+		data.playerTrait3 = GameManager.gameManager.playerScript.Traits[3];
+		data.playerTrait4 = GameManager.gameManager.playerScript.Traits[4];
+		data.playerBankAccount = GameManager.gameManager.playerScript.BankAccount;
 		
 		// Saving business' state to save file
-		data.businessName = business.Name;
-		data.businessBankAccount = business.BankAccount;
-		data.businessReputation = business.Reputation;
-		data.businessBuildingSize = business.BuildingSize;
-		data.businessEmployeeSalary = business.EmployeeSalary;
-		data.businessTotalEmployeeSalary = business.TotalEmployeeSalary;
-		data.businessBuildingMaintenance = business.BuildingMaintenance;
-		data.businessAge = business.BusinessAge;
-		data.businessEquipmentUpgrades = business.EquipmentUpgrades;
+		data.businessName = GameManager.businessScript.Name;
+		data.businessBankAccount = GameManager.businessScript.BankAccount;
+		data.businessReputation = GameManager.businessScript.Reputation;
+		data.businessBuildingSize = GameManager.businessScript.BuildingSize;
+		data.businessEmployeeSalary = GameManager.businessScript.EmployeeSalary;
+		data.businessBuildingMaintenance = GameManager.businessScript.BuildingMaintenance;
+		data.businessAge = GameManager.businessScript.BusinessAge;
+		data.businessEquipmentUpgrades = GameManager.businessScript.EquipmentUpgrades;
 		
 		// Saving Employees (NO of employees and their details)
-		data.numberOfEmployees = business.Employees.Count;
+		data.numberOfEmployees = GameManager.businessScript.Employees.Count;
 
 		// loops through all employees and gets there details
-		for(int i = 0; i < business.Employees.Count; i++) {
+		for(int i = 0; i < GameManager.businessScript.Employees.Count; i++) {
 
 			// saves employees names
-			data.employeeNames.Add(business.Employees [i].GetComponent<Employee> ().Name);
+			data.employeeNames.Add(GameManager.businessScript.Employees [i].GetComponent<Employee> ().Name);
 		} // for
 		
 		// Saving Game Info
-		data.gameDifficulty = gameManager.GameDifficulty;
-		data.canStartSellingDrugs = gameManager.CanStartSellingDrugs;
-		data.canStartMakingDrugs = gameManager.CanStartMakingDrugs;
+		data.gameDifficulty = GameManager.gameManager.GameDifficulty;
+		data.canStartSellingDrugs = GameManager.gameManager.CanStartSellingDrugs;
+		data.canStartMakingDrugs = GameManager.gameManager.CanStartMakingDrugs;
 
 		// save gamedata object to file
 		bf.Serialize (file, data);
@@ -68,23 +67,98 @@ public class SaveGameManager : MonoBehaviour {
 	/*===================== Load() =====================================================================================*/
 	
 	// Loads players game from save game file
-	public void Load(Player player, Business business, GameManager gameManager)
+	public void Load()
 	{
 		if (File.Exists (Application.persistentDataPath + "/ManagementMayhem.dat")) {
 
-			BinaryFormatter bf = new BinaryFormatter();
+			BinaryFormatter bf = new BinaryFormatter ();
 
 			// opens save game file
-			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+			FileStream file = File.Open (Application.persistentDataPath + "/ManagementMayhem.dat", FileMode.Open);
 
 			// makes gamedata object with saved game data
-			GameData data = (GameData)bf.Deserialize(file);
+			GameData data = (GameData)bf.Deserialize (file);
 
 			// close file
-			file.Close();
+			file.Close ();
 			
+			// say game has not been loaded
+			GameManager.gameManager.IsGameLoaded = false;
+
+			// before loading a save file, the current values for employees  must be cleared
+			GameManager.businessScript.FireAllEmployees ();
+			
+			// setting other values to default
+			GameManager.gameManager.AppliedForGrant = false;
+			GameManager.gameManager.CanStartSellingDrugs = false;
+
 			// copy data from GameData class to local variables
 			
+			// to make sure the values load correctly
+			// try to load them, if it fails, set values to default
+			
+			try {
+				// Loading players state from save file data
+				GameManager.gameManager.playerScript.Name = data.playerName;	
+				GameManager.gameManager.playerScript.Traits [0] = data.playerTrait0;
+				GameManager.gameManager.playerScript.Traits [1] = data.playerTrait1;
+				GameManager.gameManager.playerScript.Traits [2] = data.playerTrait2;
+				GameManager.gameManager.playerScript.Traits [3] = data.playerTrait3;
+				GameManager.gameManager.playerScript.Traits [4] = data.playerTrait4;
+				GameManager.gameManager.playerScript.BankAccount = data.playerBankAccount;
+				
+				// Loading business' state from save file data
+				GameManager.businessScript.Name = data.businessName;
+				GameManager.businessScript.BankAccount = data.businessBankAccount;
+				GameManager.businessScript.Reputation = data.businessReputation;
+				GameManager.businessScript.BuildingSize = data.businessBuildingSize;
+				GameManager.businessScript.EmployeeSalary = data.businessEmployeeSalary;
+				GameManager.businessScript.BuildingMaintenance = data.businessBuildingMaintenance;
+				GameManager.businessScript.BusinessAge = data.businessAge;
+				GameManager.businessScript.EquipmentUpgrades = data.businessEquipmentUpgrades;
+				
+				// Loading Employees and their deatials
+
+				// Create employees
+				GameManager.businessScript.LoadEmployees (data.numberOfEmployees);
+
+				// load employees details
+				for (int i = 0; i < data.numberOfEmployees; i++) {
+
+					// load employees name
+					GameManager.businessScript.Employees [i].GetComponent<Employee> ().Name = data.employeeNames [i];
+
+				} // for
+
+				// Loading Game Info
+				GameManager.gameManager.GameDifficulty = data.gameDifficulty;
+				GameManager.gameManager.CanStartSellingDrugs = data.canStartSellingDrugs;
+				GameManager.gameManager.CanStartMakingDrugs = data.canStartMakingDrugs;
+				
+				// saying the game loaded
+				GameManager.gameManager.IsGameLoaded = true;
+
+			} catch (Exception e) { // if loading fails, set everything to default
+				// prints exception message
+				Debug.Log (e);
+
+				// saying game didn't load
+				GameManager.gameManager.IsGameLoaded = false;
+				
+				// set all the values being loaded back to default
+
+				// Sets business variables back to default
+				GameManager.businessScript.SetupBusiness ();
+
+				// Clears all employees
+				GameManager.businessScript.FireAllEmployees ();
+
+			} // try catch
+			
+		} else {	// if save file doesnt exsist
+
+			// tell gameManager game not loaded
+			GameManager.gameManager.IsGameLoaded = false;
 		} // if
 	} // Load()
 
@@ -97,7 +171,6 @@ public class SaveGameManager : MonoBehaviour {
 [Serializable]
 class GameData
 {
-
 	// For Saving players state to save file
 	public string playerName;
 	public string playerTrait0;
@@ -113,7 +186,6 @@ class GameData
 	public int businessReputation;
 	public int businessBuildingSize;
 	public float businessEmployeeSalary;
-	public float businessTotalEmployeeSalary;
 	public float businessBuildingMaintenance;
 	public int businessAge;
 	public int businessEquipmentUpgrades;

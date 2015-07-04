@@ -215,7 +215,7 @@ public class Business : MonoBehaviour
 
 	/*===================== HireEmployees() =====================================================================================*/
 	
-	public void HireEmployees(GameManager gameManager, int theAmount)
+	public void HireEmployees(int theAmount)
 	{
 		for(int i = 0; i < theAmount; i++)
 		{
@@ -234,20 +234,73 @@ public class Business : MonoBehaviour
 	} // HireEmployees()
 
 
+	/*===================== LoadEmployees() =====================================================================================*/
+
+	// For loading employees when loading save game
+	public void LoadEmployees(int theAmount)
+	{
+		for(int i = 0; i < theAmount; i++)
+		{
+			// instantiate employee
+			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
+			
+			// make employee a child of Business
+			newEmployee.transform.SetParent(gameObject.transform, false); 
+			
+			// add employee to employees list
+			Employees.Add(newEmployee);
+		} // for
+	} // LoadEmployees()
+
+
 	/*===================== FireEmployees() =====================================================================================*/
 	
-	public void FireEmployees(GameManager gameManager, int theAmount)
+	public void FireEmployees(int theAmount)
 	{
-	/*	if(theAmount == employees.Count) // if the amount is = to all employees, clear list
-		{
-			Employees.Clear();
-		}
-		else // remove the number entered
-		{
-			while(theAmount > 0)
-				Employees.RemoveRange(0, theAmount--);
-		} // if else*/
+		int employeeCount = 0;
+
+		// if the amount is = to all employees, clear list
+		if(theAmount >= employees.Count) {
+
+			// fires all employees
+			FireAllEmployees();
+		} else {
+
+			// removes the number entered, starting at the back of the list (better performance on list)  
+			while(theAmount > 0){
+
+				// gets number of employees
+				employeeCount = Employees.Count;
+		
+				// destroys employee gameobject
+				Destroy(Employees[employeeCount-1]);
+
+				// removes destroyed employee from list
+				Employees.Remove(Employees[employeeCount-1]);
+
+				// decrement
+				theAmount--;
+			} // while
+
+		} // if else
 	} // FireEmployees()
+
+
+	/*===================== FireAllEmployees() =====================================================================================*/
+
+	// fires all employees
+	public void FireAllEmployees()
+	{
+		// destroys and removes employees from list, start at the back (better performance on list)
+		for (int i = Employees.Count; i > 0; i--) {
+		
+			// destroys employee gameobject
+			Destroy (Employees [i-1]);
+		
+			// removes destroyed employee from list
+			Employees.Remove (Employees [i-1]);
+		} // for
+	} // FireAllEmployees()
 
 
 	/*===================== PrintListOfEmployees() =====================================================================================*/

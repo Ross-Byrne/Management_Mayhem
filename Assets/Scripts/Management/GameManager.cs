@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager gameManager;
 	public static UIManager uiManager;
+	public static SaveGameManager saveGameManager;
 
 	public Player playerScript;
 	public static Business businessScript;
@@ -74,17 +75,17 @@ public class GameManager : MonoBehaviour
 
 		// get references for scripts
 		uiManager = uiManagerObject.GetComponent<UIManager> ();
+		saveGameManager = gameObject.GetComponent<SaveGameManager> ();
 		playerScript = player.GetComponent<Player>();
 
 		// if in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 
-			//Debug.Log ("Hiring Employees");
-		//	businessScript.HireEmployees (gameManager, 2);
-
 			// Wait until mainUI is read
 			//StartCoroutine("WaitForMainUI");
+
+
 
 			//uiManager.DisplayText(businessScript.PrintListOfEmployees());
 
@@ -106,7 +107,18 @@ public class GameManager : MonoBehaviour
 			if(IsNewGameCreated == true){
 
 				StartCoroutine("SetupNewGame");
-			} // if
+			} else {
+
+		/*		// load last save Game
+				StartCoroutine("SetupLoadedGame");
+
+				if(IsGameLoaded == false){
+					Debug.Log("Game Not loaded");
+
+					// go back to main menu
+					Application.LoadLevel(0);
+				} // if*/
+			}
 		} // if
 	} // OnLevelWasLoaded()
 	
@@ -177,9 +189,29 @@ public class GameManager : MonoBehaviour
 		} // switch
 
 		// Displays New Games info
-		//uiManager.DisplayNewGameDetails (playerScript, businessScript, gameManager);
 
 	} // SetupNewGame()
+
+
+	/*===================== SetupLoadedGame() =====================================================================================*/
+	
+	IEnumerator SetupLoadedGame()
+	{
+		// To make sure MainUI is set up first
+		do{
+			// Waits one frame
+			yield return null;
+			// loops while mainUI isn't finished being setup
+		}while(!uiManager.IsMainUISetup);
+		
+		Debug.Log ("Loading Game");
+
+		// Loads last saved game
+		saveGameManager.Load ();
+
+		Debug.Log ("Game Loaded");
+
+	} // SetupLoadedGame()
 
 
 	/*===================== WaitForMainUI() =====================================================================================*/
@@ -197,10 +229,40 @@ public class GameManager : MonoBehaviour
 
 	/*===================== ResumeGame() =====================================================================================*/
 
-	public void ResumeGame()
-	{
+	public void ResumeGame(){
+
 		uiManager.ExitEscapeMenu ();
 	} // ResumeGame()
+
+
+	/*===================== SaveGame() =====================================================================================*/
+	
+	public void SaveGame(){
+
+		// Saves game
+		saveGameManager.Save ();
+
+		// Tells player game is saved
+		Debug.Log ("Game Saved!");
+
+		// Resumes
+		ResumeGame ();
+	} // SaveGame()
+
+
+	/*===================== LoadGame() =====================================================================================*/
+	
+	public void LoadGame(){
+		
+		// Saves game
+		saveGameManager.Load ();
+		
+		// Tells player game is Loaded
+		Debug.Log ("Game Loaded!");
+		
+		// Resumes
+		ResumeGame ();
+	} // LoadGame()
 
 
 	/*===================== ExitToMainMenu() =====================================================================================*/
