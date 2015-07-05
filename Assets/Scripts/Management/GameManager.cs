@@ -71,26 +71,12 @@ public class GameManager : MonoBehaviour
 
 			// Get reference for script
 			businessScript = business.GetComponent<Business>();
-		}
+		} // if
 
 		// get references for scripts
 		uiManager = uiManagerObject.GetComponent<UIManager> ();
 		saveGameManager = gameObject.GetComponent<SaveGameManager> ();
 		playerScript = player.GetComponent<Player>();
-
-		// if in Main Scene
-		if (Application.loadedLevelName.Equals ("Main")) {
-
-
-			// Wait until mainUI is read
-			//StartCoroutine("WaitForMainUI");
-
-
-
-			//uiManager.DisplayText(businessScript.PrintListOfEmployees());
-
-		} // if
-
 
 	} // Awake()
 
@@ -103,18 +89,13 @@ public class GameManager : MonoBehaviour
 		// if scene loaded is Main Scene
 		if (level == 1) {
 
-			// if a new game has been created, setup variables
-			if(IsNewGameCreated == true){
+			// Sets up the game
 
-				StartCoroutine("SetupNewGame");
-				Debug.Log("New game made");
-		
-			} else {
-				Debug.Log("Starting to load game");
-				// load last save Game
-				StartCoroutine("SetupLoadedGame");
-
-			}
+			// Calling GameManager.gameManager.SetupGame() because
+			// GameManager is a singlton and with DontDestroyOnLoad(),
+			// OnLevelWasLoaded() runs twice, once on the object not to be destoryed
+			// and once before the object that was loaded in the scene that is going to be destroyed
+			GameManager.gameManager.SetupGame();
 		} // if
 	} // OnLevelWasLoaded()
 	
@@ -133,24 +114,30 @@ public class GameManager : MonoBehaviour
 
 	} // Update()
 
+
 	/*===================== SetupGame() =====================================================================================*/
 
-	void SetupGame()
-	{
+	// Sets the game up
+	void SetupGame(){
 
+		Debug.Log ("IsNewGameCreated = " + IsNewGameCreated);
+
+		// if a new game has been created, setup variables
+		if(IsNewGameCreated == true){
+			
+			SetupNewGame();
+			return;
+		} else { // a game must have been loaded
+			
+			// load last save Game
+			SetupLoadedGame();
+		} // if
 	} // SetupGame()
 
 
 	/*===================== SetupNewGame() =====================================================================================*/
 
-	IEnumerator SetupNewGame()
-	{
-		// To make sure MainUI is set up first
-		do{
-			// Waits one frame
-			yield return null;
-			// loops while mainUI isn't finished being setup
-		}while(!uiManager.IsMainUISetup);
+	void SetupNewGame(){
 
 		Debug.Log ("Starting New Game Setup");
 		// set the players new name to players name
@@ -172,41 +159,40 @@ public class GameManager : MonoBehaviour
 		switch (GameDifficulty) {
 		case 'E':	// Easy
 			// if game is easy, you start with 100,000 in bank account
-			businessScript.BankAccount = 100000;
+			GameManager.businessScript.BankAccount = 100000f;
 			break;
 		case 'N':	// Normal
 			// if game is normal, you start with 50,000 in bank account
-			businessScript.BankAccount = 50000;
+			GameManager.businessScript.BankAccount = 50000f;
 			break;
 		case 'H':	// Hard
 			// if game is hard, you start with 10,000 in bank account
-			businessScript.BankAccount = 10000;
+			GameManager.businessScript.BankAccount = 10000f;
 			break;
 		} // switch
 
 		// Displays New Games info
-
+	
 	} // SetupNewGame()
 
 
 	/*===================== SetupLoadedGame() =====================================================================================*/
 	
-	IEnumerator SetupLoadedGame()
-	{
-		// To make sure MainUI is set up first
-		do{
-			// Waits one frame
-			yield return null;
-			// loops while mainUI isn't finished being setup
-		}while(!uiManager.IsMainUISetup);
-		
-		Debug.Log ("Loading Game");
+	void SetupLoadedGame(){
 
 		// Loads last saved game
 		saveGameManager.Load ();
 
-		Debug.Log ("Game Loaded");
+		if (IsGameLoaded == false) {
 
+			Debug.Log ("Game Not Loaded!");
+
+			// Exits back to main menu
+			//ExitToMainMenu();
+		} else {
+
+			Debug.Log ("Game Loaded!");
+		} // if
 	} // SetupLoadedGame()
 
 
@@ -249,12 +235,9 @@ public class GameManager : MonoBehaviour
 	/*===================== LoadGame() =====================================================================================*/
 	
 	public void LoadGame(){
-		
-		// Saves game
-		saveGameManager.Load ();
-		
-		// Tells player game is Loaded
-		Debug.Log ("Game Loaded!");
+
+		// Loads last saved game
+		SetupLoadedGame();
 		
 		// Resumes
 		ResumeGame ();
