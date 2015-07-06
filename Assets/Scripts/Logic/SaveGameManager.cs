@@ -67,11 +67,8 @@ public class SaveGameManager : MonoBehaviour {
 	/*===================== Load() =====================================================================================*/
 	
 	// Loads players game from save game file
-	public void Load(){
-
-		// say game has not been loaded
-		GameManager.gameManager.IsGameLoaded = false;
-
+	public void Load()
+	{
 		if (File.Exists (Application.persistentDataPath + "/ManagementMayhem.dat")) {
 
 			BinaryFormatter bf = new BinaryFormatter ();
@@ -84,6 +81,9 @@ public class SaveGameManager : MonoBehaviour {
 
 			// close file
 			file.Close ();
+			
+			// say game has not been loaded
+			GameManager.gameManager.IsGameLoaded = false;
 
 			// before loading a save file, the current values for employees  must be cleared
 			GameManager.businessScript.FireAllEmployees ();
@@ -152,8 +152,13 @@ public class SaveGameManager : MonoBehaviour {
 
 				// Clears all employees
 				GameManager.businessScript.FireAllEmployees ();
+
 			} // try catch
 			
+		} else {	// if save file doesnt exsist
+
+			// tell gameManager game not loaded
+			GameManager.gameManager.IsGameLoaded = false;
 		} // if
 	} // Load()
 
