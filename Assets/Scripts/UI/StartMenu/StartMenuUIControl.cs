@@ -19,7 +19,7 @@ public class StartMenuUIControl : MonoBehaviour {
 	public Button GameInfoButton;
 	public Button ExitGameButton;
 
-	// Methods
+	// Methods 
 	
 	void Start(){
 	

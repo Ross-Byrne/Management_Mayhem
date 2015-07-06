@@ -27,6 +27,7 @@ public class Player : Person {
 	void Awake(){
 
 		Name = "Player";
+		BankAccount = 1000f;
 	} // Awake()
 
 
@@ -37,12 +38,10 @@ public class Player : Person {
 		StringBuilder str = new StringBuilder();
 
 		// Add Players name
-		str.Append ("Name: ");
-		str.Append (Name);
+		str.Append ("Name: ").Append (Name);
 
 		// Add players BankBalance
-		str.Append ("\nBank Account: $");
-		str.Append (string.Format("0.00", BankAccount));
+		str.Append ("\nBank Account: ").Append (string.Format("${0:00}", BankAccount));
 
 		return str.ToString ();
 	} // DisplayPlayerInfo()

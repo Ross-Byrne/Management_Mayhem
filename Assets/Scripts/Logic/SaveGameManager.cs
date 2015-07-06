@@ -23,13 +23,13 @@ public class SaveGameManager : MonoBehaviour {
 		// Save games data to GameData Object
 	
 		// Saving players state to save file
-		data.playerName = GameManager.gameManager.playerScript.Name;
-		data.playerTrait0 = GameManager.gameManager.playerScript.Traits[0];
-		data.playerTrait1 = GameManager.gameManager.playerScript.Traits[1];
-		data.playerTrait2 = GameManager.gameManager.playerScript.Traits[2];
-		data.playerTrait3 = GameManager.gameManager.playerScript.Traits[3];
-		data.playerTrait4 = GameManager.gameManager.playerScript.Traits[4];
-		data.playerBankAccount = GameManager.gameManager.playerScript.BankAccount;
+		data.playerName = GameManager.playerScript.Name;
+		data.playerTrait0 = GameManager.playerScript.Traits[0];
+		data.playerTrait1 = GameManager.playerScript.Traits[1];
+		data.playerTrait2 = GameManager.playerScript.Traits[2];
+		data.playerTrait3 = GameManager.playerScript.Traits[3];
+		data.playerTrait4 = GameManager.playerScript.Traits[4];
+		data.playerBankAccount = GameManager.playerScript.BankAccount;
 		
 		// Saving business' state to save file
 		data.businessName = GameManager.businessScript.Name;
@@ -99,13 +99,13 @@ public class SaveGameManager : MonoBehaviour {
 			
 			try {
 				// Loading players state from save file data
-				GameManager.gameManager.playerScript.Name = data.playerName;	
-				GameManager.gameManager.playerScript.Traits [0] = data.playerTrait0;
-				GameManager.gameManager.playerScript.Traits [1] = data.playerTrait1;
-				GameManager.gameManager.playerScript.Traits [2] = data.playerTrait2;
-				GameManager.gameManager.playerScript.Traits [3] = data.playerTrait3;
-				GameManager.gameManager.playerScript.Traits [4] = data.playerTrait4;
-				GameManager.gameManager.playerScript.BankAccount = data.playerBankAccount;
+				GameManager.playerScript.Name = data.playerName;	
+				GameManager.playerScript.Traits [0] = data.playerTrait0;
+				GameManager.playerScript.Traits [1] = data.playerTrait1;
+				GameManager.playerScript.Traits [2] = data.playerTrait2;
+				GameManager.playerScript.Traits [3] = data.playerTrait3;
+				GameManager.playerScript.Traits [4] = data.playerTrait4;
+				GameManager.playerScript.BankAccount = data.playerBankAccount;
 				
 				// Loading business' state from save file data
 				GameManager.businessScript.Name = data.businessName;

@@ -18,7 +18,7 @@ public class MainUIControl : MonoBehaviour {
 	// Player text
 	public Text playerInfoText;
 
-
+	 
 	// Business info Text
 	public Text businessNameText;
 	public Text businessBankAccountText;

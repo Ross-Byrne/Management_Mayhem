@@ -563,7 +563,7 @@ public class Business : MonoBehaviour
 		// add business reputation]
 		str.Append ("\nReputation: ");
 		str.Append (Reputation);
-
+	
 		// add the size of the building
 		str.Append ("\nRooms In The Building: ");
 		str.Append (BuildingSize);

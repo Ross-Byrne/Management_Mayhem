@@ -15,7 +15,7 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	// Scripts
 
 	public CharacterInfo characterInfoScript;
-
+	 
 	// UI Elements
 
 	public Text headingText;

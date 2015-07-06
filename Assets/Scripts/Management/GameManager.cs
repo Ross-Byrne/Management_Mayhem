@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// GameManager is a singlton.
+// GameManager is a singleton.
 
 public class GameManager : MonoBehaviour 
 {
@@ -9,17 +9,16 @@ public class GameManager : MonoBehaviour
 
 	public GameObject uiManagerPrefab;
 	public GameObject businessPrefab;
-
-	public GameObject player;
+	public GameObject playerPrefab;
 
 	
 	/*===================== Scripts =====================================================================================*/
 
-	public static GameManager gameManager;
+	public static GameManager gameManager = null;
 	public static UIManager uiManager;
 	public static SaveGameManager saveGameManager;
 
-	public Player playerScript;
+	public static Player playerScript;
 	public static Business businessScript;
 
 
@@ -50,8 +49,7 @@ public class GameManager : MonoBehaviour
 	/*===================== Awake() =====================================================================================*/
 
 	// Initialisation
-	void Awake () 
-	{
+	void Awake () {
 		// to make sure only one version of GameManager exisits
 		// to enforce singlton patern
 		if (gameManager == null) {
@@ -64,30 +62,27 @@ public class GameManager : MonoBehaviour
 		// Instanstiate UIManager 
 		GameObject uiManagerObject = (GameObject)Instantiate (uiManagerPrefab);
 
+		// If in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 			// Instanstiate Business
 			GameObject business = (GameObject)Instantiate (businessPrefab);
 
+			// Instantiate Player
+			GameObject player = (GameObject)Instantiate (playerPrefab);
+
 			// Get reference for script
 			businessScript = business.GetComponent<Business>();
-		}
+			playerScript = player.GetComponent<Player>();
+		} // if
 
 		// get references for scripts
 		uiManager = uiManagerObject.GetComponent<UIManager> ();
 		saveGameManager = gameObject.GetComponent<SaveGameManager> ();
-		playerScript = player.GetComponent<Player>();
 
 		// if in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
-
-			// Wait until mainUI is read
-			//StartCoroutine("WaitForMainUI");
-
-
-
-			//uiManager.DisplayText(businessScript.PrintListOfEmployees());
 
 		} // if
 
@@ -103,18 +98,14 @@ public class GameManager : MonoBehaviour
 		// if scene loaded is Main Scene
 		if (level == 1) {
 
-			// if a new game has been created, setup variables
-			if(IsNewGameCreated == true){
+			// Because GameManager is a singleton, when the main gameManager
+			// destroys a new gameManger, both OnLevelWasLoaded() get run
+			// this if makes sure only the main gameManager runs its code
+			if(gameManager == this){
 
-				StartCoroutine("SetupNewGame");
-				Debug.Log("New game made");
-		
-			} else {
-				Debug.Log("Starting to load game");
-				// load last save Game
-				StartCoroutine("SetupLoadedGame");
-
-			}
+				// Sets up the game
+				SetupGame();
+			} // if
 		} // if
 	} // OnLevelWasLoaded()
 	
@@ -135,23 +126,27 @@ public class GameManager : MonoBehaviour
 
 	/*===================== SetupGame() =====================================================================================*/
 
-	void SetupGame()
-	{
+	void SetupGame(){
 
+		// if a new game has been created, setup variables
+		if(IsNewGameCreated == true){
+			
+			SetupNewGame();
+			Debug.Log("New game made");
+			
+		} else { // else load a game
+
+			Debug.Log("Starting to load game");
+			// load last save Game
+			SetupLoadedGame();
+		} // if
 	} // SetupGame()
 
 
 	/*===================== SetupNewGame() =====================================================================================*/
 
-	IEnumerator SetupNewGame()
-	{
-		// To make sure MainUI is set up first
-		do{
-			// Waits one frame
-			yield return null;
-			// loops while mainUI isn't finished being setup
-		}while(!uiManager.IsMainUISetup);
-
+	void SetupNewGame(){
+	
 		Debug.Log ("Starting New Game Setup");
 		// set the players new name to players name
 		playerScript.Name = PName;
@@ -172,40 +167,44 @@ public class GameManager : MonoBehaviour
 		switch (GameDifficulty) {
 		case 'E':	// Easy
 			// if game is easy, you start with 100,000 in bank account
-			businessScript.BankAccount = 100000;
+			businessScript.BankAccount = 100000f;
 			break;
 		case 'N':	// Normal
 			// if game is normal, you start with 50,000 in bank account
-			businessScript.BankAccount = 50000;
+			businessScript.BankAccount = 50000f;
 			break;
 		case 'H':	// Hard
 			// if game is hard, you start with 10,000 in bank account
-			businessScript.BankAccount = 10000;
+			businessScript.BankAccount = 10000f;
 			break;
 		} // switch
 
 		// Displays New Games info
 
+
+		// set IsNewGameCreated to false after new game setup
+		IsNewGameCreated = false;
+	
 	} // SetupNewGame()
 
 
 	/*===================== SetupLoadedGame() =====================================================================================*/
 	
-	IEnumerator SetupLoadedGame()
-	{
-		// To make sure MainUI is set up first
-		do{
-			// Waits one frame
-			yield return null;
-			// loops while mainUI isn't finished being setup
-		}while(!uiManager.IsMainUISetup);
+	void SetupLoadedGame(){
+
 		
 		Debug.Log ("Loading Game");
 
 		// Loads last saved game
 		saveGameManager.Load ();
 
-		Debug.Log ("Game Loaded");
+		if (gameManager.IsGameLoaded) {
+
+			Debug.Log ("Game Loaded");
+		} else {
+
+			Debug.Log ("Game Not Loaded");
+		} // if
 
 	} // SetupLoadedGame()
 
@@ -227,6 +226,7 @@ public class GameManager : MonoBehaviour
 
 	public void ResumeGame(){
 
+		// Closes escape Menu
 		uiManager.ExitEscapeMenu ();
 	} // ResumeGame()
 
@@ -250,11 +250,8 @@ public class GameManager : MonoBehaviour
 	
 	public void LoadGame(){
 		
-		// Saves game
-		saveGameManager.Load ();
-		
-		// Tells player game is Loaded
-		Debug.Log ("Game Loaded!");
+		// Loads game
+		SetupLoadedGame();
 		
 		// Resumes
 		ResumeGame ();
@@ -263,8 +260,8 @@ public class GameManager : MonoBehaviour
 
 	/*===================== ExitToMainMenu() =====================================================================================*/
 
-	public void ExitToMainMenu()
-	{
+	public void ExitToMainMenu(){
+
 		// loads StartMenu Scene (first scene)
 		Application.LoadLevel (0);
 	} // ExitToMainMenu()
@@ -273,8 +270,8 @@ public class GameManager : MonoBehaviour
 	/*===================== CheckReputation() =====================================================================================*/
 	
 	// checks if player can do certain things because of reputation level
-	public void CheckReputation(Business business)
-	{
+	public void CheckReputation(Business business){
+
 		if(business.Reputation > 39) // if at least -40 rep
 		{
 			// player can hire dealers

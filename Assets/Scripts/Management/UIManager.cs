@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Text;			// to use StringBuilder
 
-// UIManager is a singlton
-
 public class UIManager : MonoBehaviour 
 {
 	/*===================== UIs =====================================================================================*/
@@ -220,7 +218,7 @@ public class UIManager : MonoBehaviour
 		mainUI.GetComponent<MainUIControl> ().businessNameText.text = string.Format("Name: {0}", business.Name);
 
 		// Update Business Bank Account
-		mainUI.GetComponent<MainUIControl>().businessBankAccountText.text = string.Format ("Bank Account: $0.00", business.BankAccount);
+		mainUI.GetComponent<MainUIControl>().businessBankAccountText.text = string.Format ("Bank Account: ${0:00}", business.BankAccount);
 
 		// Update Business Age
 		mainUI.GetComponent<MainUIControl> ().businessAgeText.text = string.Format("Age: {0} Months", business.BusinessAge);
@@ -235,10 +233,10 @@ public class UIManager : MonoBehaviour
 		mainUI.GetComponent<MainUIControl>().BusinessEmployeeCountText.text = string.Format("Employees: {0}", business.Employees.Count);
 
 		// Update Business Employee Salary
-		mainUI.GetComponent<MainUIControl>().businessEmployeeSalText.text = string.Format("Employees Salary: $0.00", business.EmployeeSalary);
+		mainUI.GetComponent<MainUIControl>().businessEmployeeSalText.text = string.Format("Employees Salary: ${0:00}", business.EmployeeSalary);
 
 		// Update Business Maintenance Cost
-		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = string.Format("Maintenance Cost: $0.00", business.BuildingMaintenance);
+		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = string.Format("Maintenance Cost: ${0:00}", business.BuildingMaintenance);
 
 		// Update Business Producivity Bonus
 		mainUI.GetComponent<MainUIControl>().businessProdcutivtyBonusText.text = string.Format("Productivity Bonus: {0}%", business.ProductivityBonus);

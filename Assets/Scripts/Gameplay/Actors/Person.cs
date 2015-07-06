@@ -6,5 +6,5 @@ using System.Collections;
 public abstract class Person : MonoBehaviour {
 
 	protected new string name;
-
+	 
 } // class

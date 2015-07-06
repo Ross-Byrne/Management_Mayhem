@@ -16,7 +16,7 @@ public class Employee : Person {
 
 	void Awake(){
 
-		Name = "Employee";
+		Name = "Employee"; 
 	} // Awake()
 
 } // class

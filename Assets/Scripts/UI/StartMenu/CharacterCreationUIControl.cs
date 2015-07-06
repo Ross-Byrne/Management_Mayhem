@@ -27,7 +27,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 	private char gameDiff;
 	
-	// Methods
+	// Methods 
 	
 	void Awake(){
 
