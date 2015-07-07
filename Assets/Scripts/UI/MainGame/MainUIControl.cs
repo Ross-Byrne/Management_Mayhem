@@ -21,7 +21,15 @@ public class MainUIControl : MonoBehaviour {
 	/*===================== InforBar Text Elements =====================================================================================*/
 
 	// Player text
-	public Text playerInfoText;
+	public Text playerNameText;
+	public Text playerBankAccountText;
+	public Text playerLevelText;
+	public Text playerXPText;
+	public Text playerTrait1Text;
+	public Text playerTrait2Text;
+	public Text playerTrait3Text;
+	public Text playerTrait4Text;
+	public Text playerTrait5Text;
 
 	 
 	// Business info Text
@@ -31,14 +39,15 @@ public class MainUIControl : MonoBehaviour {
 	public Text businessRepText;
 	public Text businessSizeText;
 	public Text BusinessEmployeeCountText;
-	public Text businessEmployeeSalText;
+	public Text businessTotalSalaryText;
 	public Text businessMaintenanceText;
 	public Text businessProdcutivtyBonusText;
 	public Text businessEquipUpgradesText;
 
 
 	// World Info Text
-	public Text worldInfoText;
+	public Text businessProfitsText;
+	public Text businessCostsText;
 
 
 	/*===================== Methods =====================================================================================*/

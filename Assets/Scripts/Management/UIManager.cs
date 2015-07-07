@@ -209,7 +209,7 @@ public class UIManager : MonoBehaviour
 	public void InformationBarUpdate(Player player, Business business, string worldInfo){
 
 		// update player info text
-		mainUI.GetComponent<MainUIControl>().playerInfoText.text = player.DisplayPlayerInfo();
+		//mainUI.GetComponent<MainUIControl>().playerInfoText.text = player.DisplayPlayerInfo();
 
 
 		// update business info Text
@@ -233,7 +233,7 @@ public class UIManager : MonoBehaviour
 		mainUI.GetComponent<MainUIControl>().BusinessEmployeeCountText.text = string.Format("Employees: {0}", business.Employees.Count);
 
 		// Update Business Employee Salary
-		mainUI.GetComponent<MainUIControl>().businessEmployeeSalText.text = string.Format("Employees Salary: ${0:00}", business.EmployeeSalary);
+		mainUI.GetComponent<MainUIControl>().businessTotalSalaryText.text = string.Format("Total Salary Paid: ${0:00}", business.TotalEmployeeSalary);
 
 		// Update Business Maintenance Cost
 		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = string.Format("Maintenance Cost: ${0:00}", business.BuildingMaintenance);
@@ -246,7 +246,7 @@ public class UIManager : MonoBehaviour
 
 
 		// update world text
-		mainUI.GetComponent<MainUIControl>().worldInfoText.text = worldInfo;
+		//mainUI.GetComponent<MainUIControl>().worldInfoText.text = worldInfo;
 
 	} // InformationBarUpdate()
 
