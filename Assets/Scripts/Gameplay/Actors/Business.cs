@@ -25,7 +25,7 @@ public class Business : MonoBehaviour
 	public float BuildingMaintenance { get; set;}
 	private int maxEmployees;
 	private int maxDealers;
-	public float EmployeeSalary { get; set;} // Per Month
+	public float EmployeeSalary { get; set;} // Per Hour
 	private float totalEmployeeSalary; // total salary paid to all employees
 	public int BusinessAge { get; set;} // in months
 	private int productivityBonus;
@@ -80,8 +80,8 @@ public class Business : MonoBehaviour
 	public float TotalEmployeeSalary
 	{
 		// total employee salary is calculated
-		// using employeeSalary * number of employees
-		get{ return Employees.Count * EmployeeSalary;}
+		// using employees salary * number of employees * 40 (hours worked in a week)(Just temp)
+		get{ return Employees.Count * Employees[0].GetComponent<Employee>().Salary * 40;}
 		set{ totalEmployeeSalary = value;}
 	}
 	

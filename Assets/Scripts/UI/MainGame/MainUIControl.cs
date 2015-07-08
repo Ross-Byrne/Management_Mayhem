@@ -12,11 +12,6 @@ public class MainUIControl : MonoBehaviour {
 	public GameObject worldInfo;
 
 
-	/*===================== Menus =====================================================================================*/
-
-	public GameObject manageBusinessMenu;
-
-
 	/*===================== UI Elements =====================================================================================*/
 
 	/*===================== InforBar Text Elements =====================================================================================*/
@@ -52,26 +47,7 @@ public class MainUIControl : MonoBehaviour {
 
 
 	/*===================== Methods =====================================================================================*/
-
-	/*===================== MenuControl() =====================================================================================*/
 	
-	// controls if a menu is turned on or off
-	public void MenuControl(GameObject menu){
-
-		// if menu is active, turn off
-		if (menu.activeSelf) {
-
-			// deactivate menu
-			menu.SetActive(false);
-		} else { // if menu is turned off, turn it on
-
-			// activate menu
-			menu.SetActive(true);
-		} // if
-
-	} // MenuControl()
-
-
 	/*===================== PlayerInformationUpdate() =====================================================================================*/
 	
 	public void PlayerInformationUpdate(Player player){

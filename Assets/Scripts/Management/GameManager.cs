@@ -305,6 +305,21 @@ public class GameManager : MonoBehaviour
 	} // WaitForMainUI()
 
 
+	/*===================== PauseGame() =====================================================================================*/
+
+	public void PauseGame(bool pause){
+
+		// Pauses or Unpauses game
+		if (pause) {
+			// Pause game
+			Time.timeScale = 0f;
+		} else {
+			// Unpause game
+			Time.timeScale = 1f;
+		} // if
+	} // PauseGame()
+
+
 	/*===================== ResumeGame() =====================================================================================*/
 
 	public void ResumeGame(){
@@ -313,10 +328,7 @@ public class GameManager : MonoBehaviour
 		uiManager.ExitEscapeMenu ();
 
 		// unpauses game
-		if (Time.timeScale == 0f) {
-
-			Time.timeScale = 1f;
-		} // if
+		PauseGame (false);
 
 	} // ResumeGame()
 

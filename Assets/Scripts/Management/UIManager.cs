@@ -159,7 +159,7 @@ public class UIManager : MonoBehaviour
 	{
 		if (isActive) {
 			// pauses game
-			Time.timeScale = 0f;
+			GameManager.gameManager.PauseGame(true);
 
 			// Activates escapeMenu
 			escapeMenu.gameObject.SetActive (true);
@@ -168,7 +168,7 @@ public class UIManager : MonoBehaviour
 			escapeMenu.gameObject.SetActive(false);
 
 			// unpauses game
-			Time.timeScale = 1f;
+			GameManager.gameManager.PauseGame(false);
 		} // if
 	} // ManageEscapeMenu()
 

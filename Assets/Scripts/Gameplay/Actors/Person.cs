@@ -6,5 +6,8 @@ using System.Collections;
 public abstract class Person : MonoBehaviour {
 
 	protected new string name;
+	protected char gender;
+	protected float bankAccount;
+	protected float salary; 		// salary is hourly rate
 	 
 } // class
