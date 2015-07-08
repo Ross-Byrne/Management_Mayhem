@@ -158,11 +158,17 @@ public class UIManager : MonoBehaviour
 	public void ManageEscapeMenu(bool isActive)
 	{
 		if (isActive) {
+			// pauses game
+			Time.timeScale = 0f;
+
 			// Activates escapeMenu
 			escapeMenu.gameObject.SetActive (true);
 		} else {
 			// Deactivates escapeMenu
 			escapeMenu.gameObject.SetActive(false);
+
+			// unpauses game
+			Time.timeScale = 1f;
 		} // if
 	} // ManageEscapeMenu()
 
@@ -204,57 +210,4 @@ public class UIManager : MonoBehaviour
 	} // DisplayNewGameDetails()
 
 
-	/*===================== InformationBarUpdate() =====================================================================================*/
-
-	public void InformationBarUpdate(Player player, Business business, string worldInfo){
-
-		// update player info text
-		//mainUI.GetComponent<MainUIControl>().playerInfoText.text = player.DisplayPlayerInfo();
-
-
-		// update business info Text
-
-		// Update Business Name
-		mainUI.GetComponent<MainUIControl> ().businessNameText.text = string.Format("Name: {0}", business.Name);
-
-		// Update Business Bank Account
-		mainUI.GetComponent<MainUIControl>().businessBankAccountText.text = string.Format ("Bank Account: ${0:00}", business.BankAccount);
-
-		// Update Business Age
-		mainUI.GetComponent<MainUIControl> ().businessAgeText.text = string.Format("Age: {0} Months", business.BusinessAge);
-	
-		// Update Business Reputation
-		mainUI.GetComponent<MainUIControl> ().businessRepText.text = string.Format ("Reputation: {0}", business.Reputation);;
-
-		// Update Business Building Size
-		mainUI.GetComponent<MainUIControl>().businessSizeText.text = string.Format("Number Of Rooms: {0}", business.BuildingSize);
-
-		// Update Business Employee Count
-		mainUI.GetComponent<MainUIControl>().BusinessEmployeeCountText.text = string.Format("Employees: {0}", business.Employees.Count);
-
-		// Update Business Employee Salary
-		mainUI.GetComponent<MainUIControl>().businessTotalSalaryText.text = string.Format("Total Salary Paid: ${0:00}", business.TotalEmployeeSalary);
-
-		// Update Business Maintenance Cost
-		mainUI.GetComponent<MainUIControl>().businessMaintenanceText.text = string.Format("Maintenance Cost: ${0:00}", business.BuildingMaintenance);
-
-		// Update Business Producivity Bonus
-		mainUI.GetComponent<MainUIControl>().businessProdcutivtyBonusText.text = string.Format("Productivity Bonus: {0}%", business.ProductivityBonus);
-
-		// Update Business Equipment Upgrades
-		mainUI.GetComponent<MainUIControl>().businessEquipUpgradesText.text = string.Format("Equipment Upgrades: {0}", business.EquipmentUpgrades);
-
-
-		// update world text
-		//mainUI.GetComponent<MainUIControl>().worldInfoText.text = worldInfo;
-
-	} // InformationBarUpdate()
-
-
-	/*===================== DisplayText() =====================================================================================*/
-	
-	public void DisplayText(string str)
-	{
-		mainUI.GetComponentInChildren<Text>().text = str;
-	} // DisplayText()
 } // class

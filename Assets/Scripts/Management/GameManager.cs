@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 
 	/*===================== Variables =====================================================================================*/
 
+	public bool gameRunning = false;
+	public float gameSpeed = 1f;
+
 	public char GameDifficulty { get; set;}
 	public bool IsNewGameCreated { get; set;}
 	public bool IsGameLoaded { get; set;}
@@ -118,14 +121,94 @@ public class GameManager : MonoBehaviour
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 			// update game information
-			uiManager.InformationBarUpdate (playerScript, businessScript, "World Info");
+
+			// Update player info
+			uiManager.mainUI.GetComponent<MainUIControl>().PlayerInformationUpdate(playerScript);
+
+			// update business info
+			uiManager.mainUI.GetComponent<MainUIControl>().BusinessInformationUpdate(businessScript);
+
+			// update world info
+			//uiManager.mainUI.GetComponent<MainUIControl>().WorldInformationUpdate(0f, 0f);
 
 		} // if
 
 	} // Update()
 
-	/*===================== SetupGame() =====================================================================================*/
 
+	/*===================== Update() =====================================================================================*/
+
+	void FixedUpdate(){
+
+		// if in Main Scene
+		if (Application.loadedLevelName.Equals ("Main")) {
+
+			if(!gameRunning){
+
+				// runs the business
+				InvokeRepeating("RunBusiness", 0f, gameSpeed);
+				gameRunning = true;
+
+			} // if
+
+		} // if
+
+	} // FixedUpdate()
+
+
+	/*===================== RunBusiness() =====================================================================================*/
+
+	// Manages the running of the business
+	void RunBusiness(){
+
+		float businessProfits = 0f;
+		float businessCosts = 0f;
+		
+		// produceProducts
+		businessScript.ProduceProducts();
+		businessProfits = businessScript.MoneyEarned;
+		
+		// If player can start selling drugs
+		/*	if(gameManager.CanStartSellingDrugs){
+
+				// Sell drugs
+				businessScript.SellDrugs(playerScript);
+
+				// Divide by 2 because the business only gets half while the player gets the other half
+				businessProfits += businessScript.MoneyEarned / 2; 
+			} // if
+			*/
+		
+		// if business can start producing drugs
+		/*	if(gameManager.CanStartMakingDrugs){
+
+				businessScript.MakeDrugs(player);
+				// divided by 2 because the business only gets half while the player gets the other half
+				businessProfits += businessScript.MoneyEarned / 2;
+			} // if
+		*/
+
+		// Pay employees
+		businessScript.PayEmployees ();
+
+		// Gets cost of employee salarys
+		businessCosts = businessScript.TotalEmployeeSalary;
+
+		// Pays building Maintenance
+		businessScript.PayMaintenance ();
+
+		// get cost of building Maintenance
+		businessCosts += businessScript.BuildingMaintenance;
+
+		// Display business Profits and Costs
+		uiManager.mainUI.GetComponent<MainUIControl> ().WorldInformationUpdate (businessProfits, businessCosts);
+
+
+	} // RunBusiness()
+
+
+	/*===================== SetupGame() =====================================================================================*/
+	
 	void SetupGame(){
 
 		// if a new game has been created, setup variables
@@ -179,8 +262,8 @@ public class GameManager : MonoBehaviour
 			break;
 		} // switch
 
-		// Displays New Games info
-
+		// Hire 3 Employees. The default starting number of employees
+		businessScript.HireEmployees (3);
 
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
@@ -228,6 +311,13 @@ public class GameManager : MonoBehaviour
 
 		// Closes escape Menu
 		uiManager.ExitEscapeMenu ();
+
+		// unpauses game
+		if (Time.timeScale == 0f) {
+
+			Time.timeScale = 1f;
+		} // if
+
 	} // ResumeGame()
 
 
