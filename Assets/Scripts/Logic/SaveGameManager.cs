@@ -24,13 +24,15 @@ public class SaveGameManager : MonoBehaviour {
 	
 		// Saving players state to save file
 		data.playerName = GameManager.playerScript.Name;
+		data.playerGender = GameManager.playerScript.Gender;
+		data.playerSalary = GameManager.playerScript.Salary;
+		data.playerBankAccount = GameManager.playerScript.BankAccount;
 		data.playerTrait0 = GameManager.playerScript.Traits[0];
 		data.playerTrait1 = GameManager.playerScript.Traits[1];
 		data.playerTrait2 = GameManager.playerScript.Traits[2];
 		data.playerTrait3 = GameManager.playerScript.Traits[3];
 		data.playerTrait4 = GameManager.playerScript.Traits[4];
-		data.playerBankAccount = GameManager.playerScript.BankAccount;
-		
+
 		// Saving business' state to save file
 		data.businessName = GameManager.businessScript.Name;
 		data.businessBankAccount = GameManager.businessScript.BankAccount;
@@ -47,8 +49,12 @@ public class SaveGameManager : MonoBehaviour {
 		// loops through all employees and gets there details
 		for(int i = 0; i < GameManager.businessScript.Employees.Count; i++) {
 
-			// saves employees names
 			data.employeeNames.Add(GameManager.businessScript.Employees [i].GetComponent<Employee> ().Name);
+			data.employeeGenders.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().Gender);
+			data.employeeBankAccounts.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().BankAccount);
+			data.employeeSalaries.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().Salary);
+			data.employeeIsDealer.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().IsDealer);
+
 		} // for
 		
 		// Saving Game Info
@@ -99,13 +105,15 @@ public class SaveGameManager : MonoBehaviour {
 			
 			try {
 				// Loading players state from save file data
-				GameManager.playerScript.Name = data.playerName;	
+				GameManager.playerScript.Name = data.playerName;
+				GameManager.playerScript.Gender = data.playerGender;
+				GameManager.playerScript.Salary = data.playerSalary;
+				GameManager.playerScript.BankAccount = data.playerBankAccount;
 				GameManager.playerScript.Traits [0] = data.playerTrait0;
 				GameManager.playerScript.Traits [1] = data.playerTrait1;
 				GameManager.playerScript.Traits [2] = data.playerTrait2;
 				GameManager.playerScript.Traits [3] = data.playerTrait3;
 				GameManager.playerScript.Traits [4] = data.playerTrait4;
-				GameManager.playerScript.BankAccount = data.playerBankAccount;
 				
 				// Loading business' state from save file data
 				GameManager.businessScript.Name = data.businessName;
@@ -125,8 +133,11 @@ public class SaveGameManager : MonoBehaviour {
 				// load employees details
 				for (int i = 0; i < data.numberOfEmployees; i++) {
 
-					// load employees name
 					GameManager.businessScript.Employees [i].GetComponent<Employee> ().Name = data.employeeNames [i];
+					GameManager.businessScript.Employees[i].GetComponent<Employee>().Gender = data.employeeGenders[i];
+					GameManager.businessScript.Employees[i].GetComponent<Employee>().BankAccount = data.employeeBankAccounts[i];
+					GameManager.businessScript.Employees[i].GetComponent<Employee>().Salary = data.employeeSalaries[i];
+					GameManager.businessScript.Employees[i].GetComponent<Employee>().IsDealer = data.employeeIsDealer[i];
 
 				} // for
 
@@ -173,12 +184,14 @@ class GameData
 {
 	// For Saving players state to save file
 	public string playerName;
+	public char playerGender;
+	public float playerSalary;
+	public float playerBankAccount;
 	public string playerTrait0;
 	public string playerTrait1;
 	public string playerTrait2;
 	public string playerTrait3;
 	public string playerTrait4;
-	public float playerBankAccount;
 	
 	// For Saving business' state to save file
 	public string businessName;
@@ -193,6 +206,10 @@ class GameData
 	// For Saving Employees (NO of employees and their details)
 	public int numberOfEmployees;
 	public List<string> employeeNames = new List<string> ();
+	public List<char> employeeGenders = new List<char> ();
+	public List<float> employeeBankAccounts = new List<float> ();
+	public List<float> employeeSalaries = new List<float> ();
+	public List<bool> employeeIsDealer = new List<bool> ();
 
 	// For Saving Game Info
 	public char gameDifficulty;

@@ -219,14 +219,19 @@ public class Business : MonoBehaviour
 	{
 		for(int i = 0; i < theAmount; i++)
 		{
+			char gender;
+
 			// instantiate employee
 			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 
 			// make employee a child of Business
 			newEmployee.transform.SetParent(gameObject.transform, false);
 
+			// get gender for employee
+			gender = characterInfoScript.GenerateRandomGender();
+
 			// name the employee
-			newEmployee.GetComponent<Employee>().Name = characterInfoScript.GenerateRandomName(); 
+			newEmployee.GetComponent<Employee>().Name = characterInfoScript.GenerateRandomName(gender); 
 
 			// add employee to employees list
 			Employees.Add(newEmployee);
