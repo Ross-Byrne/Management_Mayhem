@@ -155,7 +155,7 @@ public class Business : MonoBehaviour
 	{
 		float bonus = 0;
 		
-		MoneyEarned = employees.Count * 1000; // business makes 1000 per employee a month
+		MoneyEarned = employees.Count * 20 * 40; // business makes $20 per employee per hour (40 hour week)
 		
 		bonus = ((float)ProductivityBonus / 100); // getting the productivity bonus %
 		
