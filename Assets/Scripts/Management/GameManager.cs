@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 			// update game information
+			uiManager.mainUI.GetComponent<MainUIControl>().InformationBarUpdate(playerScript, businessScript);
 
 			// Update player info
 			uiManager.mainUI.GetComponent<MainUIControl>().PlayerInformationUpdate(playerScript);
@@ -129,7 +130,6 @@ public class GameManager : MonoBehaviour
 			uiManager.mainUI.GetComponent<MainUIControl>().BusinessInformationUpdate(businessScript);
 
 			// update world info
-			//uiManager.mainUI.GetComponent<MainUIControl>().WorldInformationUpdate(0f, 0f);
 
 		} // if
 
@@ -160,13 +160,10 @@ public class GameManager : MonoBehaviour
 
 	// Manages the running of the business
 	void RunBusiness(){
-
-		float businessProfits = 0f;
-		float businessCosts = 0f;
 		
 		// produceProducts
 		businessScript.ProduceProducts();
-		businessProfits = businessScript.MoneyEarned;
+		businessScript.Profits = businessScript.MoneyEarned;
 		
 		// If player can start selling drugs
 		/*	if(gameManager.CanStartSellingDrugs){
@@ -192,17 +189,13 @@ public class GameManager : MonoBehaviour
 		businessScript.PayEmployees ();
 
 		// Gets cost of employee salarys
-		businessCosts = businessScript.TotalEmployeeSalary;
+		businessScript.Costs = businessScript.TotalEmployeeSalary;
 
 		// Pays building Maintenance
 		businessScript.PayMaintenance ();
 
 		// get cost of building Maintenance
-		businessCosts += businessScript.BuildingMaintenance;
-
-		// Display business Profits and Costs
-		uiManager.mainUI.GetComponent<MainUIControl> ().WorldInformationUpdate (businessProfits, businessCosts);
-
+		businessScript.Costs += businessScript.BuildingMaintenance;
 
 	} // RunBusiness()
 

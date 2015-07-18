@@ -14,7 +14,18 @@ public class MainUIControl : MonoBehaviour {
 
 	/*===================== UI Elements =====================================================================================*/
 
-	/*===================== InforBar Text Elements =====================================================================================*/
+	/*===================== Main Info Bar =====================================================================================*/
+
+	// Shown on main game UI
+	public Text playersAccountText;
+	public Text businessAccountText;
+	public Text employeeCountText;
+	public Text profitsText;
+	public Text costsText;
+	public Text worldDateText;
+
+
+	/*===================== Information Windows =====================================================================================*/
 
 	// Player text
 	public Text playerNameText;
@@ -41,12 +52,37 @@ public class MainUIControl : MonoBehaviour {
 	public Text businessEquipUpgradesText;
 
 
-	// World Info Text
-	public Text businessProfitsText;
-	public Text businessCostsText;
-
-
 	/*===================== Methods =====================================================================================*/
+
+	/*===================== InformationBarUpdate() =====================================================================================*/
+
+	public void InformationBarUpdate(Player player, Business business){
+
+		StringBuilder str = new StringBuilder ();
+
+		// Update Game Information
+
+		// Update players bankAccount
+		playersAccountText.text = str.Append("$").Append(player.BankAccount.ToString ("F")).ToString();
+		str.Length = 0; // clear string
+
+		// Update business bankAccount
+		businessAccountText.text = str.Append("$").Append(business.BankAccount.ToString ("F")).ToString();
+		str.Length = 0; // clear string
+
+		// Update business' employee Count
+		employeeCountText.text = business.Employees.Count.ToString();
+
+		// Update business Profits
+		profitsText.text = str.Append ("$").Append (business.Profits.ToString("F")).ToString ();
+		str.Length = 0; // clear string
+
+		// Update business Costs
+		costsText.text = str.Append ("$").Append (business.Costs.ToString("F")).ToString ();
+		str.Length = 0; // clear string
+
+	} // InformationBarUpdate()
+
 	
 	/*===================== PlayerInformationUpdate() =====================================================================================*/
 	
@@ -146,19 +182,8 @@ public class MainUIControl : MonoBehaviour {
 
 	/*===================== WorldInformationUpdate() =====================================================================================*/
 	
-	public void WorldInformationUpdate(float businessProfits, float businessCosts){
+	public void WorldInformationUpdate(){
 	
-		StringBuilder str = new StringBuilder();
-
-		// Update world info
-		
-		// Update profits being made by the business
-		businessProfitsText.text = str.Append("Business Profits: $").Append(businessProfits.ToString("F")).ToString();
-		str.Length = 0; // clear string
-
-		// Update business Costs
-		businessCostsText.text = str.Append("Business Costs: $").Append(businessCosts.ToString("F")).ToString();
-		str.Length = 0; // clear string
 		
 	} // WorldInformationUpdate()
 

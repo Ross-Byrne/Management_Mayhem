@@ -32,6 +32,8 @@ public class Business : MonoBehaviour
 	public int EquipmentUpgrades { get; set;} // + 10% productivity bonus per upgrade
 	private float equipmentUpgradeCost;
 	public float MoneyEarned { get; set;}
+	public float Profits { get; set;}
+	public float Costs { get; set;}
 
 	
 	/*===================== List of Employee GameObjects =====================================================================================*/
