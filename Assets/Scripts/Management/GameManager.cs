@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
 	public bool gameRunning = false;
 	public float gameSpeed = 1f;
+	public float normalSpeed = 10f;
+	public float fastSpeed = 5;
 
 	public char GameDifficulty { get; set;}
 	public bool IsNewGameCreated { get; set;}

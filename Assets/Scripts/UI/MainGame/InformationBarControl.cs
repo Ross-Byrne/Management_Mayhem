@@ -13,6 +13,7 @@ public class InformationBarControl : MonoBehaviour {
 
 	public void WorldTimeControl(Button buttonPressed){
 
+		// if button pressed is pausePlayButton
 		if (buttonPressed.Equals(pausePlayButton)) {
 
 			// if game not paused
@@ -38,6 +39,38 @@ public class InformationBarControl : MonoBehaviour {
 				GameManager.gameManager.PauseGame(false);
 
 			} // if
+		} // if
+
+		// if button pressed is playNormalButton
+		if (buttonPressed.Equals (playNormalButton)) {
+
+			// set game speed to normal
+			GameManager.gameManager.gameSpeed = 10f;
+		
+			// unpause game if game is paused
+			GameManager.gameManager.PauseGame(false);
+
+			// Make pause play button text black
+			pausePlayButton.GetComponentInChildren<Text>().color = Color.black;
+			
+			// Change pause play button text to "Pause"
+			pausePlayButton.GetComponentInChildren<Text>().text = "Pause";
+
+		} // if
+
+		if (buttonPressed.Equals (playFasterButton)) {
+
+			// set game speed to faster
+			GameManager.gameManager.gameSpeed = 5f;
+			
+			// unpause game if game is paused
+			GameManager.gameManager.PauseGame(false);
+
+			// Make pause play button text black
+			pausePlayButton.GetComponentInChildren<Text>().color = Color.black;
+			
+			// Change pause play button text to "Pause"
+			pausePlayButton.GetComponentInChildren<Text>().text = "Pause";
 		} // if
 
 	} // WorldTimeControl()
