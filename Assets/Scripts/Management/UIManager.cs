@@ -208,6 +208,5 @@ public class UIManager : MonoBehaviour
 				break;
 		} // Switch
 	} // DisplayNewGameDetails()
-
-
+	
 } // class
