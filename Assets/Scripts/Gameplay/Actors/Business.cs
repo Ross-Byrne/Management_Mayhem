@@ -82,8 +82,8 @@ public class Business : MonoBehaviour
 	public float TotalEmployeeSalary
 	{
 		// total employee salary is calculated
-		// using employees salary * number of employees * 40 (hours worked in a week)(Just temp)
-		get{ return Employees.Count * Employees[0].GetComponent<Employee>().Salary * 40;}
+		// using employees salary * number of employees * 8 (hours worked in a day)
+		get{ return Employees.Count * Employees[0].GetComponent<Employee>().Salary * 8;}
 		set{ totalEmployeeSalary = value;}
 	}
 	
@@ -137,10 +137,10 @@ public class Business : MonoBehaviour
 	{
 		Name = "";
 		BankAccount = 0f;
-		Reputation = 0; // +25 because of 1000 for maintenance and -25 because salary is 800
+		Reputation = 0; // +25 because of 100 for maintenance and -25 because salary is 800
 		BuildingSize = 3;
 		BuildingUpgradeCost = BuildingSize *1000;
-		BuildingMaintenance = 1000; // medium maintenance level
+		BuildingMaintenance = 100; // medium maintenance level
 		MaxEmployees = 0;
 		EmployeeSalary = 800;
 		BusinessAge = 0;
@@ -157,7 +157,7 @@ public class Business : MonoBehaviour
 	{
 		float bonus = 0;
 		
-		MoneyEarned = employees.Count * 20 * 40; // business makes $20 per employee per hour (40 hour week)
+		MoneyEarned = employees.Count * 20 * 8; // business makes $20 per employee per hour (8 hour day)
 		
 		bonus = ((float)ProductivityBonus / 100); // getting the productivity bonus %
 		
@@ -409,15 +409,15 @@ public class Business : MonoBehaviour
 		{
 			Reputation += 50; // give back 50 rep lost
 		}
-		else if(oldMaintenanceCost == 500)
+		else if(oldMaintenanceCost == 50)
 		{
 			Reputation += 25; // give back 25 rep lost
 		}
-		else if(oldMaintenanceCost == 1000)
+		else if(oldMaintenanceCost == 100)
 		{
 			Reputation -= 25; // take back 25 rep given
 		}
-		else if(oldMaintenanceCost == 1500)
+		else if(oldMaintenanceCost == 150)
 		{
 			Reputation -= 50; // take back 50 rep given
 		} // if
@@ -430,15 +430,15 @@ public class Business : MonoBehaviour
 			Reputation -= 50; // loose 50 rep
 			break;
 		case 2: // low maintenance
-			BuildingMaintenance = 500f; // sets maintenance cost
+			BuildingMaintenance = 50f; // sets maintenance cost
 			Reputation -= 25; // loose 25 rep
 			break;
 		case 3: // medium maintenance
-			BuildingMaintenance = 1000f; // sets maintenance cost
+			BuildingMaintenance = 100f; // sets maintenance cost
 			Reputation += 25; // get 25 rep
 			break;
 		case 4: // high maintenance
-			BuildingMaintenance = 1500f; // sets maintenance cost
+			BuildingMaintenance = 150f; // sets maintenance cost
 			Reputation += 50; // get 50 rep
 			break;
 		} // switch

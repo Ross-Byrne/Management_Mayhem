@@ -130,6 +130,16 @@ public class GameManager : MonoBehaviour
 		// if in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
+			// Run The Game
+			if(!GameRunning){
+				
+				GameRunning = true;
+				
+				// Runs The Business
+				StartCoroutine("RunBusiness");
+				
+			} // if
+
 			// update game information
 			uiManager.mainUI.GetComponent<MainUIControl>().InformationBarUpdate(playerScript, businessScript);
 
@@ -140,31 +150,11 @@ public class GameManager : MonoBehaviour
 			uiManager.mainUI.GetComponent<MainUIControl>().BusinessInformationUpdate(businessScript);
 
 			// update world info
+	
 
 		} // if
 
 	} // Update()
-
-
-	/*===================== Update() =====================================================================================*/
-
-	void FixedUpdate(){
-
-		// if in Main Scene
-		if (Application.loadedLevelName.Equals ("Main")) {
-
-			if(!GameRunning){
-
-				GameRunning = true;
-
-				// runs the business
-				StartCoroutine("RunBusiness");
-
-			} // if
-
-		} // if
-
-	} // FixedUpdate()
 
 
 	/*===================== RunBusiness() =====================================================================================*/

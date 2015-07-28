@@ -6,92 +6,124 @@ public class ManagementMenuControl : MonoBehaviour {
 	/*===================== Menus =====================================================================================*/
 
 	public GameObject managementMenu;
-	public GameObject playerManagementMenu;
-	public GameObject businessManagementMenu;
-	public GameObject worldManagementMenu;
+	public GameObject manageEmployeesMenu;
+	public GameObject businessUpgradesMenu;
+	public GameObject manageOperationsMenu;
+	public GameObject businessFinancesMenu;
 
 
 	/*===================== Methods =====================================================================================*/
 
-	/*===================== PlayerMenuControl =====================================================================================*/
+	/*===================== EmployeeMenuControl() =====================================================================================*/
 
-	public void PlayerMenuControl(){
+	public void EmployeeMenuControl(){
 
 		// if menu is on
-		if (playerManagementMenu.activeSelf) {
+		if (manageEmployeesMenu.activeSelf) {
 
 			// turn off
-			playerManagementMenu.SetActive (false);
+			manageEmployeesMenu.SetActive (false);
 
-			// turn of background menu
+			// turn off background menu
 			managementMenu.SetActive (false);
 		} else {	// if off, turn on
 
 			// make sure even other menu is off
-			businessManagementMenu.SetActive(false);
-			worldManagementMenu.SetActive(false);
+			businessUpgradesMenu.SetActive(false);
+			manageOperationsMenu.SetActive(false);
+			businessFinancesMenu.SetActive (false);
 
 			// turn on background menu
 			managementMenu.SetActive(true);
 
 			// turn on menu
-			playerManagementMenu.SetActive(true);
+			manageEmployeesMenu.SetActive(true);
 		} // if
-	} // PlayerMenuControl()
+	} // EmployeeMenuControl()
 
 
-	/*===================== BusinessMenuControl =====================================================================================*/
+	/*===================== UpgradesMenuControl() =====================================================================================*/
 	
-	public void BusinessMenuControl(){
+	public void UpgradesMenuControl(){
 		
 		// if menu is on
-		if (businessManagementMenu.activeSelf) {
+		if (businessUpgradesMenu.activeSelf) {
 			
 			// turn off
-			businessManagementMenu.SetActive (false);
+			businessUpgradesMenu.SetActive (false);
 			
-			// turn of background menu
+			// turn off background menu
 			managementMenu.SetActive (false);
 		} else {	// if off, turn on
 			
 			// make sure even other menu is off
-			playerManagementMenu.SetActive(false);
-			worldManagementMenu.SetActive(false);
+			manageEmployeesMenu.SetActive(false);
+			manageOperationsMenu.SetActive(false);
+			businessFinancesMenu.SetActive (false);
 			
 			// turn on background menu
 			managementMenu.SetActive(true);
 			
 			// turn on menu
-			businessManagementMenu.SetActive(true);
+			businessUpgradesMenu.SetActive(true);
 		} // if
-	} // BusinessMenuControl()
+	} // UpgradesMenuControl()
 
 
-	/*===================== WorldMenuControl =====================================================================================*/
+	/*===================== OperationsMenuControl() =====================================================================================*/
 	
-	public void WorldMenuControl(){
+	public void OperationsMenuControl(){
 		
 		// if menu is on
-		if (worldManagementMenu.activeSelf) {
+		if (manageOperationsMenu.activeSelf) {
 			
 			// turn off
-			worldManagementMenu.SetActive (false);
+			manageOperationsMenu.SetActive (false);
 			
-			// turn of background menu
+			// turn off background menu
 			managementMenu.SetActive (false);
 		} else {	// if off, turn on
 			
 			// make sure even other menu is off
-			playerManagementMenu.SetActive(false);
-			businessManagementMenu.SetActive(false);
+			manageEmployeesMenu.SetActive(false);
+			businessUpgradesMenu.SetActive(false);
+			businessFinancesMenu.SetActive (false);
 			
 			// turn on background menu
 			managementMenu.SetActive(true);
 			
 			// turn on menu
-			worldManagementMenu.SetActive(true);
+			manageOperationsMenu.SetActive(true);
 		} // if
-	} // WorldMenuControl()
+	} // OperationsMenuControl()
+
+
+	/*===================== FinancesMenuControl() =====================================================================================*/
+	
+	public void FinancesMenuControl(){
+		
+		// if menu is on
+		if (businessFinancesMenu.activeSelf) {
+			
+			// turn off
+			businessFinancesMenu.SetActive (false);
+			
+			// turn off background menu
+			managementMenu.SetActive (false);
+		} else {	// if off, turn on
+			
+			// make sure even other menu is off
+			manageEmployeesMenu.SetActive(false);
+			businessUpgradesMenu.SetActive(false);
+			manageOperationsMenu.SetActive(false);
+
+			// turn on background menu
+			managementMenu.SetActive(true);
+			
+			// turn on menu
+			businessFinancesMenu.SetActive(true);
+		} // if
+	} // FinancesMenuControl()
 
 
 } // class

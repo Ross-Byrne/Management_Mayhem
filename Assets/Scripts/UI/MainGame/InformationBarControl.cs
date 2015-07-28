@@ -3,13 +3,33 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class InformationBarControl : MonoBehaviour {
-
-	// UI Elements
+	
+	/*===================== UI Elements =====================================================================================*/
 
 	public Button pausePlayButton;
 	public Button playNormalButton;
 	public Button playFasterButton;
 
+
+	/*===================== InfoDisplayControl() =====================================================================================*/
+
+	public void InfoDisplayControl(GameObject infoDisplayMenu){
+
+		// if menu is turned on
+		if (infoDisplayMenu.activeSelf) {
+
+			// turn off
+			infoDisplayMenu.SetActive (false);
+		} else { // if menu off
+
+			// turn on
+			infoDisplayMenu.SetActive (true);
+		} // if
+
+	} // InfoDisplayControl()
+
+
+	/*===================== WorldTimeControl() =====================================================================================*/
 
 	public void WorldTimeControl(Button buttonPressed){
 
