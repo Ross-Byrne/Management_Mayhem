@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
 
 	/*===================== Variables =====================================================================================*/
 
-	public bool gameRunning = false;
-	public float gameSpeed = 1f;
-	public float normalSpeed = 10f;
-	public float fastSpeed = 5;
+	public bool GameRunning { get; set;}
+	public float GameSpeed { get; set;}
+	public float NormalGameSpeed { get; set;}
+	public float FastGameSpeed { get; set;}
 
 	public char GameDifficulty { get; set;}
 	public bool IsNewGameCreated { get; set;}
@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
 			// Get reference for script
 			businessScript = business.GetComponent<Business>();
 			playerScript = player.GetComponent<Player>();
+
 		} // if
 
 		// get references for scripts
@@ -89,9 +90,16 @@ public class GameManager : MonoBehaviour
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 
+
 		} // if
 
-
+		// initialise game variables
+		
+		GameRunning = false;
+		NormalGameSpeed = 1.5f;
+		FastGameSpeed = 0.8f;
+		GameSpeed = NormalGameSpeed;
+	
 	} // Awake()
 
 
@@ -145,11 +153,12 @@ public class GameManager : MonoBehaviour
 		// if in Main Scene
 		if (Application.loadedLevelName.Equals ("Main")) {
 
-			if(!gameRunning){
+			if(!GameRunning){
+
+				GameRunning = true;
 
 				// runs the business
-				InvokeRepeating("RunBusiness", 0f, gameSpeed);
-				gameRunning = true;
+				StartCoroutine("RunBusiness");
 
 			} // if
 
@@ -161,14 +170,16 @@ public class GameManager : MonoBehaviour
 	/*===================== RunBusiness() =====================================================================================*/
 
 	// Manages the running of the business
-	void RunBusiness(){
+	IEnumerator RunBusiness(){
+
+		while (GameRunning) {
+
+			// produceProducts
+			businessScript.ProduceProducts ();
+			businessScript.Profits = businessScript.MoneyEarned;
 		
-		// produceProducts
-		businessScript.ProduceProducts();
-		businessScript.Profits = businessScript.MoneyEarned;
-		
-		// If player can start selling drugs
-		/*	if(gameManager.CanStartSellingDrugs){
+			// If player can start selling drugs
+			/*	if(gameManager.CanStartSellingDrugs){
 
 				// Sell drugs
 				businessScript.SellDrugs(playerScript);
@@ -178,8 +189,8 @@ public class GameManager : MonoBehaviour
 			} // if
 			*/
 		
-		// if business can start producing drugs
-		/*	if(gameManager.CanStartMakingDrugs){
+			// if business can start producing drugs
+			/*	if(gameManager.CanStartMakingDrugs){
 
 				businessScript.MakeDrugs(player);
 				// divided by 2 because the business only gets half while the player gets the other half
@@ -187,18 +198,20 @@ public class GameManager : MonoBehaviour
 			} // if
 		*/
 
-		// Pay employees
-		businessScript.PayEmployees ();
+			// Pay employees
+			businessScript.PayEmployees ();
 
-		// Gets cost of employee salarys
-		businessScript.Costs = businessScript.TotalEmployeeSalary;
+			// Gets cost of employee salarys
+			businessScript.Costs = businessScript.TotalEmployeeSalary;
 
-		// Pays building Maintenance
-		businessScript.PayMaintenance ();
+			// Pays building Maintenance
+			businessScript.PayMaintenance ();
 
-		// get cost of building Maintenance
-		businessScript.Costs += businessScript.BuildingMaintenance;
+			// get cost of building Maintenance
+			businessScript.Costs += businessScript.BuildingMaintenance;
 
+			yield return new WaitForSeconds(GameSpeed);
+		} // while
 	} // RunBusiness()
 
 

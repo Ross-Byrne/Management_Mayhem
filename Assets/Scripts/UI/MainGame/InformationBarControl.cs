@@ -45,7 +45,7 @@ public class InformationBarControl : MonoBehaviour {
 		if (buttonPressed.Equals (playNormalButton)) {
 
 			// set game speed to normal
-			GameManager.gameManager.gameSpeed = 10f;
+			GameManager.gameManager.GameSpeed = GameManager.gameManager.NormalGameSpeed;
 		
 			// unpause game if game is paused
 			GameManager.gameManager.PauseGame(false);
@@ -61,7 +61,7 @@ public class InformationBarControl : MonoBehaviour {
 		if (buttonPressed.Equals (playFasterButton)) {
 
 			// set game speed to faster
-			GameManager.gameManager.gameSpeed = 5f;
+			GameManager.gameManager.GameSpeed = GameManager.gameManager.FastGameSpeed;
 			
 			// unpause game if game is paused
 			GameManager.gameManager.PauseGame(false);
