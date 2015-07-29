@@ -46,6 +46,16 @@ public class Business : MonoBehaviour
 	}
 
 
+	/*===================== List of New Available Employee GameObjects =====================================================================================*/
+	
+	private List<GameObject> newAvailableEmployees = new List<GameObject> ();
+	public List<GameObject> NewAvailableEmployees 
+	{
+		get{ return newAvailableEmployees;}
+		set{ newAvailableEmployees = value;}
+	}
+
+
 	/*===================== Get and Set Properties =====================================================================================*/
 
 	/*===================== get/set BuildingUpgradeCost =====================================================================================*/
@@ -234,6 +244,9 @@ public class Business : MonoBehaviour
 
 			// name the employee
 			newEmployee.GetComponent<Employee>().Name = characterInfoScript.GenerateRandomName(gender); 
+
+			// Give Employee Gender
+			newEmployee.GetComponent<Employee>().Gender = gender;
 
 			// add employee to employees list
 			Employees.Add(newEmployee);

@@ -36,6 +36,9 @@ public class ManagementMenuControl : MonoBehaviour {
 			// turn on background menu
 			managementMenu.SetActive(true);
 
+			// Get employee menu ready
+			manageEmployeesMenu.GetComponent<EmployeeManagement>().SetUpMenu();
+
 			// turn on menu
 			manageEmployeesMenu.SetActive(true);
 		} // if

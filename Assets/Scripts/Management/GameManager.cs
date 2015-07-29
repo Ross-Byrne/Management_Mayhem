@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
 		// Instanstiate UIManager 
 		GameObject uiManagerObject = (GameObject)Instantiate (uiManagerPrefab);
 
-		// If in Main Scene
-		if (Application.loadedLevelName.Equals ("Main")) {
+		// If in Main Scene (or MenuMakingTesting Scene, this is for testing)
+		if (Application.loadedLevelName.Equals ("Main") || Application.loadedLevelName.Equals ("MenuMakingTesting")) {
 
 			// Instanstiate Business
 			GameObject business = (GameObject)Instantiate (businessPrefab);

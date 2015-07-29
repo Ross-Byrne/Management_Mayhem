@@ -13,4 +13,10 @@ public class EmployeeInfoCard : MonoBehaviour {
 	public Text employeeGenderText;
 	public Text employeePositionText;
 
+
+	/*===================== Variables =====================================================================================*/
+
+	public int employeeIndex;
+
+
 } // class
