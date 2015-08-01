@@ -290,19 +290,6 @@ public class GameManager : MonoBehaviour
 	} // SetupLoadedGame()
 
 
-	/*===================== WaitForMainUI() =====================================================================================*/
-
-	IEnumerator WaitForMainUI(){
-
-		// To make sure MainUI is set up first
-		do{
-			// Waits one frame
-			yield return null;
-			// loops while mainUI isn't finished being setup
-		}while(!uiManager.IsMainUISetup);
-	} // WaitForMainUI()
-
-
 	/*===================== PauseGame() =====================================================================================*/
 
 	public void PauseGame(bool pause){
