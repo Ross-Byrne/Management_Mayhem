@@ -3,23 +3,28 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class StartMenuUIControl : MonoBehaviour {
-
-	// GameObjects
+	
+	/*===================== GameObjects =====================================================================================*/
 
 	public GameObject characterCreationMenuPrefab;
 	
-	// Menus
+
+	/*===================== Menus =====================================================================================*/
 
 	public GameObject characterCreationMenu;
 
-	// UI Elements
+
+	/*===================== UI Elements =====================================================================================*/
 
 	public Button StartNewGameButton;
 	public Button LoadGameButton;
 	public Button GameInfoButton;
 	public Button ExitGameButton;
 
-	// Methods 
+
+	/*===================== Methods =====================================================================================*/
+
+	/*===================== Start() =====================================================================================*/
 	
 	void Start(){
 	
@@ -42,6 +47,9 @@ public class StartMenuUIControl : MonoBehaviour {
 
 	} // Start()
 
+
+	/*===================== NewGame() =====================================================================================*/
+
 	// Fires when player clicks "StartNewGameButton"
 	public void NewGame(){
 
@@ -55,6 +63,9 @@ public class StartMenuUIControl : MonoBehaviour {
 		characterCreationMenu.GetComponent<CharacterCreationUIControl> ().SetUp ();
 	} // NewGame()
 
+
+	/*===================== LoadGame() =====================================================================================*/
+
 	// Fires when player clicks "LoadGameButton"
 	public void LoadGame(){
 
@@ -62,11 +73,17 @@ public class StartMenuUIControl : MonoBehaviour {
 
 	} // LoadGame()
 
+
+	/*===================== GameInfo() =====================================================================================*/
+
 	// Fires when player clicks "GameInfoButton"
 	public void GameInfo(){
 
 
 	} // GameInfo()
+
+
+	/*===================== ExitGame() =====================================================================================*/
 
 	// Fires when player clicks "ExitGameButton"
 	public void ExitGame(){
@@ -74,7 +91,5 @@ public class StartMenuUIControl : MonoBehaviour {
 		// Exits the game
 		Application.Quit();
 	} // ExitGame()
-
-
-
+	
 } // class

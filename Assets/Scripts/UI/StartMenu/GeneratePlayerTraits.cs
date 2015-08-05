@@ -7,16 +7,18 @@ using UnityEngine.UI;
 
 public class GeneratePlayerTraits : MonoBehaviour {
 
-	// Menus
-
+	/*===================== Menus =====================================================================================*/
+	
 	public GameObject characterCreationMenu;
 	public GameObject selectCharacterTraitsMenu;
 
-	// Scripts
+
+	/*===================== Scripts =====================================================================================*/
 
 	public CharacterInfo characterInfoScript;
 	 
-	// UI Elements
+
+	/*===================== UI Elements =====================================================================================*/
 
 	public Text headingText;
 	public Toggle traitTogglePrefab;
@@ -29,6 +31,9 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		get{ return toggles;}
 		set{ toggles = value;}
 	}
+
+
+	/*===================== Variables =====================================================================================*/
 
 	private float posY;
 	private float posX = 0;
@@ -44,7 +49,10 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		set{ selectedTraits = value;}
 	}
 
-	// Methods
+
+	/*===================== Methods =====================================================================================*/
+
+	/*===================== Awake() =====================================================================================*/
 
 	void Awake(){
 
@@ -52,6 +60,9 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		characterInfoScript = GetComponent<CharacterInfo> ();
 
 	} // Awake()
+
+
+	/*===================== Start() =====================================================================================*/
 	
 	void Start(){
 
@@ -83,6 +94,9 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		characterCreationMenu.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 
 	} // Start()
+
+
+	/*===================== SetUpTraits() =====================================================================================*/
 
 	// Sets up the traits toggles
 	public void SetUpTraits(){
@@ -121,6 +135,9 @@ public class GeneratePlayerTraits : MonoBehaviour {
 
 	} // SetUpTraits()
 
+
+	/*===================== CheckSelected() =====================================================================================*/
+
 	// Fires everytime a toggle is checked/unchecked
 	public void CheckSelected(){
 
@@ -157,6 +174,9 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		} // if
 
 	} // CheckSelected()
+
+
+	/*===================== ResetTraits() =====================================================================================*/
 
 	// resets all of the toggles to off
 	public void ResetTraits(){

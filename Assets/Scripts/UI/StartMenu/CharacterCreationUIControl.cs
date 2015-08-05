@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CharacterCreationUIControl : MonoBehaviour {
 
-	// Menus
+	/*===================== Menus =====================================================================================*/
 
 	public GameObject mainMenu;
 	public GameObject characterNameMenu;
@@ -12,7 +12,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public GameObject setupBusinessMenu;
 	public GameObject selectGameDiffMenu;
 
-	// UI Elements
+
+	/*===================== UI Elements =====================================================================================*/
 
 	public InputField playerNameInput;
 	public InputField businessNameInput;
@@ -23,18 +24,25 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public Toggle normalToggle;
 	public Toggle hardToggle;
 
-	// Variables
+
+	/*===================== Variables =====================================================================================*/
 
 	private char gameDiff;
-	
-	// Methods 
-	
+
+
+	/*===================== Methods =====================================================================================*/
+
+	/*===================== Awake() =====================================================================================*/
+
 	void Awake(){
 
 		// Get reference for menu because it was instantiated 
 		mainMenu = GameObject.FindWithTag("MainMenu");
-	} // Awake
 
+	} // Awake()
+
+
+	/*===================== SetUp() =====================================================================================*/
 
 	// To get the menu Setup. Runs when player goes to visit it
 	public void SetUp(){
@@ -67,6 +75,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	} // SetUp()
 
 
+	/*===================== ValidPlayerName() =====================================================================================*/
+
 	// its run every time the input field changes
 	// to check to make sure it's a valid name
 	public void ValidPlayerName(){
@@ -80,6 +90,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		}// if
 	} // ValidPlayerName()
 
+
+	/*===================== ValidBusinessName() =====================================================================================*/
 
 	// its run every time the input field changes
 	// to check to make sure it's a valid name
@@ -95,6 +107,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	} // ValidBusinessName()
 
 
+	/*===================== SavePlayerName() =====================================================================================*/
+
 	// Saves players name that was entered and moves to next section 
 	public void SavePlayerName(){
 
@@ -107,6 +121,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 	} // SavePlayerName()
 
+
+	/*===================== SavePlayerTraits() =====================================================================================*/
 
 	// Saves players traits selection and moves on to next section
 	public void SavePlayerTraits(){
@@ -127,6 +143,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	} // SavePlayerTraits()
 
 
+	/*===================== SaveBusinessName() =====================================================================================*/
+
 	// Saves the name of the business and moves to next section
 	public void SaveBusinessName(){
 
@@ -139,6 +157,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 	} // SaveBusinessName()
 
+
+	/*===================== ValidGameDiff() =====================================================================================*/
 
 	// fires every time a game Diff toggle is clicked
 	// to make sure a game difficulty is selected
@@ -179,6 +199,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	} // ValidGameDiff()
 
 
+	/*===================== SaveGameDiffAndFinish() =====================================================================================*/
+
 	// Save game difficulty and finishes character creation
 	public void SaveGameDiffAndFinish(){
 
@@ -202,7 +224,9 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 	} // SaveGameDiffAndFinish()
 
-	
+
+	/*===================== Exit() =====================================================================================*/
+
 	// To exit character Creation Menu
 	public void Exit(){
 
