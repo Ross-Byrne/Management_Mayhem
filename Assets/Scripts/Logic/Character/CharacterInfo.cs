@@ -129,8 +129,26 @@ public class CharacterInfo : MonoBehaviour {
 
 	// gives employees a position when creating them.
 	// if rep is at correct level, can hire dealers etc
-	public void GenerateEmployeePosition(int rep){
+	// Returns the position as a string
+	public string GenerateEmployeePosition(int rep){
+		int rndValue;
 
+		if (rep <= -40) {
+
+			// get random position including dealer
+			rndValue = Random.Range (0, EmployeePositions.Length -2); // no including last 2 pos
+		} else  if (rep <= -60) {
+
+			// get random position including drug related ones
+			rndValue = Random.Range (0, EmployeePositions.Length);
+		} else {
+
+			// just good positions
+			rndValue = Random.Range(0, EmployeePositions.Length -3); // not including last 3 bad positions
+		} // if
+
+		// return the position selected
+		return EmployeePositions[rndValue];
 
 	} // GenerateEmployeePosition()
 

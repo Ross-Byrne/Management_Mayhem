@@ -260,8 +260,19 @@ public class GameManager : MonoBehaviour
 			break;
 		} // switch
 
-		// Hire 3 Employees. The default starting number of employees
-		businessScript.HireEmployees (3);
+		// Hire 4 Employees. The default starting number of employees
+
+		// Hire a Manager
+		businessScript.HireEmployees ("Manager");
+
+		// Hire a Engineer
+		businessScript.HireEmployees("Engineer");
+
+		// Hire a Factory Worker
+		businessScript.HireEmployees("Factory Worker");
+
+		// Hire a Office Worker
+		businessScript.HireEmployees("Office Worker");
 
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;

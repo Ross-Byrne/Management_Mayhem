@@ -227,10 +227,10 @@ public class Business : MonoBehaviour {
 
 	/*===================== HireEmployees() =====================================================================================*/
 	
-	public void HireEmployees(int theAmount)
-	{
-		for(int i = 0; i < theAmount; i++)
-		{
+	public void HireEmployees(int theAmount){
+
+		for(int i = 0; i < theAmount; i++){
+
 			char gender;
 
 			// instantiate employee
@@ -248,19 +248,53 @@ public class Business : MonoBehaviour {
 			// Give Employee Gender
 			newEmployee.GetComponent<Employee>().Gender = gender;
 
+			// Give Employee a  work Position
+			newEmployee.GetComponent<Employee>().Position = characterInfoScript.GenerateEmployeePosition(Reputation);
+
 			// add employee to employees list
 			Employees.Add(newEmployee);
 		} // for
 	} // HireEmployees()
 
 
+	/*===================== HireEmployees() =====================================================================================*/
+
+	// Overloaded method to hire a employee for specific position
+	public void HireEmployees(string position){
+	
+		char gender;
+		
+		// instantiate employee
+		GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
+		
+		// make employee a child of Business
+		newEmployee.transform.SetParent(gameObject.transform, false);
+		
+		// get gender for employee
+		gender = characterInfoScript.GenerateRandomGender();
+		
+		// name the employee
+		newEmployee.GetComponent<Employee>().Name = characterInfoScript.GenerateRandomName(gender); 
+		
+		// Give Employee Gender
+		newEmployee.GetComponent<Employee>().Gender = gender;
+		
+		// Give Employee a work Position
+		newEmployee.GetComponent<Employee>().Position = position;
+		
+		// add employee to employees list
+		Employees.Add(newEmployee);
+	
+	} // HireEmployees()
+
+
 	/*===================== LoadEmployees() =====================================================================================*/
 
 	// For loading employees when loading save game
-	public void LoadEmployees(int theAmount)
-	{
-		for(int i = 0; i < theAmount; i++)
-		{
+	public void LoadEmployees(int theAmount){
+
+		for(int i = 0; i < theAmount; i++){
+
 			// instantiate employee
 			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 			
@@ -275,8 +309,8 @@ public class Business : MonoBehaviour {
 
 	/*===================== FireEmployees() =====================================================================================*/
 	
-	public void FireEmployees(int theAmount)
-	{
+	public void FireEmployees(int theAmount){
+
 		int employeeCount = 0;
 
 		// if the amount is = to all employees, clear list

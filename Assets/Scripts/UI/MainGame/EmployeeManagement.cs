@@ -155,7 +155,7 @@ public class EmployeeManagement : MonoBehaviour {
 		// Get the number of employees currently hired
 		numOfEmployees = GameManager.businessScript.Employees.Count;
 
-		// if enough employees for more then one page and current index is not 0
+		// if enough employees for more then one page and current index is not 0 (Not on first page)
 		if (numOfEmployees >= 5 && currentEmployeeIndex != 0) {
 
 			// if less then five, fill as many cards that are needed
@@ -293,7 +293,7 @@ public class EmployeeManagement : MonoBehaviour {
 			} // if
 
 			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeePositionText.text = "";
+			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
 
 			// Activate info card
 			employeeInfoCard1.SetActive(true);
@@ -309,7 +309,7 @@ public class EmployeeManagement : MonoBehaviour {
 			} // if
 			
 			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeePositionText.text = "";
+			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
 
 			// Activate info card
 			employeeInfoCard2.SetActive(true);
@@ -325,7 +325,7 @@ public class EmployeeManagement : MonoBehaviour {
 			} // if
 			
 			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeePositionText.text = "";
+			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
 
 			// Activate info card
 			employeeInfoCard3.SetActive(true);
@@ -341,7 +341,7 @@ public class EmployeeManagement : MonoBehaviour {
 			} // if
 			
 			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeePositionText.text = "";
+			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
 
 			// Activate info card
 			employeeInfoCard4.SetActive(true);
@@ -357,7 +357,7 @@ public class EmployeeManagement : MonoBehaviour {
 			} // if
 			
 			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeePositionText.text = "";
+			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
 
 			// Activate info card
 			employeeInfoCard5.SetActive(true);
