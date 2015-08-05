@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Text;			// to use StringBuilder
 
-public class UIManager : MonoBehaviour 
-{
+public class UIManager : MonoBehaviour {
+
 	/*===================== UIs =====================================================================================*/
 	
 	public Canvas mainCanvas;

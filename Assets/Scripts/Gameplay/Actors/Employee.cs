@@ -29,8 +29,11 @@ public class Employee : Person {
 		set{ salary = value;}
 	}
 
-	private bool isDealer;
-	public bool IsDealer {get; set;}
+	// inherits string position from Person
+	public string Position {
+		get{ return position;}
+		set{ position = value;}
+	}
 
 
 	/*===================== Methods =====================================================================================*/
@@ -42,7 +45,8 @@ public class Employee : Person {
 		Gender = ' ';
 		BankAccount = 500f;
 		Salary = 10f;		// $10/hr
-		IsDealer = false;
+		Position = "Employee";
+
 	} // Awake()
 
 } // class

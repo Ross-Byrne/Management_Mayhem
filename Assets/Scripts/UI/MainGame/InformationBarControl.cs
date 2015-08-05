@@ -94,5 +94,5 @@ public class InformationBarControl : MonoBehaviour {
 		} // if
 
 	} // WorldTimeControl()
-
+ 
 } // class

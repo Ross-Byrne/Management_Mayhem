@@ -7,14 +7,15 @@ using Random = UnityEngine.Random;	// to use random number generater
 
 public class CharacterInfo : MonoBehaviour {
 
-	// Variables
+	/*===================== Variables =====================================================================================*/
 
-	// Pool of selectable player traits
+	/*===================== Pool of selectable player traits =====================================================================================*/
 	
 	private string[] traitsSelection = { 	"People Person", "Marketing Master", "Organiser", "Opportunist", "Charming",
 		"Greedy", "Spiteful", "Alcoholic", "Reckless", "Seedy"};
-	
-	// Pool of random first and last names for employees
+
+
+	/*===================== Pool of random first and last names for employees =====================================================================================*/
 	
 	private string[] randomFemaleFirstName = { "Rachael", "Samantha", "Mary", "Ciara", "Jennifer", "Jane", "Sarah"};
 
@@ -23,7 +24,14 @@ public class CharacterInfo : MonoBehaviour {
 	private string[] randomLastName = { " Power", " Sullivan", " Smith", " McCarthy", " White", " Rodrigue", " Jones",
 		" Browne", " Butler", " Byrne", " Daly", " Kelly", " Harrington", " Jameson"};
 
-	// get and set properties
+
+	/*===================== Pool of Selectable Positions =====================================================================================*/
+
+	private string[] employeePositions = { "Manager", "Engineer", "Lawyer", "Factory Worker", "Office Worker", "Dealer",
+		"Chemist", "Chemical Engineer"};
+
+
+	/*===================== Get and Set Properties =====================================================================================*/
 
 	public string[] TraitsSelection {
 
@@ -47,6 +55,12 @@ public class CharacterInfo : MonoBehaviour {
 
 		get{ return randomLastName;}
 		set{ randomLastName = value;}
+	}
+
+	public string[] EmployeePositions {
+
+		get{ return employeePositions;}
+		set{ employeePositions = value;}
 	}
 
 
@@ -111,5 +125,13 @@ public class CharacterInfo : MonoBehaviour {
 	} // GenerateRandomGender()
 
 
+	/*===================== GenerateEmployeePosition() =====================================================================================*/
+
+	// gives employees a position when creating them.
+	// if rep is at correct level, can hire dealers etc
+	public void GenerateEmployeePosition(int rep){
+
+
+	} // GenerateEmployeePosition()
 
 } // class

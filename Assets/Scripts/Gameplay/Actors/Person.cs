@@ -9,5 +9,6 @@ public abstract class Person : MonoBehaviour {
 	protected char gender;
 	protected float bankAccount;
 	protected float salary; 		// salary is hourly rate
+	protected string position;
 	 
 } // class

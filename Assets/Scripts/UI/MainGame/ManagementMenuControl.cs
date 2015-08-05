@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ManagementMenuControl : MonoBehaviour {
-
+	 
 	/*===================== Menus =====================================================================================*/
 
 	public GameObject managementMenu;

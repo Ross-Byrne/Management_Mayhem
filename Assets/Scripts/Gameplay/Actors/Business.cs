@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic; 	// to use Lists
 using System.Text; 					// to use StringBuilder
 
-public class Business : MonoBehaviour 
-{
+public class Business : MonoBehaviour {
+
 	/*===================== GameObjects =====================================================================================*/
 
 	public GameObject employeePrefab;

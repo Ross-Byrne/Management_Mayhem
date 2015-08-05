@@ -27,6 +27,7 @@ public class SaveGameManager : MonoBehaviour {
 		data.playerGender = GameManager.playerScript.Gender;
 		data.playerSalary = GameManager.playerScript.Salary;
 		data.playerBankAccount = GameManager.playerScript.BankAccount;
+		data.playerPosition = GameManager.playerScript.Position;
 		data.playerTrait0 = GameManager.playerScript.Traits[0];
 		data.playerTrait1 = GameManager.playerScript.Traits[1];
 		data.playerTrait2 = GameManager.playerScript.Traits[2];
@@ -53,7 +54,7 @@ public class SaveGameManager : MonoBehaviour {
 			data.employeeGenders.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().Gender);
 			data.employeeBankAccounts.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().BankAccount);
 			data.employeeSalaries.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().Salary);
-			data.employeeIsDealer.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().IsDealer);
+			data.employeePosition.Add(GameManager.businessScript.Employees[i].GetComponent<Employee>().Position);
 
 		} // for
 		
@@ -109,6 +110,7 @@ public class SaveGameManager : MonoBehaviour {
 				GameManager.playerScript.Gender = data.playerGender;
 				GameManager.playerScript.Salary = data.playerSalary;
 				GameManager.playerScript.BankAccount = data.playerBankAccount;
+				GameManager.playerScript.Position = data.playerPosition;
 				GameManager.playerScript.Traits [0] = data.playerTrait0;
 				GameManager.playerScript.Traits [1] = data.playerTrait1;
 				GameManager.playerScript.Traits [2] = data.playerTrait2;
@@ -137,7 +139,7 @@ public class SaveGameManager : MonoBehaviour {
 					GameManager.businessScript.Employees[i].GetComponent<Employee>().Gender = data.employeeGenders[i];
 					GameManager.businessScript.Employees[i].GetComponent<Employee>().BankAccount = data.employeeBankAccounts[i];
 					GameManager.businessScript.Employees[i].GetComponent<Employee>().Salary = data.employeeSalaries[i];
-					GameManager.businessScript.Employees[i].GetComponent<Employee>().IsDealer = data.employeeIsDealer[i];
+					GameManager.businessScript.Employees[i].GetComponent<Employee>().Position = data.employeePosition[i];
 
 				} // for
 
@@ -187,6 +189,7 @@ class GameData
 	public char playerGender;
 	public float playerSalary;
 	public float playerBankAccount;
+	public string playerPosition;
 	public string playerTrait0;
 	public string playerTrait1;
 	public string playerTrait2;
@@ -209,7 +212,7 @@ class GameData
 	public List<char> employeeGenders = new List<char> ();
 	public List<float> employeeBankAccounts = new List<float> ();
 	public List<float> employeeSalaries = new List<float> ();
-	public List<bool> employeeIsDealer = new List<bool> ();
+	public List<string> employeePosition = new List<string> ();
 
 	// For Saving Game Info
 	public char gameDifficulty;

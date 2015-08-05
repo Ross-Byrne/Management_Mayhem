@@ -17,6 +17,6 @@ public class EmployeeInfoCard : MonoBehaviour {
 	/*===================== Variables =====================================================================================*/
 
 	public int employeeIndex;
-
+	
 
 } // class

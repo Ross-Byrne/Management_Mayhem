@@ -30,6 +30,12 @@ public class Player : Person {
 		set{ salary = value;}
 	}
 
+	// inherits string position from Person
+	public string Position {
+		get{ return position;}
+		set{ position = value;}
+	}
+
 	private string[] traits = new string[5]; // string array to store 5 player traits
 	public string[] Traits {
 
@@ -49,6 +55,7 @@ public class Player : Person {
 		Gender = ' ';
 		BankAccount = 1000f;
 		Salary = 10f;			// $10/hr
+		Position = "Owner";
 
 	} // Awake()
 

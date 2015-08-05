@@ -13,6 +13,5 @@ public class CloseUpEmployeeInfo : MonoBehaviour {
 	public Text employeeGenderText;
 	public Text employeePositionText;
 	public Text employeeSalaryText;
-
-
+	
 } // class
