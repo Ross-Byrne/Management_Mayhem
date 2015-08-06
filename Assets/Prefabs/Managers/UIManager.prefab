@@ -94,7 +94,7 @@ MonoBehaviour:
     type: 2}
   mainMenu: {fileID: 0}
   characterCreationMenu: {fileID: 0}
-  mainUIPrefab: {fileID: 190506, guid: a059c51266161dd469628dea5a568fb3, type: 2}
+  mainUIPrefab: {fileID: 138902, guid: c30ade5cae323e84695de5793c5b3a68, type: 2}
   mainUI: {fileID: 0}
   escapeMenuPrefab: {fileID: 165830, guid: 86cec18339637b94e94e1239b8f1b303, type: 2}
   escapeMenu: {fileID: 0}
@@ -224,7 +224,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mainUIPrefab
       value: 
-      objectReference: {fileID: 190506, guid: a059c51266161dd469628dea5a568fb3, type: 2}
+      objectReference: {fileID: 138902, guid: c30ade5cae323e84695de5793c5b3a68, type: 2}
     - target: {fileID: 0}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -241,6 +241,10 @@ Prefab:
       propertyPath: escapeMenuPrefab
       value: 
       objectReference: {fileID: 165830, guid: 86cec18339637b94e94e1239b8f1b303, type: 2}
+    - target: {fileID: 0}
+      propertyPath: mainUI
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119308}

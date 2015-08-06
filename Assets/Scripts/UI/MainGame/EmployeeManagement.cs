@@ -283,6 +283,7 @@ public class EmployeeManagement : MonoBehaviour {
 
 		switch (number) {
 		case 1:
+			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
 			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
 
@@ -299,6 +300,7 @@ public class EmployeeManagement : MonoBehaviour {
 			employeeInfoCard1.SetActive(true);
 			break;
 		case 2: 
+			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
 			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
 			
@@ -315,6 +317,7 @@ public class EmployeeManagement : MonoBehaviour {
 			employeeInfoCard2.SetActive(true);
 			break;
 		case 3:
+			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
 			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
 			
@@ -331,6 +334,7 @@ public class EmployeeManagement : MonoBehaviour {
 			employeeInfoCard3.SetActive(true);
 			break;
 		case 4:
+			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
 			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
 			
@@ -347,6 +351,7 @@ public class EmployeeManagement : MonoBehaviour {
 			employeeInfoCard4.SetActive(true);
 			break;
 		case 5:
+			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
 			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
 			
@@ -389,5 +394,25 @@ public class EmployeeManagement : MonoBehaviour {
 		str.Length = 0;
 
 	} // UpdateEmployeeCountText()
+
+
+	/*===================== EmployeeSelected() =====================================================================================*/
+
+	// Fires when an employee infocard is selected
+	public void EmployeeSelected(GameObject employeeSelected){
+
+		// update close up employee info
+		employeeInfo.GetComponent<CloseUpEmployeeInfo> ().UpdateEmployeeCloseUp (employeeSelected.GetComponent<EmployeeInfoCard>().employee);
+
+		// activate employeeInfo
+		employeeInfo.SetActive (true);
+
+		// active hire/fireButton
+		hireFireButton.SetActive (true);
+
+		// update hire/firebutton
+		hireFireButton.GetComponentInChildren<Text> ().text = "Fire";
+
+	} // EmployeeSelected()
 
 } // class
