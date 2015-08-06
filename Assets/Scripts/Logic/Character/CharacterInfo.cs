@@ -133,11 +133,11 @@ public class CharacterInfo : MonoBehaviour {
 	public string GenerateEmployeePosition(int rep){
 		int rndValue;
 
-		if (rep <= -40) {
+		if (rep <= -20) {
 
 			// get random position including dealer
 			rndValue = Random.Range (0, EmployeePositions.Length -2); // no including last 2 pos
-		} else  if (rep <= -60) {
+		} else  if (rep <= -30) {
 
 			// get random position including drug related ones
 			rndValue = Random.Range (0, EmployeePositions.Length);

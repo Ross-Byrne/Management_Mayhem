@@ -37,7 +37,7 @@ public class Business : MonoBehaviour {
 
 	
 	/*===================== List of Employee GameObjects =====================================================================================*/
-
+	[SerializeField]
 	private List<GameObject> employees = new List<GameObject> ();
 	public List<GameObject> Employees 
 	{
@@ -47,7 +47,7 @@ public class Business : MonoBehaviour {
 
 
 	/*===================== List of New Available Employee GameObjects =====================================================================================*/
-	
+	[SerializeField]
 	private List<GameObject> newAvailableEmployees = new List<GameObject> ();
 	public List<GameObject> NewAvailableEmployees 
 	{
@@ -60,19 +60,32 @@ public class Business : MonoBehaviour {
 
 	/*===================== get/set BuildingUpgradeCost =====================================================================================*/
 
-	public float BuildingUpgradeCost 
-	{
-		get{ return BuildingSize * 1000;}
+	public float BuildingUpgradeCost {
+
+		get{ 
+			buildingUpgradeCost = 0;
+
+			// the cost of every room upgrade is 1000 more then the last
+			buildingUpgradeCost = BuildingSize * 1000;
+
+			return buildingUpgradeCost;
+		}
 		set{ buildingUpgradeCost = value;}
 	}
 	
 	/*===================== get/set MaxEmployees =====================================================================================*/
 
-	public int MaxEmployees
-	{
-		// maximum number of employees business can have
-		// is 5 employees per room
-		get{ return BuildingSize * 5;}
+	public int MaxEmployees{
+
+		get{ 
+			maxEmployees = 0;
+
+			// maximum number of employees business can have
+			// is 5 employees per room
+			maxEmployees = BuildingSize * 5;
+
+			return maxEmployees;
+		}
 		set{ maxEmployees = value;}
 	}
 
@@ -89,39 +102,64 @@ public class Business : MonoBehaviour {
 	 
 	/*===================== get/set TotalEmployeeSalary =====================================================================================*/
 
-	public float TotalEmployeeSalary
-	{
+	public float TotalEmployeeSalary {
+
 		// total employee salary is calculated
-		// using employees salary * number of employees * 8 (hours worked in a day)
-		get{ return Employees.Count * Employees[0].GetComponent<Employee>().Salary * 8;}
+		// using employees salary * 8 (hours worked in a day)
+		get{ 
+			totalEmployeeSalary = 0;
+
+			// if there are employees
+			if (Employees.Count != 0) {
+
+				// Loop through all employees and calculate salary
+				for(int i = 0; i < Employees.Count; i++){
+
+					// sum all employees salaries for one day
+				 	totalEmployeeSalary += Employees [i].GetComponent<Employee> ().Salary * 8;
+				} // for
+
+				return totalEmployeeSalary;
+			} // if
+
+			// otherwise return 0
+			return 0;
+		}
 		set{ totalEmployeeSalary = value;}
 	}
 	
 	/*===================== get/set ProductivityBonus =====================================================================================*/
 
-	public int ProductivityBonus
-	{
+	public int ProductivityBonus{
+
 		get{
-			int bonus = 0;
+			productivityBonus = 0;
 
 			// adds 1% + or - bonus for each 5 rep, per employee
-			bonus += employees.Count * (Reputation / 5); 
+			productivityBonus += employees.Count * (Reputation / 5); 
 
 			// Adds 10% bonus for each equipment upgrade
-			bonus += (EquipmentUpgrades * 10); 
+			productivityBonus += (EquipmentUpgrades * 10); 
 			
-			return bonus;
+			return productivityBonus;
 		}
 		set{ productivityBonus = value;}
 	}
 	
 	/*===================== get/set EquipmentUpgradeCost =====================================================================================*/
 
-	public float EquipmentUpgradeCost
-	{
+	public float EquipmentUpgradeCost{
+
 		// the equipment upgrades +1 is to get the cost of next upgrade
 		// not the cost of the current upgrade number
-		get{return (EquipmentUpgrades + 1) * 20000;} // each upgrade costs 20000 more then the last
+		get{
+			equipmentUpgradeCost = 0;
+
+			// each upgrade costs 20000 more then the last
+			equipmentUpgradeCost = (EquipmentUpgrades + 1) * 20000;
+
+			return equipmentUpgradeCost;
+		} 
 		set{ equipmentUpgradeCost = value;}
 	}
 
@@ -166,14 +204,18 @@ public class Business : MonoBehaviour {
 	public void ProduceProducts()
 	{
 		float bonus = 0;
+
+		// if there are employees to actually work
+		if (Employees.Count != 0) {
+
+			MoneyEarned = employees.Count * 20 * 8; // business makes $20 per employee per hour (8 hour day)
 		
-		MoneyEarned = employees.Count * 20 * 8; // business makes $20 per employee per hour (8 hour day)
+			bonus = ((float)ProductivityBonus / 100); // getting the productivity bonus %
 		
-		bonus = ((float)ProductivityBonus / 100); // getting the productivity bonus %
+			MoneyEarned = MoneyEarned + (MoneyEarned * bonus); // Adding the productivity bonus on to money earned
 		
-		MoneyEarned = MoneyEarned + (MoneyEarned * bonus); // Adding the productivity bonus on to money earned
-		
-		BankAccount += MoneyEarned; // adds money earned into bank account
+			BankAccount += MoneyEarned; // adds money earned into bank account
+		} // if
 	} // ProduceProducts()
 
 
@@ -202,16 +244,26 @@ public class Business : MonoBehaviour {
 	/*===================== PayEmployees() =====================================================================================*/
 	
 	// pays employees for the month
-	public void PayEmployees()
-	{
-		if(TotalEmployeeSalary > BankAccount)
+	public void PayEmployees(){
+
+		float totalSal = 0;
+
+		// get copy of total sal (otherwise a for loop will run everytime TotalEmployeeSalary is called)
+		totalSal = TotalEmployeeSalary;
+
+		if(totalSal > BankAccount)
 		{
 			// flag business as not able to pay salary without going into debt
 			Debug.Log("Cannot Afford Employees Salary Without Entering Debt!");
 			return;
-		}
-		// takes the total salary out of the business bank account
-		BankAccount -= TotalEmployeeSalary;
+		} // if
+
+		// if there is a salary to pay
+		if (totalSal > 0) {
+
+			// takes the total salary out of the business bank account
+			BankAccount -= totalSal;
+		} // if
 	} // PayEmployees()
 
 
@@ -307,6 +359,19 @@ public class Business : MonoBehaviour {
 	} // LoadEmployees()
 
 
+	/*===================== FireEmployee() =====================================================================================*/
+	
+	public void FireEmployee(GameObject employee){
+
+		// Destroy the employee Object that is selected
+		Destroy (employee);
+
+		// Remove it from the list of employees
+		Employees.Remove (employee);
+	
+	} // FireEmployee()
+
+
 	/*===================== FireEmployees() =====================================================================================*/
 	
 	public void FireEmployees(int theAmount){
@@ -371,60 +436,7 @@ public class Business : MonoBehaviour {
 		
 		return employeeNames.ToString ();
 	} // PrintListOfEmployees()
-
-
-	/*===================== HireDealers() =====================================================================================*/
 	
-	/*public void HireDealers(GameManager gameManager, int theAmount)
-	{
-		Random rnd = new Random();
-		int rndValue=0;
-		String tempName="";
-		
-		for(int i = 0; i < theAmount; i++)
-		{
-			Employee dealer = new Dealer(); // create dealer - Polymorphism
-			
-			rndValue = rnd.nextInt(14); // get a random value 
-			tempName = gameManager.getRandomFName(rndValue); // use value to get random first name
-			
-			rndValue = rnd.nextInt(14); // get another random value
-			tempName += gameManager.getRandomLName(rndValue); // choose a random last name and add it on to the first name
-			
-			dealer.setName(tempName); // name the employee
-			dealers.add(dealer); // add dealer to dealers list
-		} // for
-	} // HireDealers()*/
-
-
-	/*===================== FireDealers() =====================================================================================*/
-	
-	/*	public void FireDealers(GameManager gameManager, int theAmount)
-	{
-		if(theAmount == dealers.size()) // if the amount is = to all dealers, clear list
-		{
-			dealers.clear();
-		}
-		else // remove the number entered
-		{
-			while(theAmount > 0)
-				dealers.remove(theAmount--);
-		} // if else
-	} // FireDealers()*/
-
-
-	/*===================== PrintListOfDealers() =====================================================================================*/
-	
-	/*public void PrintListOfDealers()
-	{
-		String tempNames = "";
-		
-		for(int i = 0; i < dealers.size(); i++)
-			tempNames += "\n\t" + dealers.get(i);
-		
-		System.out.println("Dealers: " + tempNames);
-	} // PrintListOfDealers()*/
-
 
 	/*===================== PayMaintenance() =====================================================================================*/
 	

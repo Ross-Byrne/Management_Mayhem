@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Text;
+using UnityEngine.EventSystems;
 
 public class EmployeeManagement : MonoBehaviour {
  
@@ -12,6 +13,7 @@ public class EmployeeManagement : MonoBehaviour {
 	public Text employeeInfoText;
 	public Text dealerInfoText;
 	public Text listOfEmployeesText;
+	public Text hireFireButtonText;
 	
 	// Buttons
 
@@ -35,6 +37,9 @@ public class EmployeeManagement : MonoBehaviour {
 
 	public GameObject employeeInfo;
 	public GameObject hireFireButton;
+
+	// the currently selected employee
+	private GameObject selectedEmployee;
 
 
 	/*===================== Variables =====================================================================================*/
@@ -152,6 +157,10 @@ public class EmployeeManagement : MonoBehaviour {
 		employeeInfoCard4.SetActive (false);
 		employeeInfoCard5.SetActive (false);
 
+		// turn of close up info
+		employeeInfo.SetActive (false);
+		hireFireButton.SetActive (false);
+
 		// Get the number of employees currently hired
 		numOfEmployees = GameManager.businessScript.Employees.Count;
 
@@ -172,7 +181,7 @@ public class EmployeeManagement : MonoBehaviour {
 					currentEmployeeIndex++;
 
 					// update info cards
-					UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex].GetComponent<Employee>());
+					UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex]);
 
 					// save num of employees on page
 					numOfEmployeesOnPage++;
@@ -181,9 +190,7 @@ public class EmployeeManagement : MonoBehaviour {
 			
 			// if there are five or more, just fill another five cards
 			if((numOfEmployees-1) - currentEmployeeIndex >= 5){
-				int temp = 0;
 
-				temp = currentEmployeeIndex;
 				// fill all 5 info cards
 				for(int i = 0; i < 5; i++){
 					
@@ -191,7 +198,7 @@ public class EmployeeManagement : MonoBehaviour {
 					currentEmployeeIndex++;
 					
 					// update info cards
-					UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex].GetComponent<Employee>());
+					UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex]);
 				} // for
 
 				// save num of employees on page
@@ -207,7 +214,7 @@ public class EmployeeManagement : MonoBehaviour {
 			for(int i = 0; i < 5; i++){
 
 				// update info cards
-				UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i].GetComponent<Employee>());
+				UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i]);
 
 				// Save current employee index
 				currentEmployeeIndex = i;
@@ -225,7 +232,7 @@ public class EmployeeManagement : MonoBehaviour {
 			for(int i = 0; i < numOfEmployees; i++){
 
 				// update info cards
-				UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i].GetComponent<Employee>());
+				UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i]);
 
 				// Save current employee index
 				currentEmployeeIndex = i;
@@ -256,6 +263,13 @@ public class EmployeeManagement : MonoBehaviour {
 			backButton.interactable = false;
 		} // if
 
+		// if there is at least One employee
+		if (numOfEmployees != 0) {
+
+			// select the first employee in displayed list
+			EmployeeSelected(employeeInfoCard1);
+		} // if
+
 	} // DisplayListOfEmployees()
 
 
@@ -270,6 +284,10 @@ public class EmployeeManagement : MonoBehaviour {
 		employeeInfoCard3.SetActive (false);
 		employeeInfoCard4.SetActive (false);
 		employeeInfoCard5.SetActive (false);
+
+		// turn of close up info
+		employeeInfo.SetActive (false);
+		hireFireButton.SetActive (false);
 		
 	} // DisplayListOfNewApps()
 
@@ -277,24 +295,25 @@ public class EmployeeManagement : MonoBehaviour {
 	/*===================== UpdateEmployeeInfoCard() =====================================================================================*/
 
 	// takes number 1-5, the index the employee is at and updates that card will given employee details 
-	void UpdateEmployeeInfoCard(int number, int employeeIndex, Employee employee){
+	void UpdateEmployeeInfoCard(int number, int employeeIndex, GameObject employee){
 
 		string gender = " ";
+		Employee employeeScript = employee.GetComponent<Employee> ();
 
 		switch (number) {
 		case 1:
 			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
-			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
+			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeNameText.text = employeeScript.Name;
 
-			if(employee.Gender == 'M'){
+			if(employeeScript.Gender == 'M'){
 				gender = "Male";
-			} else if(employee.Gender == 'F') {
+			} else if(employeeScript.Gender == 'F') {
 				gender = "Female";
 			} // if
 
 			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
+			employeeInfoCard1.GetComponent<EmployeeInfoCard>().employeePositionText.text = employeeScript.Position;
 
 			// Activate info card
 			employeeInfoCard1.SetActive(true);
@@ -302,16 +321,16 @@ public class EmployeeManagement : MonoBehaviour {
 		case 2: 
 			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
-			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
+			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeNameText.text = employeeScript.Name;
 			
-			if(employee.Gender == 'M'){
+			if(employeeScript.Gender == 'M'){
 				gender = "Male";
-			} else if(employee.Gender == 'F'){
+			} else if(employeeScript.Gender == 'F'){
 				gender = "Female";
 			} // if
 			
 			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
+			employeeInfoCard2.GetComponent<EmployeeInfoCard>().employeePositionText.text = employeeScript.Position;
 
 			// Activate info card
 			employeeInfoCard2.SetActive(true);
@@ -319,16 +338,16 @@ public class EmployeeManagement : MonoBehaviour {
 		case 3:
 			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
-			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
+			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeNameText.text = employeeScript.Name;
 			
-			if(employee.Gender == 'M'){
+			if(employeeScript.Gender == 'M'){
 				gender = "Male";
-			} else if(employee.Gender == 'F'){
+			} else if(employeeScript.Gender == 'F'){
 				gender = "Female";
 			} // if
 			
 			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
+			employeeInfoCard3.GetComponent<EmployeeInfoCard>().employeePositionText.text = employeeScript.Position;
 
 			// Activate info card
 			employeeInfoCard3.SetActive(true);
@@ -336,16 +355,16 @@ public class EmployeeManagement : MonoBehaviour {
 		case 4:
 			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
-			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
+			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeNameText.text = employeeScript.Name;
 			
-			if(employee.Gender == 'M'){
+			if(employeeScript.Gender == 'M'){
 				gender = "Male";
-			} else if(employee.Gender == 'F') {
+			} else if(employeeScript.Gender == 'F') {
 				gender = "Female";
 			} // if
 			
 			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
+			employeeInfoCard4.GetComponent<EmployeeInfoCard>().employeePositionText.text = employeeScript.Position;
 
 			// Activate info card
 			employeeInfoCard4.SetActive(true);
@@ -353,16 +372,16 @@ public class EmployeeManagement : MonoBehaviour {
 		case 5:
 			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employee = employee;
 			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeIndex = employeeIndex;
-			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeNameText.text = employee.Name;
+			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeNameText.text = employeeScript.Name;
 			
-			if(employee.Gender == 'M'){
+			if(employeeScript.Gender == 'M'){
 				gender = "Male";
-			} else if(employee.Gender == 'F') {
+			} else if(employeeScript.Gender == 'F') {
 				gender = "Female";
 			} // if
 			
 			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeeGenderText.text = gender;
-			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeePositionText.text = employee.Position;
+			employeeInfoCard5.GetComponent<EmployeeInfoCard>().employeePositionText.text = employeeScript.Position;
 
 			// Activate info card
 			employeeInfoCard5.SetActive(true);
@@ -402,17 +421,38 @@ public class EmployeeManagement : MonoBehaviour {
 	public void EmployeeSelected(GameObject employeeSelected){
 
 		// update close up employee info
-		employeeInfo.GetComponent<CloseUpEmployeeInfo> ().UpdateEmployeeCloseUp (employeeSelected.GetComponent<EmployeeInfoCard>().employee);
+		employeeInfo.GetComponent<CloseUpEmployeeInfo> ().UpdateEmployeeCloseUp (employeeSelected.GetComponent<EmployeeInfoCard>().employee.GetComponent<Employee>());
 
 		// activate employeeInfo
 		employeeInfo.SetActive (true);
 
+		// update hire/firebutton
+		hireFireButtonText.text = "Fire";
+
 		// active hire/fireButton
 		hireFireButton.SetActive (true);
 
-		// update hire/firebutton
-		hireFireButton.GetComponentInChildren<Text> ().text = "Fire";
+		// save the current employee object that is selected
+		selectedEmployee = employeeSelected.GetComponent<EmployeeInfoCard> ().employee;
 
 	} // EmployeeSelected()
+
+
+	/*===================== FireSelectedEmployee() =====================================================================================*/
+	
+	// Fires when Fire button is pressed on employeeCloseUp
+	public void FireSelectedEmployee(){
+		
+		// make sure an employee is actually selected
+		if (selectedEmployee != null) {
+
+			// Fire Selected Employee
+			GameManager.businessScript.FireEmployee (selectedEmployee);
+		} // if
+
+		// Refresh list of employees by loading it again
+		DisplayListOfEmployees ();
+
+	} // FireSelectedEmployee()
 
 } // class

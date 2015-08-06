@@ -16,7 +16,7 @@ public class EmployeeInfoCard : MonoBehaviour {
 
 	/*===================== Variables =====================================================================================*/
 
-	public Employee employee;
+	public GameObject employee;
 	public int employeeIndex;
 
 } // class

@@ -23,24 +23,24 @@ public class CloseUpEmployeeInfo : MonoBehaviour {
 	public void UpdateEmployeeCloseUp(Employee selectedEmployee){
 
 		// display the employees Name
-		employeeNameText.text = selectedEmployee.Name;
+		employeeNameText.text = string.Format("Name: {0}.", selectedEmployee.Name);
 
 		// display the employees gender
 		if(selectedEmployee.Gender == 'M'){
 
 			// display gender
-			employeeGenderText.text = "Male";
+			employeeGenderText.text = "Gender: Male.";
 		} else if(selectedEmployee.Gender == 'F'){
 
 			// display gender
-			employeeGenderText.text = "Female";
+			employeeGenderText.text = "Gender: Female.";
 		} // if
 
 		// display the employees position
-		employeePositionText.text = selectedEmployee.Position;
+		employeePositionText.text = string.Format("Position: {0}.", selectedEmployee.Position);
 
 		// display the employees salary
-		employeeSalaryText.text = selectedEmployee.Salary.ToString("F");
+		employeeSalaryText.text = string.Format("Current Salary For Position: ${0} Per Hour.",selectedEmployee.Salary.ToString("F"));
 		
 	} // UpdateEmployeeCloseUp()
 	
