@@ -277,9 +277,10 @@ public class Business : MonoBehaviour {
 	} // PayEmployeesAnyway()
 
 
-	/*===================== HireEmployees() =====================================================================================*/
-	
-	public void HireEmployees(int theAmount){
+	/*===================== GenerateEmployeeApplicants() =====================================================================================*/
+
+	// Creates employees that the player can choose to hire
+	public void GenerateEmployeeApplicants(int theAmount){
 
 		for(int i = 0; i < theAmount; i++){
 
@@ -303,16 +304,29 @@ public class Business : MonoBehaviour {
 			// Give Employee a  work Position
 			newEmployee.GetComponent<Employee>().Position = characterInfoScript.GenerateEmployeePosition(Reputation);
 
-			// add employee to employees list
-			Employees.Add(newEmployee);
+			// add employee to NewAvailableEmployees list
+			NewAvailableEmployees.Add(newEmployee);
 		} // for
-	} // HireEmployees()
+	} // GenerateEmployeeApplicants()
 
 
-	/*===================== HireEmployees() =====================================================================================*/
+	/*===================== HireEmployee() =====================================================================================*/
+	
+	// Hire an employee that is selected
+	public void HireEmployee(GameObject employee){
+		
+		// Remove employee from the list of new applicants
+		NewAvailableEmployees.Remove (employee);
 
-	// Overloaded method to hire a employee for specific position
-	public void HireEmployees(string position){
+		// Add employee to the list of hired employees
+		Employees.Add (employee);
+		
+	} // HireEmployee()
+
+	/*===================== HireEmployee() =====================================================================================*/
+
+	// Overloaded Method to Hire an employee for specific position
+	public void HireEmployee(string position){
 	
 		char gender;
 		
@@ -337,7 +351,7 @@ public class Business : MonoBehaviour {
 		// add employee to employees list
 		Employees.Add(newEmployee);
 	
-	} // HireEmployees()
+	} // HireEmployee()
 
 
 	/*===================== LoadEmployees() =====================================================================================*/
@@ -372,39 +386,6 @@ public class Business : MonoBehaviour {
 	} // FireEmployee()
 
 
-	/*===================== FireEmployees() =====================================================================================*/
-	
-	public void FireEmployees(int theAmount){
-
-		int employeeCount = 0;
-
-		// if the amount is = to all employees, clear list
-		if(theAmount >= employees.Count) {
-
-			// fires all employees
-			FireAllEmployees();
-		} else {
-
-			// removes the number entered, starting at the back of the list (better performance on list)  
-			while(theAmount > 0){
-
-				// gets number of employees
-				employeeCount = Employees.Count;
-		
-				// destroys employee gameobject
-				Destroy(Employees[employeeCount-1]);
-
-				// removes destroyed employee from list
-				Employees.Remove(Employees[employeeCount-1]);
-
-				// decrement
-				theAmount--;
-			} // while
-
-		} // if else
-	} // FireEmployees()
-
-
 	/*===================== FireAllEmployees() =====================================================================================*/
 
 	// fires all employees
@@ -420,6 +401,19 @@ public class Business : MonoBehaviour {
 			Employees.Remove (Employees [i-1]);
 		} // for
 	} // FireAllEmployees()
+
+
+	/*===================== RemoveEmployeeApplicant() =====================================================================================*/
+	
+	public void RemoveEmployeeApplicant(GameObject employee){
+		
+		// Destroy the employee Object that is selected
+		Destroy (employee);
+		
+		// Remove it from the list of employeeApplicants
+		NewAvailableEmployees.Remove (employee);
+		
+	} // RemoveEmployeeApplicant()
 
 
 	/*===================== PrintListOfEmployees() =====================================================================================*/

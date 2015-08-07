@@ -263,16 +263,19 @@ public class GameManager : MonoBehaviour
 		// Hire 4 Employees. The default starting number of employees
 
 		// Hire a Manager
-		businessScript.HireEmployees ("Manager");
+		businessScript.HireEmployee ("Manager");
 
 		// Hire a Engineer
-		businessScript.HireEmployees("Engineer");
+		businessScript.HireEmployee("Engineer");
 
 		// Hire a Factory Worker
-		businessScript.HireEmployees("Factory Worker");
+		businessScript.HireEmployee("Factory Worker");
 
 		// Hire a Office Worker
-		businessScript.HireEmployees("Office Worker");
+		businessScript.HireEmployee("Office Worker");
+
+		// Generate a list of employees that are applying for a job
+		businessScript.GenerateEmployeeApplicants (10);
 
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
@@ -297,6 +300,9 @@ public class GameManager : MonoBehaviour
 
 			Debug.Log ("Game Not Loaded");
 		} // if
+
+		// Generate a list of employees that are applying for a job
+		businessScript.GenerateEmployeeApplicants (10);
 
 	} // SetupLoadedGame()
 

@@ -50,6 +50,10 @@ public class EmployeeManagement : MonoBehaviour {
 	// keeps track of num of employees on current page
 	private int numOfEmployeesOnPage = 0;
 
+	// to keep track of what page is being viewed
+	// if true, on CurrentEmployeePage, if false, on other page
+	private bool onCurrentEmployeePage;
+
 
 	/*===================== Methods =====================================================================================*/
 
@@ -72,6 +76,9 @@ public class EmployeeManagement : MonoBehaviour {
 	// Fires when currentEmployees button is pressed
 	public void CurrentEmployeesControl(){
 
+		// say you are on this page
+		onCurrentEmployeePage = true;
+
 		// reset value
 		currentEmployeeIndex = 0;
 		numOfEmployeesOnPage = 0;
@@ -79,8 +86,8 @@ public class EmployeeManagement : MonoBehaviour {
 		// Change ListOfEmployees Text to Say Current Employees
 		listOfEmployeesText.text = "Current Employees";
 
-		// Display the list of hired employees
-		DisplayListOfEmployees ();
+		// Will display the list of hired employees
+		DisplayListOfEmployees (onCurrentEmployeePage);
 
 		// Make current employees button non interactible because it's selected
 		currentEmplyButton.interactable = false;
@@ -96,6 +103,9 @@ public class EmployeeManagement : MonoBehaviour {
 	// Fires when currentEmployees button is pressed
 	public void NewApplicationsControl(){
 
+		// say you are on this page
+		onCurrentEmployeePage = false;
+
 		// reset value
 		currentEmployeeIndex = 0;
 		numOfEmployeesOnPage = 0;
@@ -103,8 +113,8 @@ public class EmployeeManagement : MonoBehaviour {
 		// Change ListOfEmployees Text to Say New Applications
 		listOfEmployeesText.text = "New Applications";
 
-		// Display the list of new applications
-		DisplayListOfNewApps ();
+		// Will display the list of new applications
+		DisplayListOfEmployees (onCurrentEmployeePage);
 
 		// Make new applications button non interactible because it's selected
 		newAppsButton.interactable = false;
@@ -121,8 +131,8 @@ public class EmployeeManagement : MonoBehaviour {
 	public void NextButtonControl(){
 
 		// display next page of employees
-		DisplayListOfEmployees ();
-
+		DisplayListOfEmployees (onCurrentEmployeePage);
+	
 	} // NextButtonControl()
 
 
@@ -134,17 +144,18 @@ public class EmployeeManagement : MonoBehaviour {
 		// going back so reduce currentEmployeeIndex by amount on current page + one full page
 		// So you can clear the page your on, and the previous page, so the code will reprint the last page
 		currentEmployeeIndex -= numOfEmployeesOnPage + 5;
-
-		// display next page of employees
-		DisplayListOfEmployees ();
 		
+		// display last page of employees
+		DisplayListOfEmployees (onCurrentEmployeePage);
+
 	} // BackButtonControl()
 
 
 	/*===================== DisplayListOfEmployees() =====================================================================================*/
 
-	// Displays the list of hired employees
-	void DisplayListOfEmployees(){
+	// Displays the list of hired employees if true
+	// Displays the list of available employees if false
+	void DisplayListOfEmployees(bool onCurrentEmployeePage){
 
 		// reset some values
 		int numOfEmployees = 0;
@@ -161,8 +172,16 @@ public class EmployeeManagement : MonoBehaviour {
 		employeeInfo.SetActive (false);
 		hireFireButton.SetActive (false);
 
-		// Get the number of employees currently hired
-		numOfEmployees = GameManager.businessScript.Employees.Count;
+		// Check to see which page is being viewed first
+		if (onCurrentEmployeePage) { // if hired employees
+
+			// Get the number of employees currently hired
+			numOfEmployees = GameManager.businessScript.Employees.Count;
+		} else { // if new applicants
+
+			// Get the number of available employees looking to be hired
+			numOfEmployees = GameManager.businessScript.NewAvailableEmployees.Count;
+		} // if
 
 		// if enough employees for more then one page and current index is not 0 (Not on first page)
 		if (numOfEmployees >= 5 && currentEmployeeIndex != 0) {
@@ -180,8 +199,16 @@ public class EmployeeManagement : MonoBehaviour {
 					// Save current employee index
 					currentEmployeeIndex++;
 
-					// update info cards
-					UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex]);
+					// Check to see which page is being viewed first
+					if (onCurrentEmployeePage) { // if hired employees
+						
+						// update info cards
+						UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex]);
+					} else { // if new applicants
+						
+						// update info cards
+						UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.NewAvailableEmployees[currentEmployeeIndex]);
+					} // if
 
 					// save num of employees on page
 					numOfEmployeesOnPage++;
@@ -197,8 +224,16 @@ public class EmployeeManagement : MonoBehaviour {
 					// Save current employee index
 					currentEmployeeIndex++;
 					
-					// update info cards
-					UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex]);
+					// Check to see which page is being viewed first
+					if (onCurrentEmployeePage) { // if hired employees
+						
+						// update info cards
+						UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.Employees[currentEmployeeIndex]);
+					} else { // if new applicants
+						
+						// update info cards
+						UpdateEmployeeInfoCard(i+1, currentEmployeeIndex, GameManager.businessScript.NewAvailableEmployees[currentEmployeeIndex]);
+					} // if
 				} // for
 
 				// save num of employees on page
@@ -213,8 +248,16 @@ public class EmployeeManagement : MonoBehaviour {
 			// fill all 5 info cards
 			for(int i = 0; i < 5; i++){
 
-				// update info cards
-				UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i]);
+				// Check to see which page is being viewed first
+				if (onCurrentEmployeePage) { // if hired employees
+					
+					// update info cards
+					UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i]);
+				} else { // if new applicants
+					
+					// update info cards
+					UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.NewAvailableEmployees[i]);
+				} // if
 
 				// Save current employee index
 				currentEmployeeIndex = i;
@@ -231,8 +274,16 @@ public class EmployeeManagement : MonoBehaviour {
 			// fill the info cards
 			for(int i = 0; i < numOfEmployees; i++){
 
-				// update info cards
-				UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i]);
+				// Check to see which page is being viewed first
+				if (onCurrentEmployeePage) { // if hired employees
+
+					// update info cards
+					UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.Employees[i]);
+				} else { // if new applicants
+					
+					// update info cards
+					UpdateEmployeeInfoCard(i+1, i, GameManager.businessScript.NewAvailableEmployees[i]);
+				} // if
 
 				// Save current employee index
 				currentEmployeeIndex = i;
@@ -426,8 +477,16 @@ public class EmployeeManagement : MonoBehaviour {
 		// activate employeeInfo
 		employeeInfo.SetActive (true);
 
-		// update hire/firebutton
-		hireFireButtonText.text = "Fire";
+		// check which page is being viewed
+		if (onCurrentEmployeePage) { // if hired employees
+
+			// update hire/firebutton
+			hireFireButtonText.text = "Fire";
+		} else { // if new applicants
+
+			// update hire/firebutton
+			hireFireButtonText.text = "Hire";
+		} // if
 
 		// active hire/fireButton
 		hireFireButton.SetActive (true);
@@ -438,7 +497,7 @@ public class EmployeeManagement : MonoBehaviour {
 	} // EmployeeSelected()
 
 
-	/*===================== FireSelectedEmployee() =====================================================================================*/
+	/*===================== HireFireSelectedEmployee() =====================================================================================*/
 	
 	// Fires when Fire button is pressed on employeeCloseUp
 	public void FireSelectedEmployee(){
@@ -446,12 +505,21 @@ public class EmployeeManagement : MonoBehaviour {
 		// make sure an employee is actually selected
 		if (selectedEmployee != null) {
 
+			// check to see what page is being view
+			if(onCurrentEmployeePage){ // if hired employee
+
 			// Fire Selected Employee
 			GameManager.businessScript.FireEmployee (selectedEmployee);
+			} else { // if new applicant
+
+				// Fire Selected Employee
+				GameManager.businessScript.HireEmployee (selectedEmployee);
+			} // if
+
 		} // if
 
 		// Refresh list of employees by loading it again
-		DisplayListOfEmployees ();
+		DisplayListOfEmployees (onCurrentEmployeePage);
 
 	} // FireSelectedEmployee()
 
