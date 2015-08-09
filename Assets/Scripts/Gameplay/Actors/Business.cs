@@ -91,11 +91,17 @@ public class Business : MonoBehaviour {
 
 	/*===================== get/set MaxDealers =====================================================================================*/
 
-	public int MaxDealers
-	{
-		// maximum number of dealers a business can have
-		// is 1 dealer per room
-		get{ return BuildingSize;}
+	public int MaxDealers{
+
+		get{ 
+			maxDealers = 0;
+
+			// maximum number of dealers a business can have
+			// is 1 dealer per room
+			maxDealers = BuildingSize;
+
+			return maxDealers;
+		}
 		set{ maxDealers = value;}
 	}
 

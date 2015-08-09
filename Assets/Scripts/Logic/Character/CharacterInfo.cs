@@ -133,15 +133,16 @@ public class CharacterInfo : MonoBehaviour {
 	public string GenerateEmployeePosition(int rep){
 		int rndValue;
 
+		// if Reputation is -20 or less
 		if (rep <= -20) {
 
 			// get random position including dealer
-			rndValue = Random.Range (0, EmployeePositions.Length -2); // no including last 2 pos
-		} else  if (rep <= -30) {
+			rndValue = Random.Range (0, EmployeePositions.Length -2); // not including last 2 pos
+		} else  if (rep <= -30) { // if Reputation is -30 or less
 
 			// get random position including drug related ones
 			rndValue = Random.Range (0, EmployeePositions.Length);
-		} else {
+		} else { // if Not
 
 			// just good positions
 			rndValue = Random.Range(0, EmployeePositions.Length -3); // not including last 3 bad positions

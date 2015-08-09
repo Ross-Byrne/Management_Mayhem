@@ -376,32 +376,31 @@ public class GameManager : MonoBehaviour
 	// checks if player can do certain things because of reputation level
 	public void CheckReputation(Business business){
 
-		if(business.Reputation > 39) // if at least -40 rep
-		{
+		// if Reputation is -20 or less
+		if(business.Reputation <= -20) { 
+
 			// player can hire dealers
 			CanHireDealers = true;
-		}
-		else
-		{
+		} else {
+
 			// if you cant sell, you cant hire and all dealers a fired
 			CanHireDealers = false;
 			CanStartSellingDrugs = false;
 			//business.dealers.Clear();
 		} // if
-		
-		if(business.Reputation > 59) // if at least -60 rep
-		{
+
+		// if Reputation is -30 or less
+		if(business.Reputation <= -30) {
+
 			// can build drug lab
 			CanBuildDrugLab = true;
-		}
-		else
-		{
+		} else {
+
 			// cannot build drug lab
 			CanBuildDrugLab = false;
 		} // if
 		
 	} // CheckReputation()
-
-
+	
 } // class
 

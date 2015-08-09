@@ -453,16 +453,34 @@ public class EmployeeManagement : MonoBehaviour {
 		int dealerCount = 0;
 		int maxDealers = 0;
 
+		// Get employee info
 		employeeCount = GameManager.businessScript.Employees.Count;
 		maxEmployees = GameManager.businessScript.MaxEmployees;
 
+		// Get Dealer info
+		dealerCount = 0;
+		maxDealers = GameManager.businessScript.MaxDealers;
 
+		// Update Employee Count
 		employeeInfoText.text = str.Append ("You have ").Append (employeeCount).Append (" out of the ").Append (
 			maxEmployees).Append (" Employees you can hire.").ToString ();
 
 		// clear string
 		str.Length = 0;
 
+		// check if can hire dealers
+		if (GameManager.gameManager.CanHireDealers) { // if can hire dealers
+			// Update Drug dealer count
+			dealerInfoText.text = str.Append ("You have ").Append (dealerCount).Append (" out of the ").Append (
+				maxDealers).Append (" Dealers you can hire.").ToString ();
+
+			// clear string
+			str.Length = 0;
+		} else { // if cant hire dealers, hide text
+
+			// Update Text
+			dealerInfoText.text = "";
+		}// if
 	} // UpdateEmployeeCountText()
 
 
@@ -512,8 +530,16 @@ public class EmployeeManagement : MonoBehaviour {
 			GameManager.businessScript.FireEmployee (selectedEmployee);
 			} else { // if new applicant
 
-				// Hire Selected Employee
-				GameManager.businessScript.HireEmployee (selectedEmployee);
+				// Check to make sure an employee can be hired
+				if(GameManager.businessScript.Employees.Count < GameManager.businessScript.MaxEmployees){
+
+					// Hire Selected Employee
+					GameManager.businessScript.HireEmployee (selectedEmployee);
+				} else { // if already have max employees
+
+					// Print message that you cant hire anymore employees
+					Debug.Log("You have the maximum amount of employees, Upgrade building size to hire more!");
+				} // if
 			} // if
 		} // if
 
