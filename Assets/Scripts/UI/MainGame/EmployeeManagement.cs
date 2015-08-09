@@ -517,6 +517,9 @@ public class EmployeeManagement : MonoBehaviour {
 			} // if
 		} // if
 
+		// Upadate Employee Count text after hiring or firing
+		UpdateEmployeeCountText ();
+
 		// if there are still other employees
 		if (currentEmployeeIndex != -1) {
 
@@ -537,6 +540,8 @@ public class EmployeeManagement : MonoBehaviour {
 			// Go back a page
 			BackButtonControl();
 		} // if
+
+
 
 	} // FireSelectedEmployee()
 
