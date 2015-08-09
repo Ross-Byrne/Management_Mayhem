@@ -187,14 +187,14 @@ public class EmployeeManagement : MonoBehaviour {
 		if (numOfEmployees >= 5 && currentEmployeeIndex != 0) {
 
 			// if less then five, fill as many cards that are needed
-			if((numOfEmployees-1) - currentEmployeeIndex < 5){
+			if(((numOfEmployees-1) - currentEmployeeIndex) < 5){
 				int temp = 0;
 
 				// save currentEmployeeIndex
 				temp = currentEmployeeIndex;
 
 				// fill the info cards
-				for(int i = 0; i < (numOfEmployees-1) - temp; i++){
+				for(int i = 0; i < ((numOfEmployees-1) - temp); i++){
 
 					// Save current employee index
 					currentEmployeeIndex++;
@@ -512,14 +512,31 @@ public class EmployeeManagement : MonoBehaviour {
 			GameManager.businessScript.FireEmployee (selectedEmployee);
 			} else { // if new applicant
 
-				// Fire Selected Employee
+				// Hire Selected Employee
 				GameManager.businessScript.HireEmployee (selectedEmployee);
 			} // if
+		} // if
 
+		// if there are still other employees
+		if (currentEmployeeIndex != -1) {
+
+			// Account for an employee being removed
+			// take the number on the page off of current index
+			// because index is zero indexed and number of employees on page is not
+			// taking number of employees on page from index accounts for one being removed
+			// and then removes the rest so it can reprint them
+			currentEmployeeIndex -= numOfEmployeesOnPage;
 		} // if
 
 		// Refresh list of employees by loading it again
 		DisplayListOfEmployees (onCurrentEmployeePage);
+
+		// if there are still employees to display but page is empty
+		if (numOfEmployeesOnPage == 0 && currentEmployeeIndex > 0) {
+
+			// Go back a page
+			BackButtonControl();
+		} // if
 
 	} // FireSelectedEmployee()
 
