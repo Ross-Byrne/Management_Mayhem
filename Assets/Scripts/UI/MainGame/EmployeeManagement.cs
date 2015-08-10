@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Text;
-using UnityEngine.EventSystems;
 
 public class EmployeeManagement : MonoBehaviour {
  
@@ -518,7 +517,7 @@ public class EmployeeManagement : MonoBehaviour {
 	/*===================== HireFireSelectedEmployee() =====================================================================================*/
 	
 	// Fires when Fire button is pressed on employeeCloseUp
-	public void FireSelectedEmployee(){
+	public void HireFireSelectedEmployee(){
 		
 		// make sure an employee is actually selected
 		if (selectedEmployee != null) {
@@ -567,8 +566,6 @@ public class EmployeeManagement : MonoBehaviour {
 			BackButtonControl();
 		} // if
 
-
-
-	} // FireSelectedEmployee()
+	} // HireFireSelectedEmployee()
 
 } // class
