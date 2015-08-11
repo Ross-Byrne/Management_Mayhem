@@ -29,9 +29,10 @@ public class MainUIControl : MonoBehaviour {
 
 	// Player text
 	public Text playerNameText;
+	public Text playerGenderText;
 	public Text playerBankAccountText;
-	public Text playerLevelText;
-	public Text playerXPText;
+	public Text playerSalaryText;
+	public Text playerPositionText;
 	public Text playerTrait1Text;
 	public Text playerTrait2Text;
 	public Text playerTrait3Text;
@@ -89,6 +90,7 @@ public class MainUIControl : MonoBehaviour {
 	public void PlayerInformationUpdate(Player player){
 
 		StringBuilder str = new StringBuilder ();
+		string gender = "";
 
 		// Update player info text
 
@@ -96,15 +98,28 @@ public class MainUIControl : MonoBehaviour {
 		playerNameText.text = str.Append("Name: ").Append(player.Name).ToString();
 		str.Length = 0; // clear string
 
+		// Get player's Gender
+		if(player.Gender == 'M'){
+			gender = "Male";
+		} else if(player.Gender == 'F'){
+			gender = "Female";
+		} // if
+
+		// Display player Gender
+		playerGenderText.text = str.Append ("Gender: ").Append (gender).ToString ();
+		str.Length = 0; // clear string
+
 		// display players bank account
 		playerBankAccountText.text = str.Append("Bank Account: $").Append(player.BankAccount.ToString("F")).ToString();
 		str.Length = 0; // clear string
 
-		// display player level
-		playerLevelText.text = "Level: 0";
+		// display player Salary
+		playerSalaryText.text = str.Append ("Salary: $").Append (player.Salary.ToString ("F")).Append(" Per Hour").ToString ();
+		str.Length = 0; // clear string
 
-		// display player experience
-		playerXPText.text = "Experience: 0/0";
+		// display player Position
+		playerPositionText.text = str.Append ("Position: ").Append(player.Position).ToString();
+		str.Length = 0; // clear string
 
 		// Display players traits
 		playerTrait1Text.text = str.Append("Trait 1: ").Append(player.Traits [0]).ToString();
