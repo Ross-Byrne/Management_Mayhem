@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Text;
 
+// Script to manage the Employee Management Menu
+
 public class EmployeeManagement : MonoBehaviour {
  
 	/*===================== UI Elements =====================================================================================*/

@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   employeePrefab: {fileID: 120222, guid: 230d1b7605c366f4a90865cf309732b0, type: 2}
   characterInfoScript: {fileID: 0}
+  employees: []
+  newAvailableEmployees: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
