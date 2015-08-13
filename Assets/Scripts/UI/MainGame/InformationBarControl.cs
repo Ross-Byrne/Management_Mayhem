@@ -46,11 +46,11 @@ public class InformationBarControl : MonoBehaviour {
 				pausePlayButton.GetComponentInChildren<Text>().text = "Play";
 
 				// Make buttons text red
-				pausePlayButton.GetComponentInChildren<Text>().color = new Color32(154, 0, 0, 255);
+				pausePlayButton.GetComponentInChildren<Text>().color = new Color32(255, 0, 0, 255);
 			} else { // if game is paused
 
-				// Make buttons text black
-				pausePlayButton.GetComponentInChildren<Text>().color = Color.black;
+				// Make buttons text Silver
+				pausePlayButton.GetComponentInChildren<Text>().color = new Color32(219, 219, 219, 255);
 
 				// Change buttons text to "Pause"
 				pausePlayButton.GetComponentInChildren<Text>().text = "Pause";
@@ -70,8 +70,8 @@ public class InformationBarControl : MonoBehaviour {
 			// unpause game if game is paused
 			GameManager.gameManager.PauseGame(false);
 
-			// Make pause play button text black
-			pausePlayButton.GetComponentInChildren<Text>().color = Color.black;
+			// Make pause play button text silver
+			pausePlayButton.GetComponentInChildren<Text>().color = new Color32(219, 219, 219, 255);
 			
 			// Change pause play button text to "Pause"
 			pausePlayButton.GetComponentInChildren<Text>().text = "Pause";
@@ -86,8 +86,8 @@ public class InformationBarControl : MonoBehaviour {
 			// unpause game if game is paused
 			GameManager.gameManager.PauseGame(false);
 
-			// Make pause play button text black
-			pausePlayButton.GetComponentInChildren<Text>().color = Color.black;
+			// Make pause play button text silver
+			pausePlayButton.GetComponentInChildren<Text>().color = new Color32(219, 219, 219, 255);
 			
 			// Change pause play button text to "Pause"
 			pausePlayButton.GetComponentInChildren<Text>().text = "Pause";

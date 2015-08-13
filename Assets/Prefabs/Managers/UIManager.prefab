@@ -94,7 +94,7 @@ MonoBehaviour:
     type: 2}
   mainMenu: {fileID: 0}
   characterCreationMenu: {fileID: 0}
-  mainUIPrefab: {fileID: 128860, guid: f037446a61211a4409298c151c11233a, type: 2}
+  mainUIPrefab: {fileID: 129738, guid: ab02e992cff7d1d4d85ff375e6981310, type: 2}
   mainUI: {fileID: 0}
   escapeMenuPrefab: {fileID: 165830, guid: 86cec18339637b94e94e1239b8f1b303, type: 2}
   escapeMenu: {fileID: 0}
@@ -224,7 +224,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mainUIPrefab
       value: 
-      objectReference: {fileID: 128860, guid: f037446a61211a4409298c151c11233a, type: 2}
+      objectReference: {fileID: 129738, guid: ab02e992cff7d1d4d85ff375e6981310, type: 2}
     - target: {fileID: 0}
       propertyPath: m_AnchorMax.x
       value: 1
