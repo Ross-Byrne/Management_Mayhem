@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 22349220}
-  mainMenuPrefab: {fileID: 164024, guid: ce0eedd99e617054abed1bcf7c9914ce, type: 2}
+  mainMenuPrefab: {fileID: 148946, guid: 71e80348c3831504a95a04af22c1e4bb, type: 2}
   characterCreationMenuPrefab: {fileID: 131888, guid: 4c2fe32edce5ae64b903aeb51d5feba9,
     type: 2}
   mainMenu: {fileID: 0}
@@ -245,6 +245,10 @@ Prefab:
       propertyPath: mainUI
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mainMenuPrefab
+      value: 
+      objectReference: {fileID: 148946, guid: 71e80348c3831504a95a04af22c1e4bb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119308}
