@@ -66,6 +66,9 @@ public class ManagementMenuControl : MonoBehaviour {
 			
 			// turn on background menu
 			managementMenu.SetActive(true);
+
+			// Get Business Upgrades Menu Ready
+			businessUpgradesMenu.GetComponent<BusinessUpgrades>().SetUpMenu();
 			
 			// turn on menu
 			businessUpgradesMenu.SetActive(true);
