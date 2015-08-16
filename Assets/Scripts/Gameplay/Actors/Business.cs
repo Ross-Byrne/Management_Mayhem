@@ -422,22 +422,6 @@ public class Business : MonoBehaviour {
 	} // RemoveEmployeeApplicant()
 
 
-	/*===================== PrintListOfEmployees() =====================================================================================*/
-	
-	public string PrintListOfEmployees()
-	{
-		StringBuilder employeeNames = new StringBuilder();
-		int i = 0;
-		
-		for (i = 0; i < Employees.Count; i++) {
-			employeeNames.Append ("\n");
-			employeeNames.Append (Employees [i].GetComponent<Employee> ().Name);
-		}
-		
-		return employeeNames.ToString ();
-	} // PrintListOfEmployees()
-	
-
 	/*===================== PayMaintenance() =====================================================================================*/
 	
 	// to pay the buildings monthly maintenance bill
