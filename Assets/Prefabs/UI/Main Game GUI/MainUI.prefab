@@ -5775,6 +5775,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27cdbc73208a264f94b54d597346547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dealerProfits: {fileID: 147682}
+  labProfits: {fileID: 113096}
+  productionIncomeText: {fileID: 11433864}
+  contractIncomeText: {fileID: 11494044}
+  otherIncomeText: {fileID: 11405082}
+  totalIncomeText: {fileID: 11480856}
+  productionCostsText: {fileID: 11443822}
+  employeeCostsText: {fileID: 11460068}
+  maintenanceCostsText: {fileID: 11447566}
+  totalCostsText: {fileID: 11408230}
+  dealerProfitsText: {fileID: 11449814}
+  labProfitsText: {fileID: 11457608}
+  totalProfitsText: {fileID: 11456810}
 --- !u!114 &11416496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6157,6 +6170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdcffbe4f7a3bd44d84b2883cccfea14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  financeBreakdownPanel: {fileID: 187928}
 --- !u!114 &11420296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9411,7 +9425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .117241383, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8f6ee2a572e2f9f40a76dc6b9db9a75f, type: 3}
     m_FontSize: 18
