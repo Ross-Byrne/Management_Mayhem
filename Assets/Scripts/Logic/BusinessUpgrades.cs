@@ -22,6 +22,8 @@ public class BusinessUpgrades : MonoBehaviour {
 
 	public Text numOfRoomsText;
 	public Text buildingUpgradeCostText;
+	public Text numOfEquipUpgradesText;
+	public Text equipUpgradeCostText;
 	
 	/*===================== Methods =====================================================================================*/
 	
@@ -47,6 +49,9 @@ public class BusinessUpgrades : MonoBehaviour {
 		// Updates values on AddRoomMenu
 		UpdateRoomUpgradeText ();
 
+		// Update vaules on UpgradeEquipmentMenu
+		UpdateEquipmentUpgradesText ();
+
 	} // SetUpMenu()
 
 
@@ -64,6 +69,20 @@ public class BusinessUpgrades : MonoBehaviour {
 	} // BuildRoomControl()
 
 
+	/*===================== UpgradeEquipmentControl() =====================================================================================*/
+	
+	// Fires when UpgradeEquipmentButton is Clicked
+	public void UpgradeEquipmentControl(){
+		
+		// Upgrades the buildings equipment
+		GameManager.businessScript.UpgradeEquipment ();
+		
+		// Update the number of equipment upgrades and cost of next upgrade
+		UpdateEquipmentUpgradesText ();
+		
+	} // UpgradeEquipmentControl()
+
+
 	/*===================== UpdateRoomUpgradeText() =====================================================================================*/
 
 	public void UpdateRoomUpgradeText(){
@@ -72,10 +91,22 @@ public class BusinessUpgrades : MonoBehaviour {
 		numOfRoomsText.text = GameManager.businessScript.BuildingSize.ToString ();
 
 		// update the cost of next building next room
-		buildingUpgradeCostText.text = string.Format ("${0}", GameManager.businessScript.BuildingUpgradeCost.ToString ("F"));
+		buildingUpgradeCostText.text = string.Format ("${0}", GameManager.businessScript.BuildingUpgradeCost.ToString("F"));
 
 	} // UpdateRoomUpgradeText()
 
+
+	/*===================== UpdateEquipmentUpgradesText() =====================================================================================*/
+	
+	public void UpdateEquipmentUpgradesText(){
+		
+		// Update numOfEquipUpgradesText
+		numOfEquipUpgradesText.text = GameManager.businessScript.EquipmentUpgrades.ToString ();
+		
+		// update the cost of next equipment upgrade
+		equipUpgradeCostText.text = string.Format ("${0}", GameManager.businessScript.EquipmentUpgradeCost.ToString ("F"));
+		
+	} // UpdateEquipmentUpgradesText()
 
 
 } // class
