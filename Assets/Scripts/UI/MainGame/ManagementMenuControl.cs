@@ -125,6 +125,9 @@ public class ManagementMenuControl : MonoBehaviour {
 
 			// turn on background menu
 			managementMenu.SetActive(true);
+
+			// Get Business Finances Menu Ready
+			businessFinancesMenu.GetComponent<BusinessFinances>().SetUpMenu();
 			
 			// turn on menu
 			businessFinancesMenu.SetActive(true);
