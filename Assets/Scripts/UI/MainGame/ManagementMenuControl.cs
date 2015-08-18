@@ -97,6 +97,9 @@ public class ManagementMenuControl : MonoBehaviour {
 			
 			// turn on background menu
 			managementMenu.SetActive(true);
+
+			// Get Manage Operations Menu Ready
+			manageOperationsMenu.GetComponent<ManageOperations>().SetUpMenu();
 			
 			// turn on menu
 			manageOperationsMenu.SetActive(true);
