@@ -276,6 +276,9 @@ public class GameManager : MonoBehaviour {
 		// Generate a list of employees that are applying for a job
 		businessScript.GenerateEmployeeApplicants (10);
 
+		// Update business name on building Sign
+
+
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
 	
