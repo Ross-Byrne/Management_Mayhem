@@ -34,6 +34,8 @@ public class BusinessBuilding : MonoBehaviour {
 	private float buildingEntranceX = -1.5f;
 	private float buildingEntranceY = 0.459f;
 
+	// keeping track of number of building levels
+	public int numOfBuildingLevels = 0;
 
 	/*===================== Methods =====================================================================================*/
 
@@ -70,6 +72,16 @@ public class BusinessBuilding : MonoBehaviour {
 		// make buildingEntrance a child of "TheBuilding" GameObject
 		buildingEntrance.transform.SetParent (gameObject.transform, false);
 
+		// instantiate Building Roof
+		buildingRoof = (GameObject)Instantiate (buildingRoofPrefab);
+		
+		// Set position of building roof
+		buildingRoof.transform.position = new Vector3 (0, yDisBetweenLevels, 0);
+		
+		// make buildingRoof a child of "TheBuilding" GameObject
+		buildingRoof.transform.SetParent (gameObject.transform, false);
+
+		/*
 		// instantiate Building ground Floor
 		buildingLevel = (GameObject)Instantiate (buildingLevelPrefab);
 
@@ -87,18 +99,56 @@ public class BusinessBuilding : MonoBehaviour {
 		
 		// make buildingLevel a child of "TheBuilding" GameObject
 		buildingLevel.transform.SetParent (gameObject.transform, false);
+		*/
 
-		// instantiate Building Roof
-		buildingRoof = (GameObject)Instantiate (buildingRoofPrefab);
+		// Add building ground floor
+		AddBuildingLevel ();
 
-		// Set position of building roof
-		buildingRoof.transform.position = new Vector3 (0, yDisBetweenLevels * 2, 0);
-		
-		// make buildingRoof a child of "TheBuilding" GameObject
-		buildingRoof.transform.SetParent (gameObject.transform, false);
-
+	 	//Add building first floor
+		AddBuildingLevel ();
 
 	} // SetupBuilding()
+
+
+	/*===================== AddBuildingLevel() =====================================================================================*/
+
+	// Adds a level to the building
+	public void AddBuildingLevel(){
+
+		// instantiate Building Level
+		buildingLevel = (GameObject)Instantiate (buildingLevelPrefab);
+
+		if (numOfBuildingLevels == 0) {
+
+			// Set position of Building Level
+			buildingLevel.transform.position = new Vector3 (0, 0, 0);
+		} else {
+
+			// Set position of Building Level
+			buildingLevel.transform.position = new Vector3 (0, yDisBetweenLevels * numOfBuildingLevels, 0);
+		}
+
+		// make buildingLevel a child of "TheBuilding" GameObject
+		buildingLevel.transform.SetParent (gameObject.transform, false);
+
+		// increase building level counter
+		numOfBuildingLevels++;
+
+		float yCoor = (yDisBetweenLevels * numOfBuildingLevels);
+
+		Vector3 temp = new Vector3 (0, yCoor, 0);
+
+		// move the Building Roof Up to accomidate new Level
+		buildingRoof.transform.position = temp; // +1 becuase the roof is always 1 above
+
+		Debug.Log (yDisBetweenLevels);
+
+		Debug.Log (numOfBuildingLevels);
+
+		Debug.Log (yDisBetweenLevels * numOfBuildingLevels);
+
+
+	} // AddBuildingLevel()
 
 	
 } // class

@@ -1041,6 +1041,7 @@ MonoBehaviour:
   buildingLevel: {fileID: 0}
   buildingEntrance: {fileID: 0}
   buildingFoundation: {fileID: 0}
+  numOfBuildingLevels: 0
 --- !u!1 &1873115197
 GameObject:
   m_ObjectHideFlags: 0
