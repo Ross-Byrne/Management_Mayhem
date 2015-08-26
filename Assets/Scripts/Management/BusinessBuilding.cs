@@ -43,7 +43,7 @@ public class BusinessBuilding : MonoBehaviour {
 
 	void Start(){
 
-		// Set up the building
+		// Set up the building (this will be somewhere else later)
 		SetupBuilding ();
 
 	} // Start()
@@ -79,27 +79,7 @@ public class BusinessBuilding : MonoBehaviour {
 		buildingRoof.transform.position = new Vector3 (0, yDisBetweenLevels, 0);
 		
 		// make buildingRoof a child of "TheBuilding" GameObject
-		buildingRoof.transform.SetParent (gameObject.transform, false);
-
-		/*
-		// instantiate Building ground Floor
-		buildingLevel = (GameObject)Instantiate (buildingLevelPrefab);
-
-		// Set position of ground floor
-		buildingLevel.transform.position = new Vector3 (0, 0, 0);
-
-		// make buildingLevel a child of "TheBuilding" GameObject
-		buildingLevel.transform.SetParent (gameObject.transform, false);
-
-		// instantiate Building First Floor
-		buildingLevel = (GameObject)Instantiate (buildingLevelPrefab);
-
-		// Set position of first floor
-		buildingLevel.transform.position = new Vector3 (0, yDisBetweenLevels * 1, 0);
-		
-		// make buildingLevel a child of "TheBuilding" GameObject
-		buildingLevel.transform.SetParent (gameObject.transform, false);
-		*/
+		buildingRoof.transform.SetParent (gameObject.transform, true);
 
 		// Add building ground floor
 		AddBuildingLevel ();
@@ -118,15 +98,8 @@ public class BusinessBuilding : MonoBehaviour {
 		// instantiate Building Level
 		buildingLevel = (GameObject)Instantiate (buildingLevelPrefab);
 
-		if (numOfBuildingLevels == 0) {
-
-			// Set position of Building Level
-			buildingLevel.transform.position = new Vector3 (0, 0, 0);
-		} else {
-
-			// Set position of Building Level
-			buildingLevel.transform.position = new Vector3 (0, yDisBetweenLevels * numOfBuildingLevels, 0);
-		}
+		// Set position of Building Level
+		buildingLevel.transform.position = new Vector3 (0, yDisBetweenLevels * numOfBuildingLevels, 0);
 
 		// make buildingLevel a child of "TheBuilding" GameObject
 		buildingLevel.transform.SetParent (gameObject.transform, false);
@@ -134,19 +107,8 @@ public class BusinessBuilding : MonoBehaviour {
 		// increase building level counter
 		numOfBuildingLevels++;
 
-		float yCoor = (yDisBetweenLevels * numOfBuildingLevels);
-
-		Vector3 temp = new Vector3 (0, yCoor, 0);
-
 		// move the Building Roof Up to accomidate new Level
-		buildingRoof.transform.position = temp; // +1 becuase the roof is always 1 above
-
-		Debug.Log (yDisBetweenLevels);
-
-		Debug.Log (numOfBuildingLevels);
-
-		Debug.Log (yDisBetweenLevels * numOfBuildingLevels);
-
+		buildingRoof.transform.localPosition = new Vector3 (0f, yDisBetweenLevels * numOfBuildingLevels, 0f); // +1 numOfBuildingLevels becuase the roof is always 1 above
 
 	} // AddBuildingLevel()
 
