@@ -86,7 +86,7 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		
 		//Add building first floor
 		AddBuildingLevel ();
-		
+
 	} // SetupBuilding()
 	
 	

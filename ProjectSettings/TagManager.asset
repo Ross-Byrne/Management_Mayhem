@@ -9,6 +9,7 @@ TagManager:
   - MainCanvas
   - Business
   - Employee
+  - BuildingSign
   layers:
   - Default
   - TransparentFX

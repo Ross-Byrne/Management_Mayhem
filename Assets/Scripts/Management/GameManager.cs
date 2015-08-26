@@ -89,7 +89,6 @@ public class GameManager : MonoBehaviour {
 		if (Application.loadedLevelName.Equals ("Main")) {
 
 
-
 		} // if
 
 		// initialise game variables
@@ -276,8 +275,10 @@ public class GameManager : MonoBehaviour {
 		// Generate a list of employees that are applying for a job
 		businessScript.GenerateEmployeeApplicants (10);
 
-		// Update business name on building Sign
-
+		// Update Business sign with name of Business
+		GameObject buildingSign = GameObject.FindWithTag("BuildingSign");
+		
+		buildingSign.GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
 
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
@@ -306,6 +307,11 @@ public class GameManager : MonoBehaviour {
 		// Generate a list of employees that are applying for a job
 		businessScript.GenerateEmployeeApplicants (10);
 
+		// Update Business sign with name of Business
+		GameObject buildingSign = GameObject.FindWithTag("BuildingSign");
+
+		buildingSign.SetActive (false);
+		
 	} // SetupLoadedGame()
 
 
