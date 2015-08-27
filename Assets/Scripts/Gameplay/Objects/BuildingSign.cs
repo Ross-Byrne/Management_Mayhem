@@ -35,10 +35,6 @@ public class BuildingSign : MonoBehaviour {
 			// Cannot update, set to default
 			businessNameShadow.GetComponent<TextMesh>().text = "Business Name";
 
-		} finally {
-
-			// print error
-			Debug.Log ("Could not update building Sign!");
 		} // try catch
 
 	} // UpdateBusinessNameSign()

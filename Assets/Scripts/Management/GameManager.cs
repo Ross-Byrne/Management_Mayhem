@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject businessPrefab;
 	public GameObject playerPrefab;
 
+	public GameObject theBuilding;
+
 	
 	/*===================== Scripts =====================================================================================*/
 
@@ -276,9 +278,7 @@ public class GameManager : MonoBehaviour {
 		businessScript.GenerateEmployeeApplicants (10);
 
 		// Update Business sign with name of Business
-		GameObject buildingSign = GameObject.FindWithTag("BuildingSign");
-		
-		buildingSign.GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
+		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
 
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
@@ -308,9 +308,8 @@ public class GameManager : MonoBehaviour {
 		businessScript.GenerateEmployeeApplicants (10);
 
 		// Update Business sign with name of Business
-		GameObject buildingSign = GameObject.FindWithTag("BuildingSign");
+		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
 
-		buildingSign.SetActive (false);
 		
 	} // SetupLoadedGame()
 

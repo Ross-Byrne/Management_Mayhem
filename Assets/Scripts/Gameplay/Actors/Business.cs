@@ -192,7 +192,7 @@ public class Business : MonoBehaviour {
 		Name = "";
 		BankAccount = 0f;
 		Reputation = 0; // +25 because of 100 for maintenance and -25 because salary is 800
-		BuildingSize = 3;
+		BuildingSize = 4;
 		BuildingUpgradeCost = BuildingSize *1000;
 		BuildingMaintenance = 100; // medium maintenance level
 		MaxEmployees = 0;
