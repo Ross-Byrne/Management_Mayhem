@@ -87,12 +87,6 @@ public class GameManager : MonoBehaviour {
 		uiManager = uiManagerObject.GetComponent<UIManager> ();
 		saveGameManager = gameObject.GetComponent<SaveGameManager> ();
 
-		// if in Main Scene
-		if (Application.loadedLevelName.Equals ("Main")) {
-
-
-		} // if
-
 		// initialise game variables
 		
 		GameRunning = false;

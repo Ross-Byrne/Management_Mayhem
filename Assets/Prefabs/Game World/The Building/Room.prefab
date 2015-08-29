@@ -242,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f259f5a755272674baf7e804fc20cf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockScreen: {fileID: 187918}
 --- !u!212 &21212260
 SpriteRenderer:
   m_ObjectHideFlags: 1

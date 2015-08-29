@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 // Script to manage the generation of the Business Building in Game
 
@@ -20,6 +21,15 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 	public GameObject buildingLevel;
 	public GameObject buildingEntrance;
 	public GameObject buildingFoundation;
+
+	// List of Rooms in Building
+	[SerializeField]
+	private List<GameObject> rooms = new List<GameObject> ();
+	public List<GameObject> Rooms {
+
+		get{ return rooms;}
+		set{ rooms = value;}
+	}
 	
 	/*===================== Variables =====================================================================================*/
 	
@@ -37,6 +47,7 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 	// keeping track of number of building levels
 	public int numOfBuildingLevels = 0;
 	
+
 	/*===================== Methods =====================================================================================*/
 	
 	/*===================== Awake() =====================================================================================*/
@@ -83,6 +94,13 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		
 		// Add building ground floor
 		AddBuildingLevel ();
+
+		// first level is always unlocked
+		for (int i = 0; i < buildingLevel.GetComponent<BuildingLevel>().RoomsInLevel.Count; i++) {
+
+			// Unlock Rooms on first level
+			Rooms[i].GetComponent<BusinessRoom>().IsLocked = false;
+		} // for
 		
 		//Add building first floor
 		AddBuildingLevel ();
@@ -103,6 +121,21 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		
 		// make buildingLevel a child of "TheBuilding" GameObject
 		buildingLevel.transform.SetParent (gameObject.transform, false);
+
+		// Get Number of rooms in building level
+		int numOfRoomsInLevel = buildingLevel.GetComponent<BuildingLevel> ().RoomsInLevel.Count;
+
+		// loop through number of rooms in building level
+		for (int i = 0; i < numOfRoomsInLevel; i++) {
+
+			// Give the rooms in the building level a number
+			buildingLevel.GetComponent<BuildingLevel>().RoomsInLevel[i].GetComponent<BusinessRoom>().Number = ((numOfBuildingLevels * 4) + i+1);
+
+			// Add Rooms in building level to Rooms list
+			Rooms.Add(buildingLevel.GetComponent<BuildingLevel>().RoomsInLevel[i]);
+		
+		} // for
+
 		
 		// increase building level counter
 		numOfBuildingLevels++;
