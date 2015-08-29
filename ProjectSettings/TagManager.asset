@@ -10,6 +10,7 @@ TagManager:
   - Business
   - Employee
   - BuildingSign
+  - Room
   layers:
   - Default
   - TransparentFX
