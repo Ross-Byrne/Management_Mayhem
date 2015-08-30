@@ -17,9 +17,12 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 	public InputField playerNameInput;
 	public InputField businessNameInput;
-	public Button savePlayerNameButton;		// nextButton on characterNameMenu
+	public Button savePlayerNameGenderButton;		// nextButton on characterNameGenderMenu
 	public Button saveBusinessNameButton;	// nextButton on setupBusinessMenu
 	public Button finishButton;				// finishButton on selectGameDiffMenu
+
+	public Toggle maleToggle;
+	public Toggle femaleToggle;
 	public Toggle easyToggle;
 	public Toggle normalToggle;
 	public Toggle hardToggle;
@@ -56,6 +59,10 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		// Clears playerNameInput
 		playerNameInput.text = "";
 
+		// Clears selected gender
+		maleToggle.isOn = false;
+		femaleToggle.isOn = false;
+
 		// resets selected traits
 		characterTraitsMenu.GetComponent<GeneratePlayerTraits> ().ResetTraits ();
 
@@ -68,28 +75,85 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		hardToggle.isOn = false;
 
 		// Makes nextButton not interactable
-		savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = false;
-		saveBusinessNameButton.GetComponent<CanvasGroup> ().interactable = false;
-		finishButton.GetComponent<CanvasGroup> ().interactable = false;
+		savePlayerNameGenderButton.interactable = false;
+		saveBusinessNameButton.interactable = false;
+		finishButton.interactable = false;
 
 	} // SetUp()
 
 
+	/*===================== ValidNameAndGender() =====================================================================================*/
+
+	// checks to see if players name and gender a valid
+	public void ValidNameAndGender(){
+
+		// if players name and gender is valid
+		if (ValidPlayerName () && ValidPlayerGender ()) {
+
+			Debug.Log ("Valid");
+			// activate the next button
+			savePlayerNameGenderButton.interactable = true;
+
+		} else { // if not valid
+
+			Debug.Log ("Invalid");
+
+			// deavtivate next button
+			savePlayerNameGenderButton.interactable = false;
+		} // if
+	} // ValidNameAndGender()
+
 	/*===================== ValidPlayerName() =====================================================================================*/
 
-	// its run every time the input field changes
-	// to check to make sure it's a valid name
-	public void ValidPlayerName(){
+	// Checks to make sure a valid name is entered
+	public bool ValidPlayerName(){
 
-		if (playerNameInput.text.Equals("") || playerNameInput.text.StartsWith(" ")) { // if input is blank or starts with space
+		// if input is blank or starts with space
+		if (playerNameInput.text.Equals("") || playerNameInput.text.StartsWith(" ")) { 
 
-			savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = false;
+			return false;
+
 		} else { // if it doesn't = a valid name
 
-			savePlayerNameButton.GetComponent<CanvasGroup> ().interactable = true;
+			Debug.Log ("Valid Name");
+
+			return true;
+
 		}// if
 	} // ValidPlayerName()
 
+
+	/*===================== ValidPlayerGender() =====================================================================================*/
+	
+	// checks if a valid gender has been selected
+	public bool ValidPlayerGender(){
+
+		if (maleToggle.isOn) { // if selected male
+
+			Debug.Log ("Valid Gender");
+
+			// Saves player gender
+			GameManager.gameManager.PGender = 'M'; // Male
+
+			return true;
+			
+		} else if (femaleToggle.isOn) { // if normal game Diff is selected
+
+			Debug.Log ("Valid Gender");
+			// Saves player gender
+			GameManager.gameManager.PGender = 'F'; // Female
+
+			return true;
+			
+		}  else { // if no difficulty is selected
+
+			// Clears Gender
+			GameManager.gameManager.PGender = ' ';
+
+			return false;
+			
+		} // if
+	} // ValidPlayerGender()
 
 	/*===================== ValidBusinessName() =====================================================================================*/
 
@@ -99,10 +163,10 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		
 		if (businessNameInput.text.Equals("") || businessNameInput.text.StartsWith(" ")) { // if input is blank or starts with space
 			
-			saveBusinessNameButton.GetComponent<CanvasGroup> ().interactable = false;
+			saveBusinessNameButton.interactable = false;
 		} else { // if it doesn't = a valid name
 			
-			saveBusinessNameButton.GetComponent<CanvasGroup> ().interactable = true;
+			saveBusinessNameButton.interactable = true;
 		}// if
 	} // ValidBusinessName()
 
@@ -116,8 +180,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		GameManager.gameManager.PName = playerNameInput.text;
 
 		// deactivate enterCharacterName and activate select character trait
-		characterNameMenu.gameObject.SetActive (false);
-		characterTraitsMenu.gameObject.SetActive (true);
+		characterNameMenu.SetActive (false);
+		characterTraitsMenu.SetActive (true);
 
 	} // SavePlayerName()
 
@@ -137,8 +201,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		} // for
 
 		// moves to next section
-		characterTraitsMenu.gameObject.SetActive (false);
-		setupBusinessMenu.gameObject.SetActive (true);
+		characterTraitsMenu.SetActive (false);
+		setupBusinessMenu.SetActive (true);
 
 	} // SavePlayerTraits()
 
@@ -152,8 +216,8 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		GameManager.gameManager.BName = businessNameInput.text;
 
 		// deactivates setupBusinessMenu and activates selectGameDiffMenu
-		setupBusinessMenu.gameObject.SetActive (false);
-		selectGameDiffMenu.gameObject.SetActive (true);
+		setupBusinessMenu.SetActive (false);
+		selectGameDiffMenu.SetActive (true);
 
 	} // SaveBusinessName()
 
@@ -170,7 +234,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 			gameDiff = 'E'; // easy
 
 			// Makes finishButton clickable
-			finishButton.GetComponent<CanvasGroup> ().interactable = true;
+			finishButton.interactable = true;
 
 		} else if (normalToggle.isOn) { // if normal game Diff is selected
 
@@ -178,7 +242,7 @@ public class CharacterCreationUIControl : MonoBehaviour {
 			gameDiff = 'N'; // normal
 			
 			// Makes finishButton clickable
-			finishButton.GetComponent<CanvasGroup> ().interactable = true;
+			finishButton.interactable = true;
 
 		} else if (hardToggle.isOn) { // hard game Diff is selected
 
@@ -186,13 +250,13 @@ public class CharacterCreationUIControl : MonoBehaviour {
 			gameDiff = 'H'; // hard
 			
 			// Makes finishButton clickable
-			finishButton.GetComponent<CanvasGroup> ().interactable = true;
+			finishButton.interactable = true;
 
 
 		} else { // if no difficulty is selected
 
 			// make finishButton non clickable
-			finishButton.GetComponent<CanvasGroup> ().interactable = false;
+			finishButton.interactable = false;
 
 		} // if
 
@@ -208,10 +272,10 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		GameManager.gameManager.GDif = gameDiff;
 
 		// Deactivates the sections of Character Creation Menu
-		characterNameMenu.gameObject.SetActive (false);
-		characterTraitsMenu.gameObject.SetActive (false);
-		setupBusinessMenu.gameObject.SetActive (false);
-		selectGameDiffMenu.gameObject.SetActive (false);
+		characterNameMenu.SetActive (false);
+		characterTraitsMenu.SetActive (false);
+		setupBusinessMenu.SetActive (false);
+		selectGameDiffMenu.SetActive (false);
 		
 		// Deactivates Character Creation Menu itself
 		gameObject.SetActive(false); 
@@ -231,16 +295,16 @@ public class CharacterCreationUIControl : MonoBehaviour {
 	public void Exit(){
 
 		// Deactivates the sections of Character Creation Menu
-		characterNameMenu.gameObject.SetActive (false);
-		characterTraitsMenu.gameObject.SetActive (false);
-		setupBusinessMenu.gameObject.SetActive (false);
-		selectGameDiffMenu.gameObject.SetActive (false);
+		characterNameMenu.SetActive (false);
+		characterTraitsMenu.SetActive (false);
+		setupBusinessMenu.SetActive (false);
+		selectGameDiffMenu.SetActive (false);
 
 		// Deactivates Character Creation Menu itself
 		gameObject.SetActive(false); 
 
 		// activates the main menu
-		mainMenu.gameObject.SetActive(true);
+		mainMenu.SetActive(true);
 	} // Exit()
 
 } // class

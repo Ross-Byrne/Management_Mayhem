@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
 	// New Game info - for saving bewteen scenes
 	public string PName { get; set;}
+	public char PGender { get; set;}
 	private string[] pTraits = new string[5];
 	public string[] PTraits {
 		get{ return pTraits;}
