@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d7b5ecb231615438f47b194990594f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCreationMenuPrefab: {fileID: 162498, guid: 9191bec93d012614cb430607dc895e52,
+  characterCreationMenuPrefab: {fileID: 196640, guid: e60d1dcc74a1a0240925e7e0e9a5f209,
     type: 2}
   characterCreationMenu: {fileID: 0}
   StartNewGameButton: {fileID: 11458440}
@@ -1001,7 +1001,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: characterCreationMenuPrefab
+      value: 
+      objectReference: {fileID: 196640, guid: e60d1dcc74a1a0240925e7e0e9a5f209, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148946}
