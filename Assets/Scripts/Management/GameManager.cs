@@ -126,12 +126,13 @@ public class GameManager : MonoBehaviour {
 
 			// Run The Game
 			if(!GameRunning){
-				
+
 				GameRunning = true;
 				
 				// Runs The Business
 				StartCoroutine("RunBusiness");
-				
+
+				Debug.Log ("Coroutine started");
 			} // if
 
 			// update game information
@@ -215,6 +216,7 @@ public class GameManager : MonoBehaviour {
 			// load last save Game
 			SetupLoadedGame();
 		} // if
+
 	} // SetupGame()
 
 
@@ -304,6 +306,8 @@ public class GameManager : MonoBehaviour {
 		// Update Business sign with name of Business
 		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
 
+		// 
+
 		
 	} // SetupLoadedGame()
 
@@ -367,8 +371,12 @@ public class GameManager : MonoBehaviour {
 
 	public void ExitToMainMenu(){
 
+		// Stop running the business
+		StopCoroutine ("RunBusiness");
+	
 		// loads StartMenu Scene (first scene)
 		Application.LoadLevel (0);
+
 	} // ExitToMainMenu()
 
 

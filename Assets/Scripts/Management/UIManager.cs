@@ -145,10 +145,11 @@ public class UIManager : MonoBehaviour {
 		// Deactivates escapeMenu
 		escapeMenu.gameObject.SetActive (false);
 
-
 		// MainUI is finished Setting up
 		IsMainUISetup = true;
 
+		// Make sure game is not paused
+		ExitEscapeMenu ();
 	} // SetUpMainScene()
 
 
