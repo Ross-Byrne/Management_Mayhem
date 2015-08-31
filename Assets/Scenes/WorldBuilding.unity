@@ -87,6 +87,10 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &612607506 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 130404, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
+  m_PrefabInternal: {fileID: 1558581293}
 --- !u!1 &705630676
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +141,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -185,6 +189,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738c0dce217f6004296d887acb1fc7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHeight: 0
+  minHeight: 0
+  topMargin: 10
+--- !u!1001 &755388221
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 465424, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a5470856a0840e54b8523513960a9ced, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1558581293
 Prefab:
   m_ObjectHideFlags: 0
@@ -222,7 +271,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489576, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 197958, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
       propertyPath: m_IsActive
@@ -247,3 +296,19 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1808760841 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 119682, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
+  m_PrefabInternal: {fileID: 1558581293}
+--- !u!114 &1808760843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1808760841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0146676abc74eaa8c2cbcb0101e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueSkyBackground: {fileID: 612607506}

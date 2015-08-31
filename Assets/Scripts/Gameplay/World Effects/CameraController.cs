@@ -5,17 +5,36 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+	/*===================== Variables =====================================================================================*/
+
 	private float dist;
 	private Vector3 mouseOrigin;
-	
+
+	public float maxHeight = 0f;
+	public float minHeight = 0f;
+	public float topMargin = 3f; // dist on Y axis between roof and maxHeight
+
+
+	/*===================== Methods =====================================================================================*/
+
+	/*===================== Start() =====================================================================================*/
+
 	void Start () {
-		dist = transform.position.z;  // Distance camera is above map
-	}
+
+		// Distance camera is above map
+		dist = transform.position.z;  
+
+		// get max height
+		maxHeight = GameManager.gameManager.theBuilding.GetComponent<BusinessBuildingGeneration>().buildingRoof.transform.position.y + topMargin;
+	} // Start()
+
+
+	/*===================== Update() =====================================================================================*/
 	
 	void Update () {
 
 		// get the mouse position when first click
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (1)) {
 
 			// get screen coordinates for where mouse is clicked
 			mouseOrigin = new Vector3(Input.mousePosition.x, Input.mousePosition.y, dist);
@@ -26,7 +45,7 @@ public class CameraController : MonoBehaviour {
 			// keep camera's original x axis, so it doesn't change 
 			mouseOrigin.x = transform.position.x;
 
-		} else if (Input.GetMouseButton (0)) { // while the mouse button is being held down
+		} else if (Input.GetMouseButton (1)) { // while the mouse button is being held down
 
 			// get the mouse's current coordinates (as it moves)
 			var mouseCurrent = new Vector3(Input.mousePosition.x, Input.mousePosition.y, dist);

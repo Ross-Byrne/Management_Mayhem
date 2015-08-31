@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour {
 		GameObject uiManagerObject = (GameObject)Instantiate (uiManagerPrefab);
 
 		// If in Main Scene (or MenuMakingTesting Scene, this is for testing)
-		if (Application.loadedLevelName.Equals ("Main") || Application.loadedLevelName.Equals ("MenuMakingTesting")) {
+		if (Application.loadedLevelName.Equals ("Main") || Application.loadedLevelName.Equals ("MenuMakingTesting") || Application.loadedLevelName.Equals ("WorldBuilding")) {
 
 			// Instanstiate Business
 			GameObject business = (GameObject)Instantiate (businessPrefab);
@@ -81,6 +81,9 @@ public class GameManager : MonoBehaviour {
 			// Get reference for script
 			businessScript = business.GetComponent<Business>();
 			playerScript = player.GetComponent<Player>();
+
+			// Get reference to thebusiness building
+			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
 
 		} // if
 
