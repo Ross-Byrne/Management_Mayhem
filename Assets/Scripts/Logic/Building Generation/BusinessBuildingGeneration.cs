@@ -95,15 +95,11 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		// Add building ground floor
 		AddBuildingLevel ();
 
-		// first level is always unlocked
-		for (int i = 0; i < buildingLevel.GetComponent<BuildingLevel>().RoomsInLevel.Count; i++) {
-
-			// Unlock Rooms on first level
-			Rooms[i].GetComponent<BusinessRoom>().IsLocked = false;
-		} // for
-		
 		//Add building first floor
 		AddBuildingLevel ();
+
+		// Unlock the corrent amount of Rooms
+		UnlockBuildingRooms ();
 
 	} // SetupBuilding()
 	
@@ -136,7 +132,6 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		
 		} // for
 
-		
 		// increase building level counter
 		numOfBuildingLevels++;
 		
@@ -144,6 +139,46 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		buildingRoof.transform.localPosition = new Vector3 (0f, yDisBetweenLevels * numOfBuildingLevels, 0f); // +1 numOfBuildingLevels becuase the roof is always 1 above
 		
 	} // AddBuildingLevel()
+
+
+	/*===================== UnlockBuildingRooms() =====================================================================================*/
+
+	// unlocks all Rooms that are meant to be unlocked
+	public void UnlockBuildingRooms(){
+
+		int numOfRooms = 0;
+
+		try {
+
+			// try get the number of rooms from the business
+			numOfRooms = GameManager.businessScript.BuildingSize;
+		} catch {
+
+			Debug.Log("Couldn't get buildingSize");
+
+			// if cant get number of rooms, use default
+			numOfRooms = 4;
+		} // try catch
+
+		// Unlock the correct number of rooms
+		for (int i = 0; i < numOfRooms; i++) {
+
+			// if there are enough rooms to unlock
+			if(i < Rooms.Count-1){ // unlock rooms up to second last room
+
+				// unlock room
+				Rooms[i].GetComponent<BusinessRoom>().UnlockRoom();
+			} else { // when second last available room is unlocked
+
+				// unlock last room
+				Rooms[i].GetComponent<BusinessRoom>().UnlockRoom();
+
+				// then add another level
+				AddBuildingLevel();
+			} // if
+		} // for
+
+	} // UnlockBuildingRooms()
 
 
 } // class

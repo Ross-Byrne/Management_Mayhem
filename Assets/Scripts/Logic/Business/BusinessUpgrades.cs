@@ -63,6 +63,9 @@ public class BusinessUpgrades : MonoBehaviour {
 		// Upgrades the building by added a new Room
 		GameManager.businessScript.UpgradeBuilding ();
 
+		// Update building to show upgrade
+		GameManager.gameManager.theBuilding.GetComponent<BusinessBuildingGeneration> ().UnlockBuildingRooms ();
+
 		// Update the number of rooms and cost of next upgrade
 		UpdateRoomUpgradeText ();
 

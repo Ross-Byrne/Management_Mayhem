@@ -218,6 +218,15 @@ public class GameManager : MonoBehaviour {
 			SetupLoadedGame();
 		} // if
 
+		// Get reference to thebusiness building
+		theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
+
+		// Generate a list of employees that are applying for a job
+		businessScript.GenerateEmployeeApplicants (10);
+		
+		// Update Business sign with name of Business
+		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
+
 	} // SetupGame()
 
 
@@ -274,12 +283,6 @@ public class GameManager : MonoBehaviour {
 		// Hire a Office Worker
 		businessScript.HireEmployee("Office Worker");
 
-		// Generate a list of employees that are applying for a job
-		businessScript.GenerateEmployeeApplicants (10);
-
-		// Update Business sign with name of Business
-		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
-
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
 	
@@ -303,15 +306,6 @@ public class GameManager : MonoBehaviour {
 
 			Debug.Log ("Game Not Loaded");
 		} // if
-
-		// Generate a list of employees that are applying for a job
-		businessScript.GenerateEmployeeApplicants (10);
-
-		// Update Business sign with name of Business
-		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
-
-		// 
-
 		
 	} // SetupLoadedGame()
 

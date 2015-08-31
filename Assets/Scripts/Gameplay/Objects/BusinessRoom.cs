@@ -37,16 +37,40 @@ public class BusinessRoom : MonoBehaviour {
 		if (!IsLocked) {
 
 			// unlock room
-			lockScreen.SetActive(false);
-
+			UnlockRoom();
 		} else { // otherwise
 
 			// lock room
-			lockScreen.SetActive(true);
-
+			LockRoom();
 		} // if
 
 	} // Start
 
 
+	/*===================== UnlockRoom() =====================================================================================*/
+
+	// Unlocks the Room
+	public void UnlockRoom(){
+
+		// flags room as unlocked
+		IsLocked = false;
+
+		// deactivates the lock screen
+		lockScreen.SetActive(false);
+
+	} // UnlockRoom()
+
+
+	/*===================== LockRoom() =====================================================================================*/
+	
+	// Locks the Room
+	public void LockRoom(){
+		
+		// flags room as locked
+		IsLocked = true;
+		
+		// activates the lock screen
+		lockScreen.SetActive(true);
+		
+	} // LockRoom()
 } // class

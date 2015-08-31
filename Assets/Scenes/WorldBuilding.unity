@@ -220,7 +220,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 177580, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
+    - target: {fileID: 149626, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -228,7 +228,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 149626, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
+    - target: {fileID: 177580, guid: 8140fef451e8d074ca98b058625d8007, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
