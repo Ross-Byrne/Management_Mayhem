@@ -228,6 +228,9 @@ public class GameManager : MonoBehaviour {
 		Debug.Log ("Starting New Game Setup");
 		// set the players new name to players name
 		playerScript.Name = PName;
+
+		// set the players selected gender
+		playerScript.Gender = PGender;
 		
 		// set the players selected traits to players traits
 		for(int i = 0; i < 5; i++){

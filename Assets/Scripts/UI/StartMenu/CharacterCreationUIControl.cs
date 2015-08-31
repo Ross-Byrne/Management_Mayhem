@@ -90,13 +90,10 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		// if players name and gender is valid
 		if (ValidPlayerName () && ValidPlayerGender ()) {
 
-			Debug.Log ("Valid");
 			// activate the next button
 			savePlayerNameGenderButton.interactable = true;
 
 		} else { // if not valid
-
-			Debug.Log ("Invalid");
 
 			// deavtivate next button
 			savePlayerNameGenderButton.interactable = false;
@@ -111,12 +108,12 @@ public class CharacterCreationUIControl : MonoBehaviour {
 		// if input is blank or starts with space
 		if (playerNameInput.text.Equals("") || playerNameInput.text.StartsWith(" ")) { 
 
+			// return false because invalid
 			return false;
 
 		} else { // if it doesn't = a valid name
 
-			Debug.Log ("Valid Name");
-
+			// return true because valid
 			return true;
 
 		}// if
@@ -130,26 +127,26 @@ public class CharacterCreationUIControl : MonoBehaviour {
 
 		if (maleToggle.isOn) { // if selected male
 
-			Debug.Log ("Valid Gender");
-
 			// Saves player gender
 			GameManager.gameManager.PGender = 'M'; // Male
 
+			// return true because valid
 			return true;
 			
-		} else if (femaleToggle.isOn) { // if normal game Diff is selected
+		} else if (femaleToggle.isOn) { // if selected female
 
-			Debug.Log ("Valid Gender");
 			// Saves player gender
 			GameManager.gameManager.PGender = 'F'; // Female
 
+			// return true because valid
 			return true;
 			
-		}  else { // if no difficulty is selected
+		}  else { // if no gender selected
 
 			// Clears Gender
 			GameManager.gameManager.PGender = ' ';
 
+			// return false because invalid
 			return false;
 			
 		} // if

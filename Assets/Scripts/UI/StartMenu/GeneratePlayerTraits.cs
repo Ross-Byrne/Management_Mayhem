@@ -145,10 +145,10 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		int count = 0;
 
 		// loops through the array of toggles that are generated
-		foreach(Toggle toggle in toggles){
+		for(int i = 0; i < Toggles.Length; i++){
 
 			// checks to see which toggles are selected or not
-			if(toggle.isOn == true){ // if trait toggle selected
+			if(Toggles[i].isOn == true){ // if trait toggle selected
 
 				if(numberSelected < 5){ // only add 5 trait indexes to array
 
@@ -167,10 +167,10 @@ public class GeneratePlayerTraits : MonoBehaviour {
 		// can only select 5 traits. if 5, can continue
 		if(numberSelected == 5){
 
-			nextButton.GetComponent<CanvasGroup> ().interactable = true;
+			nextButton.interactable = true;
 		} else { // if > or < then 5, cant continue
 
-			nextButton.GetComponent<CanvasGroup> ().interactable = false;
+			nextButton.interactable = false;
 		} // if
 
 	} // CheckSelected()
@@ -181,10 +181,10 @@ public class GeneratePlayerTraits : MonoBehaviour {
 	// resets all of the toggles to off
 	public void ResetTraits(){
 
-		foreach (Toggle toggle in toggles) {
+		for (int i = 0; i < Toggles.Length; i++) {
 
 			// reset toggles by making them all turned off
-			toggle.isOn = false;
+			Toggles[i].isOn = false;
 		} // for
 
 	} // ResetTraits()
