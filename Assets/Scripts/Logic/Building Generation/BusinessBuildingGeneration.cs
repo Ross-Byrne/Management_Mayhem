@@ -146,6 +146,9 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		
 		// move the Building Roof Up to accomidate new Level
 		buildingRoof.transform.localPosition = new Vector3 (0f, yDisBetweenLevels * numOfBuildingLevels, 0f); // +1 numOfBuildingLevels becuase the roof is always 1 above
+
+		// Tell the camera controller where the roof is
+		GameManager.gameManager.mainCamera.GetComponent<CameraController> ().UpdateMaxHeight (buildingRoof.transform.position.y);
 		
 	} // AddBuildingLevel()
 

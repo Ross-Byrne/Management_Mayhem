@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31d0fc5e2f04984db0b5bf1fa7d427f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   uiManagerPrefab: {fileID: 119308, guid: c1872a56673cf2b4b9de5d4d960c46c5, type: 2}
   businessPrefab: {fileID: 132138, guid: 126134e2963f7904391338c3e7a017ea, type: 2}
   playerPrefab: {fileID: 153886, guid: 3e0b0ed7e61d7da429497722591e53bc, type: 2}
+  theBuilding: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

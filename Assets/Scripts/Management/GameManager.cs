@@ -6,6 +6,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 	/*===================== GameObjects =====================================================================================*/
 
+	public GameObject mainCamera;
 	public GameObject uiManagerPrefab;
 	public GameObject businessPrefab;
 	public GameObject playerPrefab;
@@ -84,6 +85,9 @@ public class GameManager : MonoBehaviour {
 			businessScript = business.GetComponent<Business>();
 			playerScript = player.GetComponent<Player>();
 
+			// Get reference to thebusiness building
+			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
+
 		} // if
 
 		// get references for scripts
@@ -113,8 +117,12 @@ public class GameManager : MonoBehaviour {
 			// this if makes sure only the main gameManager runs its code
 			if(gameManager == this){
 
+				// Get reference for main camera
+				mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
 				// Sets up the game
 				SetupGame();
+		
 			} // if
 		} // if
 	} // OnLevelWasLoaded()

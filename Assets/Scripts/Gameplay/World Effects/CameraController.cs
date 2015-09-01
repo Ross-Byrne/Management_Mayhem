@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour {
 			// keep camera's original x axis, so it doesn't change 
 			mouseOrigin.x = transform.position.x;
 
-		} else if (Input.GetMouseButton (1)) { // while the mouse button is being held down
+		} else if (Input.GetMouseButton (1) && maxHeight > 2f) { // while the mouse button is being held down and maxHeight is greater then 2f
 
 			// get the mouse's current coordinates (as it moves)
 			var mouseCurrent = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, zAxis);
@@ -142,6 +142,15 @@ public class CameraController : MonoBehaviour {
 		}*/
 
 	} // Update()
+
+
+	/*===================== UpdateMaxHeight() =====================================================================================*/
+
+	public void UpdateMaxHeight(float roofHeight){
+
+		maxHeight = roofHeight + topMargin;
+
+	} // UpdateMaxHeight()
 	
 	
 } // class
