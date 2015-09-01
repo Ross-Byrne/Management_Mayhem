@@ -30,6 +30,15 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		get{ return rooms;}
 		set{ rooms = value;}
 	}
+
+	// List of Building Levels in Building
+	[SerializeField]
+	private List<GameObject> buildingLevels = new List<GameObject> ();
+	public List<GameObject> BuildingLevels {
+		
+		get{ return buildingLevels;}
+		set{ buildingLevels = value;}
+	}
 	
 	/*===================== Variables =====================================================================================*/
 	
@@ -58,7 +67,7 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		SetupBuilding ();
 		
 	} // Awake()
-	
+
 	
 	/*===================== SetupBuilding() =====================================================================================*/
 	
@@ -98,9 +107,6 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		//Add building first floor
 		AddBuildingLevel ();
 
-		// Unlock the corrent amount of Rooms
-		UnlockBuildingRooms ();
-
 	} // SetupBuilding()
 	
 	
@@ -132,6 +138,9 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		
 		} // for
 
+		// save reference to building level
+		BuildingLevels.Add (buildingLevel);
+
 		// increase building level counter
 		numOfBuildingLevels++;
 		
@@ -152,6 +161,7 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 
 			// try get the number of rooms from the business
 			numOfRooms = GameManager.businessScript.BuildingSize;
+
 		} catch {
 
 			Debug.Log("Couldn't get buildingSize");
@@ -162,6 +172,13 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 
 		// Unlock the correct number of rooms
 		for (int i = 0; i < numOfRooms; i++) {
+
+			// if there are no rooms
+			if(Rooms.Count == 0){
+
+				// Add first floor
+				AddBuildingLevel();
+			} // if
 
 			// if there are enough rooms to unlock
 			if(i < Rooms.Count-1){ // unlock rooms up to second last room
@@ -179,6 +196,43 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		} // for
 
 	} // UnlockBuildingRooms()
+
+
+	/*===================== ResetBuilding() =====================================================================================*/
+
+	// resets the number of rooms and levels back to the default
+	public void ResetBuilding(){
+
+		// destroys and removes Rooms from list, start at the back (better performance on list)
+		for (int i = Rooms.Count; i > 0; i--) {
+			
+			// destroys Room gameobject
+			Destroy (Rooms [i-1]);
+			
+			// removes destroyed Room from list
+			Rooms.Remove (Rooms [i-1]);
+		
+		} // for
+
+		// destroys and removes buildingLevels from list, start at the back (better performance on list)
+		for (int i = BuildingLevels.Count; i > 0; i--) {
+			
+			// destroys buildinglevel gameobject
+			Destroy (BuildingLevels [i-1]);
+			
+			// removes destroyed buildinglevel from list
+			BuildingLevels.Remove (BuildingLevels [i-1]);
+
+			numOfBuildingLevels--;
+		} // for
+
+		// Add ground floor
+		AddBuildingLevel ();
+
+		// add first floor
+		AddBuildingLevel ();
+
+	} // ResetBuilding()
 
 
 } // class

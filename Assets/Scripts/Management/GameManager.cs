@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
 	public float NormalGameSpeed { get; set;}
 	public float FastGameSpeed { get; set;}
 
+	public bool CameraMoving { get; set;} // to keep track of when camera is moving
+
 	public char GameDifficulty { get; set;}
 	public bool IsNewGameCreated { get; set;}
 	public bool IsGameLoaded { get; set;}
@@ -81,9 +83,6 @@ public class GameManager : MonoBehaviour {
 			// Get reference for script
 			businessScript = business.GetComponent<Business>();
 			playerScript = player.GetComponent<Player>();
-
-			// Get reference to thebusiness building
-			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
 
 		} // if
 
@@ -221,15 +220,6 @@ public class GameManager : MonoBehaviour {
 			SetupLoadedGame();
 		} // if
 
-		// Get reference to thebusiness building
-		theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
-
-		// Generate a list of employees that are applying for a job
-		businessScript.GenerateEmployeeApplicants (10);
-		
-		// Update Business sign with name of Business
-		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
-
 	} // SetupGame()
 
 
@@ -286,6 +276,18 @@ public class GameManager : MonoBehaviour {
 		// Hire a Office Worker
 		businessScript.HireEmployee("Office Worker");
 
+		// Get reference to thebusiness building
+		theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
+
+		// Load state of building
+		theBuilding.GetComponent<BusinessBuildingGeneration>().UnlockBuildingRooms();
+		
+		// Generate a list of employees that are applying for a job
+		businessScript.GenerateEmployeeApplicants (10);
+		
+		// Update Business sign with name of Business
+		GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
+
 		// set IsNewGameCreated to false after new game setup
 		IsNewGameCreated = false;
 	
@@ -296,7 +298,6 @@ public class GameManager : MonoBehaviour {
 	
 	void SetupLoadedGame(){
 
-		
 		Debug.Log ("Loading Game");
 
 		// Loads last saved game
@@ -305,7 +306,26 @@ public class GameManager : MonoBehaviour {
 		if (gameManager.IsGameLoaded) {
 
 			Debug.Log ("Game Loaded");
-		} else {
+
+			// Get reference to thebusiness building
+			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
+
+			// reset the building
+			theBuilding.GetComponent<BusinessBuildingGeneration>().ResetBuilding();
+			
+			// Generate a list of employees that are applying for a job
+			businessScript.GenerateEmployeeApplicants (10);
+			
+			// Update Business sign with name of Business
+			GameObject.FindWithTag("BuildingSign").GetComponent<BuildingSign> ().UpdateBusinessNameSign (businessScript.Name);
+
+			// Load the state of the building
+			theBuilding.GetComponent<BusinessBuildingGeneration>().UnlockBuildingRooms();
+
+		} else { // if game didnt load
+
+			// Exit to main menu
+			ExitToMainMenu();
 
 			Debug.Log ("Game Not Loaded");
 		} // if

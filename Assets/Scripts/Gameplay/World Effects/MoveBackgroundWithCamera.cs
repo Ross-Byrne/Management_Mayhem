@@ -21,8 +21,8 @@ public class MoveBackgroundWithCamera : MonoBehaviour {
 
 	void Update () {
 	
-		// while the mouse button is being held down
-		if (Input.GetMouseButton (1)) { 
+		// while the camera is flagged as moving
+		if (GameManager.gameManager.CameraMoving) { 
 
 			// save position of background
 			pos = blueSkyBackground.transform.position;
