@@ -26,6 +26,9 @@ public class BusinessRoom : MonoBehaviour {
 		// Rooms are locked by default
 		IsLocked = true;
 
+		// Rooms are empty by default
+		Type = "Empty";
+
 	} // Awake()
 
 
