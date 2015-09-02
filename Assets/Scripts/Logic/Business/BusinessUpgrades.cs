@@ -33,7 +33,7 @@ public class BusinessUpgrades : MonoBehaviour {
 	public void SetUpMenu(){
 		
 		// Open the AddRooms Menu by default
-		businessUpgradeMenuWindow.GetComponent<BusinessUpgradesMenuControl> ().AddRoomControl ();
+		gameObject.GetComponent<BusinessUpgradesMenuControl> ().AddRoomControl ();
 
 		// Check if player has a drug lab
 		if (GameManager.gameManager.CanStartMakingDrugs) { // if yes

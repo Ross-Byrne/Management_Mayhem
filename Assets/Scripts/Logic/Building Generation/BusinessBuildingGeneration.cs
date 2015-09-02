@@ -41,7 +41,15 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 	}
 	
 	/*===================== Variables =====================================================================================*/
-	
+
+	// Array of Room types
+	private string[] roomNames = { "Boss' Office", "Reception", "Loading Bay", "Office", "Production Zone", "Lab" };
+	public string[] RoomNames {
+		
+		get{ return roomNames;}
+		set{ roomNames = value;}
+	}
+
 	// distance each building level is to be places apart on Y axis
 	private float yDisBetweenLevels = 1.92f;
 	

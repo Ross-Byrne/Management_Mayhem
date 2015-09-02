@@ -46,7 +46,7 @@ public class ManageOperationsMenuControl : MonoBehaviour {
 		drugLabMenu.SetActive (false);
 		
 		// Update Heading Text
-		headingText.text = "Prodution";
+		headingText.text = "Production";
 		
 		// Turn on Menu
 		productionMenu.SetActive (true);

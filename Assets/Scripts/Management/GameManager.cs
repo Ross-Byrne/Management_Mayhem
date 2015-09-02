@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour {
 			// Get reference to thebusiness building
 			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
 
+			// Get reference for main camera
+			mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
 		} // if
 
 		// get references for scripts

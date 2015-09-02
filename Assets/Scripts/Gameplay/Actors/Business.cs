@@ -66,7 +66,7 @@ public class Business : MonoBehaviour {
 			buildingUpgradeCost = 0;
 
 			// the cost of every room upgrade is 1000 more then the last
-			buildingUpgradeCost = BuildingSize * 1000;
+			buildingUpgradeCost = (BuildingSize + 1) * 1000;
 
 			return buildingUpgradeCost;
 		}
