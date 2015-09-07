@@ -57,7 +57,7 @@ public class MainUIControl : MonoBehaviour {
 
 	/*===================== InformationBarUpdate() =====================================================================================*/
 
-	public void InformationBarUpdate(Player player, Business business){
+	public void InformationBarUpdate(Player player, Business business, TimeDateManager timeDateManager){
 
 		StringBuilder str = new StringBuilder ();
 
@@ -81,6 +81,9 @@ public class MainUIControl : MonoBehaviour {
 		// Update business Costs
 		costsText.text = str.Append ("$").Append (business.Costs.ToString("F")).ToString ();
 		str.Length = 0; // clear string
+
+		// update world date
+		worldDateText.text = timeDateManager.worldDate.Date ();
 
 	} // InformationBarUpdate()
 
@@ -197,8 +200,9 @@ public class MainUIControl : MonoBehaviour {
 
 	/*===================== WorldInformationUpdate() =====================================================================================*/
 	
-	public void WorldInformationUpdate(){
+	public void WorldInformationUpdate(GameManager gameManager){
 	
+
 		
 	} // WorldInformationUpdate()
 

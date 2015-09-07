@@ -3,7 +3,84 @@ using System.Collections;
 
 // Controls the time and date of the game
 
+// Date structure to hold the worlds date
+
+public struct DateStruct {
+
+	public int Year { get; set; }
+	public int Month { get; set; }
+	public int Day { get; set; }
+	
+	public string Date(){
+
+		// Returns the world date in DD/MM/YYYY formate
+		return string.Format ("{0}/{1}/{2}", Day, Month, Year);
+
+	} // Date()
+
+} // DateStruct
+
 public class TimeDateManager : MonoBehaviour {
+
+	/*===================== Variables =====================================================================================*/
+
+	public DateStruct worldDate;
+
+
+	/*===================== Methods =====================================================================================*/
+	
+	/*===================== SetUpWorldDate() =====================================================================================*/
+
+	// to initialise the world date
+	public void SetUpWorldDate(int day, int month, int year) {
+
+		// set day of month
+		worldDate.Day = day;
+
+		// set month
+		worldDate.Month = month;
+
+		// set year
+		worldDate.Year = year;
+
+	} // SetUpWorldDate()
+
+
+	/*===================== MoveToNextDay() =====================================================================================*/
+
+	// to progress the date forward, day by day
+	public void MoveToNextDay() {
+
+		// if the next day of the month is a valid date 
+		if (ValidateDate (worldDate.Day + 1, worldDate.Month, worldDate.Year)) {
+
+			// increase the day of the month by One
+			worldDate.Day++;
+
+		} else { // if not a valid date
+
+			// Set day of month back to 1
+			worldDate.Day = 1;
+
+			// if month is equal to 12
+			if(worldDate.Month == 12){
+
+				// set month back to 1
+				worldDate.Month = 1;
+				
+				// increase year by one
+				worldDate.Year++;
+
+			} else { // if month is not equal to 12
+
+				// increase month by One
+				worldDate.Month++;
+
+			} // if
+		} // if
+
+	} // MoveToNextDay()
+
 
 	/*===================== DaysInMonth() =====================================================================================*/
 

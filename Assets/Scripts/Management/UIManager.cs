@@ -184,30 +184,4 @@ public class UIManager : MonoBehaviour {
 	} // ExitEscapeMenu()
 
 
-	/*===================== DisplayNewGameDetails() =====================================================================================*/
-
-	public void DisplayNewGameDetails(Player player, Business business, GameManager gameManager)
-	{
-	/*	mainUI.GetComponentInChildren<Text>().text = player.Name + "\n"
-			+ player.Traits[0] + "\n"
-			+ player.Traits[1] + "\n"
-			+ player.Traits[2] + "\n"
-			+ player.Traits[3] + "\n"
-			+ player.Traits[4] + "\n"
-			+ business.Name + "\n";
-*/
-		 switch (gameManager.GameDifficulty) 
-		{
-		case 'E':
-				mainUI.GetComponentInChildren<Text>().text += "Easy";
-				break;
-		case 'N':
-				mainUI.GetComponentInChildren<Text>().text += "Normal";
-				break;
-		case 'H':
-				mainUI.GetComponentInChildren<Text>().text += "Hard";
-				break;
-		} // Switch
-	} // DisplayNewGameDetails()
-	
 } // class

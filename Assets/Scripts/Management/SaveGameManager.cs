@@ -59,6 +59,9 @@ public class SaveGameManager : MonoBehaviour {
 		} // for
 		
 		// Saving Game Info
+		data.worldDay = GameManager.timeDateManager.worldDate.Day;
+		data.worldMonth = GameManager.timeDateManager.worldDate.Month;
+		data.worldYear = GameManager.timeDateManager.worldDate.Year;
 		data.gameDifficulty = GameManager.gameManager.GameDifficulty;
 		data.canStartSellingDrugs = GameManager.gameManager.CanStartSellingDrugs;
 		data.canStartMakingDrugs = GameManager.gameManager.CanStartMakingDrugs;
@@ -144,6 +147,9 @@ public class SaveGameManager : MonoBehaviour {
 				} // for
 
 				// Loading Game Info
+				GameManager.timeDateManager.worldDate.Day = data.worldDay;
+				GameManager.timeDateManager.worldDate.Month = data.worldMonth;
+				GameManager.timeDateManager.worldDate.Year = data.worldYear;
 				GameManager.gameManager.GameDifficulty = data.gameDifficulty;
 				GameManager.gameManager.CanStartSellingDrugs = data.canStartSellingDrugs;
 				GameManager.gameManager.CanStartMakingDrugs = data.canStartMakingDrugs;
@@ -215,6 +221,9 @@ class GameData
 	public List<string> employeePosition = new List<string> ();
 
 	// For Saving Game Info
+	public int worldDay;
+	public int worldMonth;
+	public int worldYear;
 	public char gameDifficulty;
 	public bool canStartSellingDrugs;
 	public bool canStartMakingDrugs;

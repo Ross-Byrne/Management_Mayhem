@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager gameManager = null;
 	public static UIManager uiManager;
 	public static SaveGameManager saveGameManager;
+	public static TimeDateManager timeDateManager;
 
 	public static Player playerScript;
 	public static Business businessScript;
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour {
 			// Get reference for script
 			businessScript = business.GetComponent<Business>();
 			playerScript = player.GetComponent<Player>();
+			timeDateManager = gameObject.GetComponent<TimeDateManager>();
 
 			// Get reference to thebusiness building
 			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
@@ -150,7 +152,7 @@ public class GameManager : MonoBehaviour {
 			} // if
 
 			// update game information
-			uiManager.mainUI.GetComponent<MainUIControl>().InformationBarUpdate(playerScript, businessScript);
+			uiManager.mainUI.GetComponent<MainUIControl>().InformationBarUpdate(playerScript, businessScript, timeDateManager);
 
 			// Update player info
 			uiManager.mainUI.GetComponent<MainUIControl>().PlayerInformationUpdate(playerScript);
@@ -272,6 +274,9 @@ public class GameManager : MonoBehaviour {
 			businessScript.BankAccount = 10000f;
 			break;
 		} // switch
+
+		// Set Default game date(DD/MM/YYYY)
+		timeDateManager.SetUpWorldDate (01, 01, 2016);
 
 		// Hire 4 Employees. The default starting number of employees
 
