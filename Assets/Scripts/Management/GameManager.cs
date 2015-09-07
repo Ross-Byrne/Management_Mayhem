@@ -5,8 +5,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	/*===================== GameObjects =====================================================================================*/
-
-	public GameObject mainCamera;
+	
 	public GameObject uiManagerPrefab;
 	public GameObject businessPrefab;
 	public GameObject playerPrefab;
@@ -89,10 +88,7 @@ public class GameManager : MonoBehaviour {
 
 			// Get reference to thebusiness building
 			theBuilding = GameObject.FindGameObjectWithTag("BusinessBuilding");
-
-			// Get reference for main camera
-			mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-
+		
 		} // if
 
 		// get references for scripts
@@ -122,9 +118,6 @@ public class GameManager : MonoBehaviour {
 			// this if makes sure only the main gameManager runs its code
 			if(gameManager == this){
 
-				// Get reference for main camera
-				mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-
 				// Sets up the game
 				SetupGame();
 		
@@ -148,7 +141,6 @@ public class GameManager : MonoBehaviour {
 				// Runs The Business
 				StartCoroutine("RunBusiness");
 
-				Debug.Log ("Coroutine started");
 			} // if
 
 			// update game information
@@ -210,6 +202,9 @@ public class GameManager : MonoBehaviour {
 
 			// get cost of building Maintenance
 			businessScript.Costs += businessScript.BuildingMaintenance;
+
+			// progress to the next day
+			timeDateManager.MoveToNextDay();
 
 			yield return new WaitForSeconds(GameSpeed);
 		} // while

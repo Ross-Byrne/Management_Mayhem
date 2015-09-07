@@ -7,6 +7,10 @@ using System.Collections.Generic;
 public class BusinessBuildingGeneration : MonoBehaviour {
 
 	/*===================== GameObjects =====================================================================================*/
+
+	// Main Scene Camera
+
+	public GameObject mainCamera;
 	
 	// Building Parts Prefabs
 	
@@ -68,15 +72,18 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 	/*===================== Methods =====================================================================================*/
 	
 	/*===================== Awake() =====================================================================================*/
-	
+
 	void Awake(){
-		
+
+		// Get reference for main camera
+		mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
 		// Set up the building (this will be somewhere else later)
 		SetupBuilding ();
 		
 	} // Awake()
 
-	
+
 	/*===================== SetupBuilding() =====================================================================================*/
 	
 	// instansiates the business building in the game
@@ -156,7 +163,7 @@ public class BusinessBuildingGeneration : MonoBehaviour {
 		buildingRoof.transform.localPosition = new Vector3 (0f, yDisBetweenLevels * numOfBuildingLevels, 0f); // +1 numOfBuildingLevels becuase the roof is always 1 above
 
 		// Tell the camera controller where the roof is
-		GameManager.gameManager.mainCamera.GetComponent<CameraController> ().UpdateMaxHeight (buildingRoof.transform.position.y);
+		mainCamera.GetComponent<CameraController> ().UpdateMaxHeight (buildingRoof.transform.position.y);
 		
 	} // AddBuildingLevel()
 
