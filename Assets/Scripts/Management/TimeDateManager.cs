@@ -4,7 +4,7 @@ using System.Collections;
 // Controls the time and date of the game
 
 // Date structure to hold the worlds date
-
+ 
 public struct DateStruct {
 
 	public int Year { get; set; }
