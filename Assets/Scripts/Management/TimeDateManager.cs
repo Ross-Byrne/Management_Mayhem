@@ -20,97 +20,109 @@ public struct DateStruct {
 
 } // DateStruct
 
-public class TimeDateManager : MonoBehaviour {
+public class TimeDateManager : MonoBehaviour
+{
 
-	/*===================== Variables =====================================================================================*/
+    /*===================== Variables =====================================================================================*/
 
-	public DateStruct worldDate;
-
-
-	/*===================== Methods =====================================================================================*/
-	
-	/*===================== SetUpWorldDate() =====================================================================================*/
-
-	// to initialise the world date
-	public void SetUpWorldDate(int day, int month, int year) {
-
-		// set day of month
-		worldDate.Day = day;
-
-		// set month
-		worldDate.Month = month;
-
-		// set year
-		worldDate.Year = year;
-
-	} // SetUpWorldDate()
+    public DateStruct worldDate;
 
 
-	/*===================== MoveToNextDay() =====================================================================================*/
+    /*===================== Methods =====================================================================================*/
 
-	// to progress the date forward, day by day
-	public void MoveToNextDay() {
+    /*===================== SetUpWorldDate() =====================================================================================*/
 
-		// if the next day of the month is a valid date 
-		if (ValidateDate (worldDate.Day + 1, worldDate.Month, worldDate.Year)) {
+    // to initialise the world date
+    public void SetUpWorldDate(int day, int month, int year)
+    {
 
-			// increase the day of the month by One
-			worldDate.Day++;
+        // set day of month
+        worldDate.Day = day;
 
-		} else { // if not a valid date
+        // set month
+        worldDate.Month = month;
 
-			// Set day of month back to 1
-			worldDate.Day = 1;
+        // set year
+        worldDate.Year = year;
 
-			// if month is equal to 12
-			if(worldDate.Month == 12){
-
-				// set month back to 1
-				worldDate.Month = 1;
-				
-				// increase year by one
-				worldDate.Year++;
-
-			} else { // if month is not equal to 12
-
-				// increase month by One
-				worldDate.Month++;
-
-			} // if
-		} // if
-
-	} // MoveToNextDay()
+    } // SetUpWorldDate()
 
 
-	/*===================== DaysInMonth() =====================================================================================*/
+    /*===================== MoveToNextDay() =====================================================================================*/
 
-	// gets the year and month and returns the max number of
-	// days that can be in that month
-	int DaysInMonth(int month, int year){
+    // to progress the date forward, day by day
+    public void MoveToNextDay()
+    {
 
-		int[] days = { 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-		
-		// if leap year, febuary has 29 instead of 28 days
-		days[1] = ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) ? 29 : 28;
-		
-		return days[month - 1];
-	} // DaysInMonth()
+        // if the next day of the month is a valid date 
+        if (ValidateDate(worldDate.Day + 1, worldDate.Month, worldDate.Year))
+        {
+
+            // increase the day of the month by One
+            worldDate.Day++;
+
+        }
+        else
+        { // if not a valid date
+
+            // Set day of month back to 1
+            worldDate.Day = 1;
+
+            // if month is equal to 12
+            if (worldDate.Month == 12)
+            {
+
+                // set month back to 1
+                worldDate.Month = 1;
+
+                // increase year by one
+                worldDate.Year++;
+
+            }
+            else
+            { // if month is not equal to 12
+
+                // increase month by One
+                worldDate.Month++;
+
+            } // if
+        } // if
+
+    } // MoveToNextDay()
 
 
-	/*===================== ValidateDate() =====================================================================================*/
+    /*===================== DaysInMonth() =====================================================================================*/
 
-	// checks to make sure that the date is valid
-	// if it is possible to have the number of days
-	// stated in the month of the year given
-	// then date is valid and returns true
-	public bool ValidateDate(int day, int month, int year){
+    // gets the year and month and returns the max number of
+    // days that can be in that month
+    int DaysInMonth(int month, int year)
+    {
 
-		// Validates the date
-		if (day >= 1 && day <= DaysInMonth(month, year)){
-			return true;
-		} // if
-		
-		return false;
-	} // ValidateDate()
+        int[] days = { 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+        // if leap year, febuary has 29 instead of 28 days
+        days[1] = ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) ? 29 : 28;
+
+        return days[month - 1];
+    } // DaysInMonth()
+
+
+    /*===================== ValidateDate() =====================================================================================*/
+
+    // checks to make sure that the date is valid
+    // if it is possible to have the number of days
+    // stated in the month of the year given
+    // then date is valid and returns true
+    public bool ValidateDate(int day, int month, int year)
+    {
+
+        // Validates the date
+        if (day >= 1 && day <= DaysInMonth(month, year))
+        {
+            return true;
+        } // if
+
+        return false;
+    } // ValidateDate()
 
 } // class
