@@ -51,26 +51,21 @@ public class TimeDateManager : MonoBehaviour
     /*===================== MoveToNextDay() =====================================================================================*/
 
     // to progress the date forward, day by day
-    public void MoveToNextDay()
-    {
+    public void MoveToNextDay() {
 
         // if the next day of the month is a valid date 
-        if (ValidateDate(worldDate.Day + 1, worldDate.Month, worldDate.Year))
-        {
+        if (ValidateDate(worldDate.Day + 1, worldDate.Month, worldDate.Year)) {
 
             // increase the day of the month by One
             worldDate.Day++;
 
-        }
-        else
-        { // if not a valid date
+        } else { // if not a valid date
 
             // Set day of month back to 1
             worldDate.Day = 1;
 
             // if month is equal to 12
-            if (worldDate.Month == 12)
-            {
+            if (worldDate.Month == 12) {
 
                 // set month back to 1
                 worldDate.Month = 1;
@@ -78,9 +73,7 @@ public class TimeDateManager : MonoBehaviour
                 // increase year by one
                 worldDate.Year++;
 
-            }
-            else
-            { // if month is not equal to 12
+            } else { // if month is not equal to 12
 
                 // increase month by One
                 worldDate.Month++;
@@ -95,8 +88,7 @@ public class TimeDateManager : MonoBehaviour
 
     // gets the year and month and returns the max number of
     // days that can be in that month
-    int DaysInMonth(int month, int year)
-    {
+    int DaysInMonth(int month, int year) {
 
         int[] days = { 31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
@@ -113,12 +105,11 @@ public class TimeDateManager : MonoBehaviour
     // if it is possible to have the number of days
     // stated in the month of the year given
     // then date is valid and returns true
-    public bool ValidateDate(int day, int month, int year)
-    {
+    public bool ValidateDate(int day, int month, int year) {
 
         // Validates the date
-        if (day >= 1 && day <= DaysInMonth(month, year))
-        {
+        if (day >= 1 && day <= DaysInMonth(month, year)) {
+
             return true;
         } // if
 
