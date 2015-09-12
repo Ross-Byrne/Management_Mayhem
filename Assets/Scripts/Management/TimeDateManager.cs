@@ -20,8 +20,7 @@ public struct DateStruct {
 
 } // DateStruct
 
-public class TimeDateManager : MonoBehaviour
-{
+public class TimeDateManager : MonoBehaviour {
 
     /*===================== Variables =====================================================================================*/
 
@@ -33,8 +32,7 @@ public class TimeDateManager : MonoBehaviour
     /*===================== SetUpWorldDate() =====================================================================================*/
 
     // to initialise the world date
-    public void SetUpWorldDate(int day, int month, int year)
-    {
+    public void SetUpWorldDate(int day, int month, int year) {
 
         // set day of month
         worldDate.Day = day;
