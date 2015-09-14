@@ -13,7 +13,6 @@ public class Business : MonoBehaviour {
 	/*===================== Scripts =====================================================================================*/
 
 	public CharacterInfo characterInfoScript;
-    public GenerateProducts generateProductsScript;
 
 
 	/*===================== Variables =====================================================================================*/
@@ -35,7 +34,7 @@ public class Business : MonoBehaviour {
 	public float MoneyEarned { get; set;}
 	public float Profits { get; set;}
 	public float Costs { get; set;}
-    public Product[] products;
+    public List<GameObject> products = new List<GameObject>();
 
 	
 	/*===================== List of Employee GameObjects =====================================================================================*/
@@ -180,13 +179,12 @@ public class Business : MonoBehaviour {
 
         // get Script References
         characterInfoScript = gameObject.GetComponent<CharacterInfo>();
-        generateProductsScript = gameObject.GetComponent<GenerateProducts>();
 
         // Sets up business by setting variables to default values
         SetupBusiness();
 
-        // setup size of products array
-       // products = new Products[generateProductsScript.GetNumberOfProducts()];
+        // Populate products array with products
+        gameObject.GetComponent<GenerateProducts>().SetUpProducts(products);
 
     } // Awake()
 

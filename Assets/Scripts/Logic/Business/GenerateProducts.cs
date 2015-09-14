@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 // Script that handles the generation of products the business can produce.
 
 public class GenerateProducts : MonoBehaviour {
+
+    /*===================== GameObjects =====================================================================================*/
+
+    public GameObject productPrefab;
+
 
     /*===================== Variables =====================================================================================*/
 
@@ -18,25 +24,18 @@ public class GenerateProducts : MonoBehaviour {
 
     /*===================== Methods =====================================================================================*/
 
-    /*===================== GetNumberOfProducts() =====================================================================================*/
+    /*===================== SetUpProducts() =====================================================================================*/
 
-    public int GetNumberOfProducts() {
+    // sets up the product values
+    public void SetUpProducts(List<GameObject> products) {
+
+        Debug.Log("Entered");
+
 
         numOfProducts = 0;
 
         // get the number of products, based on number of names
         numOfProducts = names.Length;
-
-        // return number of products
-        return numOfProducts;
-
-    } // GetNumberOfProducts()
-
-
-    /*===================== SetUpProducts() =====================================================================================*/
-
-    // sets up the product values
-    public void SetUpProducts(Product[] products) {
 
         // if there aren't enough values to populate products
         if(resourceCost.Length != numOfProducts ||
@@ -48,23 +47,32 @@ public class GenerateProducts : MonoBehaviour {
 
         } // if
 
+        Debug.Log("Passed");
+
         // populate product values
         for(int i = 0; i < numOfProducts; i++) {
 
+            // instantiate product
+            GameObject newProduct = (GameObject)Instantiate(productPrefab);
+
             // give products their number
-            products[i].Number = i + 1;
-            
+            newProduct.GetComponent<Product>().Number = i + 1;
+
             // give products their names
-            products[i].Name = names[i];
+            newProduct.GetComponent<Product>().Name = names[i];
 
             // give products thier resource cost
-            products[i].ResourceCost = resourceCost[i];
+            newProduct.GetComponent<Product>().ResourceCost = resourceCost[i];
 
             // give products their power usage
-            products[i].PowerUsage = powerUsage[i];
+            newProduct.GetComponent<Product>().PowerUsage = powerUsage[i];
 
             // calculate products market value
-            products[i].MarketValue = ((resourceCost[i] * costOfResourceUnits) + profit[i]);
+            newProduct.GetComponent<Product>().MarketValue = ((resourceCost[i] * costOfResourceUnits) + profit[i]);
+
+            products.Add(newProduct);
+
+            Debug.Log("Added Product");
 
         } // for
 
