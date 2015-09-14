@@ -13,6 +13,7 @@ public class Business : MonoBehaviour {
 	/*===================== Scripts =====================================================================================*/
 
 	public CharacterInfo characterInfoScript;
+    public GenerateProducts generateProductsScript;
 
 
 	/*===================== Variables =====================================================================================*/
@@ -34,6 +35,7 @@ public class Business : MonoBehaviour {
 	public float MoneyEarned { get; set;}
 	public float Profits { get; set;}
 	public float Costs { get; set;}
+    public Product[] products;
 
 	
 	/*===================== List of Employee GameObjects =====================================================================================*/
@@ -170,25 +172,30 @@ public class Business : MonoBehaviour {
 	}
 
 
-	/*===================== Methods =====================================================================================*/
+    /*===================== Methods =====================================================================================*/
 
-	/*===================== Awake() =====================================================================================*/
+    /*===================== Awake() =====================================================================================*/
 
-	void Awake()
-	{
-		// get Script References
-		characterInfoScript = gameObject.GetComponent<CharacterInfo>();
+    void Awake() {
 
-		// Sets up business by setting variables to default values
-		SetupBusiness();
-	} // Awake()
+        // get Script References
+        characterInfoScript = gameObject.GetComponent<CharacterInfo>();
+        generateProductsScript = gameObject.GetComponent<GenerateProducts>();
+
+        // Sets up business by setting variables to default values
+        SetupBusiness();
+
+        // setup size of products array
+       // products = new Products[generateProductsScript.GetNumberOfProducts()];
+
+    } // Awake()
 
 
 	/*===================== SetupBusiness() =====================================================================================*/
 
 	// sets up the business to its default values
-	public void SetupBusiness()
-	{
+	public void SetupBusiness() {
+
 		Name = "";
 		BankAccount = 0f;
 		Reputation = 0; // +25 because of 100 for maintenance and -25 because salary is 800
@@ -200,6 +207,7 @@ public class Business : MonoBehaviour {
 		BusinessAge = 0;
 		ProductivityBonus = 0;
 		EquipmentUpgrades = 0;
+
 	} // SetupBusiness()
 
 
