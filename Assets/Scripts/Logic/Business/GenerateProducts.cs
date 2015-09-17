@@ -27,7 +27,7 @@ public class GenerateProducts : MonoBehaviour {
     /*===================== SetUpProducts() =====================================================================================*/
 
     // sets up the product values
-    public void SetUpProducts(List<GameObject> products) {
+    public void SetUpProducts(List<GameObject> products, GameObject businessProducts) {
 
         Debug.Log("Entered");
 
@@ -55,6 +55,9 @@ public class GenerateProducts : MonoBehaviour {
             // instantiate product
             GameObject newProduct = (GameObject)Instantiate(productPrefab);
 
+            // make newProduct a child of businessProducts
+            newProduct.transform.SetParent(businessProducts.transform, false);
+
             // give products their number
             newProduct.GetComponent<Product>().Number = i + 1;
 
@@ -71,8 +74,6 @@ public class GenerateProducts : MonoBehaviour {
             newProduct.GetComponent<Product>().MarketValue = ((resourceCost[i] * costOfResourceUnits) + profit[i]);
 
             products.Add(newProduct);
-
-            Debug.Log("Added Product");
 
         } // for
 

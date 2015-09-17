@@ -9,10 +9,13 @@ public class Business : MonoBehaviour {
 
 	public GameObject employeePrefab;
 
+    private GameObject businessEmployees;
+    private GameObject businessProducts;
 
-	/*===================== Scripts =====================================================================================*/
 
-	public CharacterInfo characterInfoScript;
+    /*===================== Scripts =====================================================================================*/
+
+    public CharacterInfo characterInfoScript;
 
 
 	/*===================== Variables =====================================================================================*/
@@ -183,8 +186,20 @@ public class Business : MonoBehaviour {
         // Sets up business by setting variables to default values
         SetupBusiness();
 
+        // Create Empty GameObject to hold Employees
+        businessEmployees = new GameObject("BusinessEmployees");
+
+        // create empty GameObject to hold products
+        businessProducts = new GameObject("BusinessProducts");
+
+        // make businessEmployees a child of Business
+        businessEmployees.transform.SetParent(gameObject.transform, false);
+
+        // make businessProducts a child of Business
+        businessProducts.transform.SetParent(gameObject.transform, false);
+
         // Populate products array with products
-        gameObject.GetComponent<GenerateProducts>().SetUpProducts(products);
+        gameObject.GetComponent<GenerateProducts>().SetUpProducts(products, businessProducts);
 
     } // Awake()
 
@@ -301,8 +316,8 @@ public class Business : MonoBehaviour {
 			// instantiate employee
 			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 
-			// make employee a child of Business
-			newEmployee.transform.SetParent(gameObject.transform, false);
+			// make employee a child of businessEmployees
+			newEmployee.transform.SetParent(businessEmployees.transform, false);
 
 			// get gender for employee
 			gender = characterInfoScript.GenerateRandomGender();
@@ -345,8 +360,8 @@ public class Business : MonoBehaviour {
 		// instantiate employee
 		GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 		
-		// make employee a child of Business
-		newEmployee.transform.SetParent(gameObject.transform, false);
+		// make employee a child of businessEmployees
+		newEmployee.transform.SetParent(businessEmployees.transform, false);
 		
 		// get gender for employee
 		gender = characterInfoScript.GenerateRandomGender();
@@ -376,8 +391,8 @@ public class Business : MonoBehaviour {
 			// instantiate employee
 			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 			
-			// make employee a child of Business
-			newEmployee.transform.SetParent(gameObject.transform, false); 
+			// make employee a child of businessEmployees
+			newEmployee.transform.SetParent(businessEmployees.transform, false); 
 			
 			// add employee to employees list
 			Employees.Add(newEmployee);
