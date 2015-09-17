@@ -29,9 +29,6 @@ public class GenerateProducts : MonoBehaviour {
     // sets up the product values
     public void SetUpProducts(List<GameObject> products, GameObject businessProducts) {
 
-        Debug.Log("Entered");
-
-
         numOfProducts = 0;
 
         // get the number of products, based on number of names
@@ -46,8 +43,6 @@ public class GenerateProducts : MonoBehaviour {
             return;
 
         } // if
-
-        Debug.Log("Passed");
 
         // populate product values
         for(int i = 0; i < numOfProducts; i++) {
@@ -73,6 +68,7 @@ public class GenerateProducts : MonoBehaviour {
             // calculate products market value
             newProduct.GetComponent<Product>().MarketValue = ((resourceCost[i] * costOfResourceUnits) + profit[i]);
 
+            // Add new Product to list of products
             products.Add(newProduct);
 
         } // for
