@@ -3,16 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CharacterCreationMenu
-  - MainMenu
-  - MainCanvas
-  - Business
-  - Employee
-  - BuildingSign
-  - Room
-  - BusinessBuilding
-  - Product
+  tags: []
   layers:
   - Default
   - TransparentFX
