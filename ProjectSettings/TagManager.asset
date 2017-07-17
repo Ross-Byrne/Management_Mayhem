@@ -12,6 +12,7 @@ TagManager:
   - BuildingSign
   - Room
   - BusinessBuilding
+  - Product
   layers:
   - Default
   - TransparentFX

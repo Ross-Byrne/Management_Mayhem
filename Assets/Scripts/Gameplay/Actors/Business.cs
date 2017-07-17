@@ -9,10 +9,13 @@ public class Business : MonoBehaviour {
 
 	public GameObject employeePrefab;
 
+    private GameObject businessEmployees;
+    private GameObject businessProducts;
 
-	/*===================== Scripts =====================================================================================*/
 
-	public CharacterInfo characterInfoScript;
+    /*===================== Scripts =====================================================================================*/
+
+    public CharacterInfo characterInfoScript;
 
 
 	/*===================== Variables =====================================================================================*/
@@ -34,6 +37,7 @@ public class Business : MonoBehaviour {
 	public float MoneyEarned { get; set;}
 	public float Profits { get; set;}
 	public float Costs { get; set;}
+    public List<GameObject> products = new List<GameObject>();
 
 	
 	/*===================== List of Employee GameObjects =====================================================================================*/
@@ -170,25 +174,41 @@ public class Business : MonoBehaviour {
 	}
 
 
-	/*===================== Methods =====================================================================================*/
+    /*===================== Methods =====================================================================================*/
 
-	/*===================== Awake() =====================================================================================*/
+    /*===================== Awake() =====================================================================================*/
 
-	void Awake()
-	{
-		// get Script References
-		characterInfoScript = gameObject.GetComponent<CharacterInfo>();
+    void Awake() {
 
-		// Sets up business by setting variables to default values
-		SetupBusiness();
-	} // Awake()
+        // get Script References
+        characterInfoScript = gameObject.GetComponent<CharacterInfo>();
+
+        // Sets up business by setting variables to default values
+        SetupBusiness();
+
+        // Create Empty GameObject to hold Employees
+        businessEmployees = new GameObject("BusinessEmployees");
+
+        // create empty GameObject to hold products
+        businessProducts = new GameObject("BusinessProducts");
+
+        // make businessEmployees a child of Business
+        businessEmployees.transform.SetParent(gameObject.transform, false);
+
+        // make businessProducts a child of Business
+        businessProducts.transform.SetParent(gameObject.transform, false);
+
+        // Populate products array with products
+        gameObject.GetComponent<GenerateProducts>().SetUpProducts(products, businessProducts);
+
+    } // Awake()
 
 
 	/*===================== SetupBusiness() =====================================================================================*/
 
 	// sets up the business to its default values
-	public void SetupBusiness()
-	{
+	public void SetupBusiness() {
+
 		Name = "";
 		BankAccount = 0f;
 		Reputation = 0; // +25 because of 100 for maintenance and -25 because salary is 800
@@ -200,6 +220,7 @@ public class Business : MonoBehaviour {
 		BusinessAge = 0;
 		ProductivityBonus = 0;
 		EquipmentUpgrades = 0;
+
 	} // SetupBusiness()
 
 
@@ -238,12 +259,12 @@ public class Business : MonoBehaviour {
 
 	/*===================== MakeDrugs() =====================================================================================*/
 	
-	public void MakeDrugs(Player player)
-	{
+	public void MakeDrugs(Player player) {
 		MoneyEarned = 5000; // drugs produced = 5,000 a month
 		
 		BankAccount += (MoneyEarned / 2); // half goes to business
 		player.BankAccount += (MoneyEarned / 2); // half goes to the player
+
 	} // MakeDrugs()
 
 
@@ -295,8 +316,8 @@ public class Business : MonoBehaviour {
 			// instantiate employee
 			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 
-			// make employee a child of Business
-			newEmployee.transform.SetParent(gameObject.transform, false);
+			// make employee a child of businessEmployees
+			newEmployee.transform.SetParent(businessEmployees.transform, false);
 
 			// get gender for employee
 			gender = characterInfoScript.GenerateRandomGender();
@@ -339,8 +360,8 @@ public class Business : MonoBehaviour {
 		// instantiate employee
 		GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 		
-		// make employee a child of Business
-		newEmployee.transform.SetParent(gameObject.transform, false);
+		// make employee a child of businessEmployees
+		newEmployee.transform.SetParent(businessEmployees.transform, false);
 		
 		// get gender for employee
 		gender = characterInfoScript.GenerateRandomGender();
@@ -370,8 +391,8 @@ public class Business : MonoBehaviour {
 			// instantiate employee
 			GameObject newEmployee = (GameObject)Instantiate(employeePrefab); 
 			
-			// make employee a child of Business
-			newEmployee.transform.SetParent(gameObject.transform, false); 
+			// make employee a child of businessEmployees
+			newEmployee.transform.SetParent(businessEmployees.transform, false); 
 			
 			// add employee to employees list
 			Employees.Add(newEmployee);
@@ -395,8 +416,7 @@ public class Business : MonoBehaviour {
 	/*===================== FireAllEmployees() =====================================================================================*/
 
 	// fires all employees
-	public void FireAllEmployees()
-	{
+	public void FireAllEmployees(){
 		// destroys and removes employees from list, start at the back (better performance on list)
 		for (int i = Employees.Count; i > 0; i--) {
 		
@@ -425,10 +445,9 @@ public class Business : MonoBehaviour {
 	/*===================== PayMaintenance() =====================================================================================*/
 	
 	// to pay the buildings monthly maintenance bill
-	public void PayMaintenance()
-	{
-		if(BuildingMaintenance > BankAccount)
-		{
+	public void PayMaintenance(){
+		if(BuildingMaintenance > BankAccount){
+
 			// flag business not being able to pay maintenance without going into debt
 			Debug.Log("Cannot Afford Building Maintenance!");
 			return;
@@ -440,34 +459,39 @@ public class Business : MonoBehaviour {
 
 	/*===================== SetBuildingMaintenanceLevel() =====================================================================================*/
 	
-	public void SetBuildingMaintenanceLevel(int theLevel)
-	{
+	public void SetBuildingMaintenanceLevel(int theLevel){
+
 		float oldMaintenanceCost=0;
 		oldMaintenanceCost = BuildingMaintenance; // to make sure player doesn't keep changing 
 		// maintenance to endless get reputation
 
 		// return reputation that was given for a particular
 		// maintenance level
-		if(oldMaintenanceCost == 0)
-		{
-			Reputation += 50; // give back 50 rep lost
-		}
-		else if(oldMaintenanceCost == 50)
-		{
-			Reputation += 25; // give back 25 rep lost
-		}
-		else if(oldMaintenanceCost == 100)
-		{
-			Reputation -= 25; // take back 25 rep given
-		}
-		else if(oldMaintenanceCost == 150)
-		{
-			Reputation -= 50; // take back 50 rep given
+		if(oldMaintenanceCost == 0){
+
+            // give back 50 rep lost
+            Reputation += 50; 
+
+		} else if(oldMaintenanceCost == 50) {
+
+            // give back 25 rep lost
+            Reputation += 25; 
+
+		} else if(oldMaintenanceCost == 100) {
+
+            // take back 25 rep given
+            Reputation -= 25; 
+
+		} else if(oldMaintenanceCost == 150){
+
+            // take back 50 rep given
+            Reputation -= 50; 
+
 		} // if
 
 		// set the new maintenance level and give rep
-		switch(theLevel)
-		{
+		switch(theLevel){
+
 		case 1: // no maintenance
 			BuildingMaintenance = 0f; // sets maintenance cost
 			Reputation -= 50; // loose 50 rep
@@ -490,8 +514,8 @@ public class Business : MonoBehaviour {
 
 	/*===================== SetEmployeeSalaryLevel() =====================================================================================*/
 	
-	public void SetEmployeeSalaryLevel(int theLevel)
-	{
+	public void SetEmployeeSalaryLevel(int theLevel){
+
 		float oldSalary=0;
 		oldSalary = EmployeeSalary; // to make sure player doesn't keep changing 
 		// Salary to endless get reputation

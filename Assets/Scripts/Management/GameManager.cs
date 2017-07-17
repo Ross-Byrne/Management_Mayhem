@@ -4,6 +4,7 @@ using System.Collections;
 // GameManager is a singleton.
 
 public class GameManager : MonoBehaviour {
+
 	/*===================== GameObjects =====================================================================================*/
 	
 	public GameObject uiManagerPrefab;

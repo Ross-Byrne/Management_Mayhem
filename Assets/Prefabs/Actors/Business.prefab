@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 426240}
   - 114: {fileID: 11468082}
   - 114: {fileID: 11419948}
+  - 114: {fileID: 11444276}
   m_Layer: 0
   m_Name: Business
   m_TagString: Business
@@ -40,6 +41,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4842583389b46004f951f4dbb9d6dd60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11444276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a646312ab1f0c545bdf294de0dfd46f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  productPrefab: {fileID: 113714, guid: e6e57d79d26dbaa4c8ee491c12d6bfdb, type: 2}
+  numOfProducts: 0
+  names:
+  - Micro Chips
+  - Circuit Boards
+  - Memory Modules
+  - Hard Drives
+  - Optical Drives
+  - Video Cards
+  resourceCost: 02000000030000000600000007000000090000000c000000
+  powerUsage: 05000000050000000500000005000000050000000a000000
+  profit:
+  - 4
+  - 5.5
+  - 7
+  - 9
+  - 12
+  - 15
+  costOfResourceUnits: 5
 --- !u!114 &11468082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,6 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   employeePrefab: {fileID: 120222, guid: 230d1b7605c366f4a90865cf309732b0, type: 2}
   characterInfoScript: {fileID: 0}
+  products: []
   employees: []
   newAvailableEmployees: []
 --- !u!1001 &100100000
@@ -70,6 +102,10 @@ Prefab:
       propertyPath: m_TagString
       value: Business
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: productPrefab
+      value: 
+      objectReference: {fileID: 113714, guid: e6e57d79d26dbaa4c8ee491c12d6bfdb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132138}
